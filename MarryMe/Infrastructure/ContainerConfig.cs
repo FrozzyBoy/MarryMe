@@ -3,10 +3,8 @@
 	#region Using
 	using System.Web.Http;
 	using System.Web.Http.Dispatcher;
-	using System.Web.Mvc;
-	using MarryMe.Model;
-	using MarryMe.Model.Interfaces;
 	using Microsoft.Practices.Unity;
+	using Microsoft.Practices.Unity.Configuration;
 	#endregion
 
 	/// <summary>
@@ -27,8 +25,7 @@
 
 		private static void MapTypes(IUnityContainer container)
 		{
-			container.RegisterType(typeof(ICalendarData), typeof(TestCalendarData));
-			container.RegisterType(typeof(IRoomData), typeof(RoomData));
+			container.LoadConfiguration();
 		}
 	}
 }

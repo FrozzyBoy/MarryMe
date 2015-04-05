@@ -41,12 +41,25 @@
   <ItemGroup>
     <Compile Include="Entity\DayStatistic.cs" />
     <Compile Include="Entity\Holiday.cs" />
+    <Compile Include="Entity\MarriageFullInfo.cs" />
     <Compile Include="Entity\Room.cs" />
+    <Compile Include="Entity\Spouse.cs" />
     <Compile Include="Interfaces\IRoomData.cs" />
+    <Compile Include="Resources\Text.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Text.resx</DependentUpon>
+    </Compile>
     <Compile Include="RoomData.cs" />
     <Compile Include="TestCalendarData.cs" />
     <Compile Include="Interfaces\ICalendarData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Text.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Text.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

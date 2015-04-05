@@ -86,6 +86,17 @@
 			return result;
 		}
 
+		/// <summary>
+		/// Submit marrige.
+		/// </summary>
+		/// <param name="marige">marige info</param>
+		/// <returns></returns>
+		public bool SubmitData(MarriageFullInfo marige)
+		{
+			Thread.Sleep(5000);
+			return true;
+		}
+
 		#endregion
 	}
 }
