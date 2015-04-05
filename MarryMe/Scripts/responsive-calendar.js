@@ -351,7 +351,7 @@
       });
     };
     $.fn.responsiveCalendar.defaults = {
-      translateMonths: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      translateMonths: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
       events: {},
       time: void 0,
       allRows: true,
