@@ -1,31 +1,130 @@
 ﻿@{
-	ViewBag.Title = "Home Page";
+	ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-	<h1>ASP.NET</h1>
-	<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-	<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@* ВЫБОР ДАТЫ *@
+<h1 class="title">Выбор даты</h1>
+<div class="responsive-calendar">
+	<div class="controls">
+		<a class="pull-left" data-go="prev"><div class="calendar-btn left glyphicon glyphicon-arrow-left"></div></a>
+		<h4 class="calendar-title"><span data-head-year></span> <span data-head-month></span></h4>
+		<a class="pull-right" data-go="next"><div class="calendar-btn right glyphicon glyphicon-arrow-right"></div></a>
+	</div>
+
+	<hr />
+
+	<div class="day-headers">
+		<div class="day header">Пн</div>
+		<div class="day header">Вт</div>
+		<div class="day header">Ср</div>
+		<div class="day header">Чт</div>
+		<div class="day header">Пт</div>
+		<div class="day header">Сб</div>
+		<div class="day header">Вс</div>
+	</div>
+	<div class="days" data-group="days">
+
+	</div>
 </div>
 
+@* ВЫБОР ЗАЛА *@
+<hr />
+<h1 class="title field">Выбор зала</h1>
 <div class="row">
-	<div class="col-md-4">
-		<h2>Getting started</h2>
-		<p>
-			ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-			enables a clean separation of concerns and gives you full control over markup
-			for enjoyable, agile development.
-		</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<div class="block form-control resize" style=" color:white">
+			<h3>Бриллиантовый</h3>
+			<p>Описание</p>
+		</div>
 	</div>
-	<div class="col-md-4">
-		<h2>Get more libraries</h2>
-		<p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<div class="block form-control resize" style=" color:white">
+			<h3>Золотой</h3>
+			<p>Описание</p>
+		</div>
 	</div>
-	<div class="col-md-4">
-		<h2>Web Hosting</h2>
-		<p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<div class="block form-control resize" style="  color:white">
+			<h3>Розовый</h3>
+			<p>Описание</p>
+		</div>
 	</div>
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<div class="block form-control resize" style=" color:white">
+			<h3>Без торжества</h3>
+			<p>Описание</p>
+		</div>
+	</div>
+</div>
+
+@* ВЫБОР ВРЕМЕНИ *@
+<hr />
+<h1 class="title field">Выбор времени</h1>
+<div>
+	<label>10.00 - 10.20</label>
+	<label>11.00 - 10.20</label>
+	<label>12.00 - 10.20</label>
+	<label>13.00 - 10.20</label>
+</div>
+
+@* ЛИЧНЫЕ ДАННЫЕ *@
+<hr />
+<h1 class="title field">Личные данные</h1>
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="block block-lg form-control form-block" color:white">
+			<h3>Жених</h3>
+			<p>Данные жениха</p>
+			<div class="row form-group">
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Имя" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Фамилия" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Отчество" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Телефон" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="E-mail" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Номер паспорта" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="block block-lg form-control form-block" color:white">
+			<h3>Невеста</h3>
+			<p>Данные невесты</p>
+			<div class="row form-group">
+				<div class="col-md-6 col-sm-12 col-xs-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Имя" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Фамилия" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Отчество" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Телефон" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="E-mail" />
+				</div>
+				<div class="col-md-6 col-sm-12 block-lg-label">
+					<input type="text" class="form-control" placeholder="Номер паспорта" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="btn-submit">
+	<button type="submit" class="btn btn-glass btn-color">Отправить заявку</button>
 </div>

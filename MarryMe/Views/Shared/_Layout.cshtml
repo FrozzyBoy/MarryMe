@@ -1,45 +1,107 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – приложение ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title – приложение ASP.NET</title>
+	@Styles.Render("~/Content/css")
+	<link href="~/Content/responsive-calendar.css" rel="stylesheet" />
+	@Scripts.Render("~/bundles/modernizr")
+	@*<link href="~/Content/Demo.css" rel="stylesheet" />*@
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
-    </div>
+<body class="body-blue">
+	@*<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					@Html.ActionLink("Главная страница", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>@Html.ActionLink("Подача заявки", "Index", "Home")</li>
+					</ul>
+				</div>
+			</div>
+		</div>*@
+	<div class="container body-content">
+		@RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+		</footer>
+	</div>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	<script src="~/Scripts/responsive-calendar.js"></script>
+
+	<script type="text/javascript">
+		function blockSize() {
+			$('.resize').height(function () {
+				return $(this).width();
+			});
+		}
+
+		function blockSize2() {
+			$('.form-block').height(function () {
+				if (window.innerWidth < 767) {
+					return 400;
+				}
+				if (window.innerWidth < 992) {
+					return 400;
+				}
+				else {
+					return 250;
+				}
+			});
+		}
+		blockSize();
+		blockSize2();
+		$(window).resize(blockSize);
+		$(window).resize(blockSize2);
+		$(document).ready(function () {
+			$(".responsive-calendar").responsiveCalendar({
+				onDayClick: function (events) {
+					var thisDayEvent, key;
+
+					key = $(this).data('year') + '-' + $(this).data('month') + '-' + $(this).data('day');
+					thisDayEvent = events[key];
+					alert(key.toString());
+				}
+			});
+		});
+	</script>
+
+
+
+	@*<script type="text/javascript">
+
+			function newFunc() {
+				alert('qweqe');
+			}
+
+			// When the document is ready
+			$(document).ready(function () {
+
+				$('#example1').datepicker({
+					format: "dd/mm/yyyy"
+				});
+
+				$('#example2').datepicker().on('changeDate', function (ev) {
+					//alert(ev.format());
+					//window.location.href = "?day=" + ev.format();
+				});
+
+
+			});
+		</script>*@
+
+	@RenderSection("scripts", required: false)
 </body>
 </html>
