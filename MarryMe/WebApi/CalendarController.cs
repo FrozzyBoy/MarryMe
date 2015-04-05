@@ -5,7 +5,9 @@
 	using System;
 	using System.Web.Http;
 	using System.Web.Http.Cors;
+	using MarryMe.Model.Entity;
 	using MarryMe.Model.Interfaces;
+	using MarryMe.Model.Resources;
 
 	#endregion
 
@@ -148,6 +150,27 @@
 			return result;
 		}
 
+		#endregion
+
+		#region http post
+		[HttpPost]
+		[Route("submit")]
+		public IHttpActionResult PostData([FromBody] MarriageFullInfo marige)
+		{
+			marige.SubmitDate = DateTime.Now;
+			marige.Method = Text.MethodOfThreatMent;
+
+			bool result = _calendar.SubmitData(marige);
+
+			if (result)
+			{
+				return Ok();
+			}
+			else
+			{
+				return BadRequest();
+			}
+		}
 		#endregion
 
 		#endregion
