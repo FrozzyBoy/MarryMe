@@ -11,11 +11,30 @@
 	public interface IRoomData
 	{
 		/// <summary>
-		/// Stats for room.
+		/// Room info.
 		/// </summary>
 		/// <param name="roomId">Room id.</param>
-		/// <param name="selectedTime">Time for room.</param>
 		/// <returns></returns>
-		Room[] GetRoomStats(int roomId, DateTime? selectedTime);
+		Room GetInformation(int roomId);
+
+		/// <summary>
+		/// Расписание для дня
+		/// </summary>
+		/// <param name="roomId"></param>
+		/// <param name="day"></param>
+		/// <returns></returns>
+		DateSchedule[] GetSchedule(int roomId, DateTime time);
+
+		/// <summary>
+		/// Get rooms count.
+		/// </summary>
+		/// <returns>Rooms Count.</returns>
+		int GetRoomsCount();
+
+		/// <summary>
+		/// Get all rooms.
+		/// </summary>
+		/// <returns></returns>
+		Room[] GetRooms();
 	}
 }

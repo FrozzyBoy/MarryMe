@@ -25,27 +25,19 @@
 		/// </summary>
 		private ICalendarData _calendar = null;
 
-		private IRoomData _room;
-
 		#region Constructor
 		/// <summary>
 		/// Constructor.
 		/// </summary>
 		/// <param name="calendar">Calendar statistic.</param>
-		public CalendarController(ICalendarData calendar, IRoomData room)
+		public CalendarController(ICalendarData calendar)
 		{
 			if (calendar == null)
 			{
 				throw new ArgumentNullException("Calendar is null.");
 			}
 
-			if (room == null)
-			{
-				throw new ArgumentNullException("Room is null.");
-			}
-
 			_calendar = calendar;
-			_room = room;
 		}
 		#endregion
 
@@ -65,39 +57,32 @@
 		}
 
 		/// <summary>
-		/// Get statistics for month.
+		/// Get statistics for year.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>
 		/// <returns></returns>
 		[HttpGet]
-		[Route("month")]
-		public IHttpActionResult GetMonthlyStats(int year, int month)
+		[Route("months")]
+		public IHttpActionResult GetMonthlyStats(int year)
 		{
-			var result = _calendar.GetMonthStatistic(year, month);
+			int[] result = _calendar.GetMonthStatistic(year);
 			return Ok(result);
 		}
 
 		/// <summary>
-		/// Get statistic for selected day.
+		/// Get statistic for selected month.
 		/// </summary>
 		/// <param name="year"></param>
 		/// <param name="month"></param>
 		/// <param name="day"></param>
 		/// <returns></returns>
 		[HttpGet]
-		[Route("day")]
-		public IHttpActionResult GetDayStatistics(int year, int month, int day)
+		[Route("days")]
+		public IHttpActionResult GetDayStatistics(int year, int month)
 		{
 			int daysInMonth = DateTime.DaysInMonth(year, month);
-			var isValid = (day > 0 && day <= daysInMonth);
-
-			IHttpActionResult result = BadRequest("Плохая дата.");
-
-			if (isValid)
-			{
-				result = Ok(_calendar.GetStatisticForDay(year, month, day));
-			}
+			var result = Ok(_calendar.GetStatisticForDays(year, month));
 
 			return result;
 		}
@@ -109,68 +94,15 @@
 		/// <param name="month"></param>
 		/// <returns></returns>
 		[HttpGet]
-		[Route("Holidays")]
+		[Route("holidays")]
 		public IHttpActionResult GetHolidays(int year, int month)
 		{
+			int daysInMonth = DateTime.DaysInMonth(year, month);
 			var result = _calendar.GetHolidaysForMonth(year, month);
+
 			return Ok(result);
 		}
 
-		/// <summary>
-		/// Get statistic for selected room.
-		/// </summary>
-		/// <param name="roomId"></param>
-		/// <param name="selectedTime"></param>
-		/// <returns></returns>
-		[HttpGet]
-		[Route("room")]
-		public IHttpActionResult GetRoomStatistic(int roomId, string selectedTime = null)
-		{
-			IHttpActionResult result = null;
-
-			if (selectedTime == null)
-			{
-				result = BadRequest("Дата null");
-			}
-			else
-			{
-				DateTime date;
-				DateTime.TryParse(selectedTime, out date);
-
-				if (date == null)
-				{
-					result = BadRequest("Не смог спарсить дату");
-				}
-				else
-				{
-					result = Ok(_room.GetRoomStats(roomId, date));
-				}
-			}
-
-			return result;
-		}
-
-		#endregion
-
-		#region http post
-		[HttpPost]
-		[Route("submit")]
-		public IHttpActionResult PostData([FromBody] MarriageFullInfo marige)
-		{
-			marige.SubmitDate = DateTime.Now;
-			marige.Method = Text.MethodOfThreatMent;
-
-			bool result = _calendar.SubmitData(marige);
-
-			if (result)
-			{
-				return Ok();
-			}
-			else
-			{
-				return BadRequest();
-			}
-		}
 		#endregion
 
 		#endregion
