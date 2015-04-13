@@ -205,6 +205,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebApi\CalendarController.cs" />
+    <Compile Include="WebApi\CommonController.cs" />
+    <Compile Include="WebApi\RoomController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

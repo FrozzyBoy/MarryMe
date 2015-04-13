@@ -31,10 +31,5 @@
 		/// Room price.
 		/// </summary>
 		public int Price { get; set; }
-
-		/// <summary>
-		/// Empty places.
-		/// </summary>
-		public DateTime[] EmptyPlaces { get; set; }
 	}
 }

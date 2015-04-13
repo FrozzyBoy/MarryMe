@@ -8,21 +8,19 @@ namespace MarryMe.Model.Interfaces
 	{
 		#region Methods
 		/// <summary>
-		/// Get every day statistic for month.
+		/// Get month busy state.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
-		/// <param name="month">Month to get statistic.</param>
-		/// <returns>Return busy stats for day. Index is day -1.</returns>
-		int[] GetMonthStatistic(int year, int month);
+		/// <returns>Return busy for month.</returns>
+		int[] GetMonthStatistic(int year);
 
 		/// <summary>
-		/// Get statistic for current day.
+		/// Get statistic dayes in month.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>
-		/// <param name="day">Day to get statistic.</param>
 		/// <returns></returns>
-		DayStatistic GetStatisticForDay(int year, int month, int day);
+		int[] GetStatisticForDays(int year, int month);
 
 		/// <summary>
 		/// Get holiday that in selected month.

@@ -22,16 +22,14 @@
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>
 		/// <returns>Return busy stats for day. Index is day -1.</returns>
-		public int[] GetMonthStatistic(int year, int month)
+		public int[] GetMonthStatistic(int year)
 		{
-			Thread.Sleep(3000);
-
-			int numDays = DateTime.DaysInMonth(year, month);
+			Thread.Sleep(1000);
 
 			Random rnd = new Random();
-			int[] days = new int[numDays];
+			int[] days = new int[12];
 
-			for (int i = 0; i < numDays; i++)
+			for (int i = 0; i < 12; i++)
 			{
 				days[i] = rnd.Next(100);
 			}
@@ -40,32 +38,23 @@
 		}
 
 		/// <summary>
-		/// Get statistic for current day.
+		/// Get statistic dayes in month.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>
-		/// <param name="day">Day to get statistic.</param>
 		/// <returns></returns>
-		public DayStatistic GetStatisticForDay(int year, int month, int day)
+		public int[] GetStatisticForDays(int year, int month)
 		{
-			Thread.Sleep(3000);
-
-			DayStatistic result = new DayStatistic();
+			Thread.Sleep(1000);
 
 			Random rnd = new Random();
 
-			var list = new List<int>();
+			var result = new int[DateTime.DaysInMonth(year, month)];
 
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < result.Length; i++)
 			{
-				if (rnd.Next(100) > 50)
-				{
-					list.Add(i);
-				}
+				result[i] = rnd.Next(100);
 			}
-
-			result.ActiveRoomsId = list.ToArray();
-			result.BusyDays = rnd.Next(100);
 
 			return result;
 		}

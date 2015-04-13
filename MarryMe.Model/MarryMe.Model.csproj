@@ -39,11 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonControllerTest.cs" />
+    <Compile Include="Entity\DateSchedule.cs" />
     <Compile Include="Entity\DayStatistic.cs" />
     <Compile Include="Entity\Holiday.cs" />
     <Compile Include="Entity\MarriageFullInfo.cs" />
     <Compile Include="Entity\Room.cs" />
     <Compile Include="Entity\Spouse.cs" />
+    <Compile Include="Interfaces\ICommonController.cs" />
     <Compile Include="Interfaces\IRoomData.cs" />
     <Compile Include="Resources\Text.Designer.cs">
       <AutoGen>True</AutoGen>
