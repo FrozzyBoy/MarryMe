@@ -1,5 +1,5 @@
 ﻿body {
-	padding-top: 50px;
+	padding-top: 30px;
 	padding-bottom: 20px;
 }
 
@@ -28,11 +28,11 @@ textarea {
 }
 
 .calendar-title {
-	font-size: 30px;
+	font-size: 40px;
 }
 
 .title {
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 	text-align: center;
 	margin-bottom: 4%;
 }
@@ -45,6 +45,13 @@ textarea {
 	margin-top: 10px;
 	text-align: center;
 }
+
+
+.text-color {
+	color: white;
+}
+
+
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8 {
 	position: relative;
@@ -184,17 +191,54 @@ textarea.form-control {
 	background-color: #e74c3c;
 }
 
+	.body-red .form-control.resize:hover {
+		border: 3px solid #e74c3c;
+		background-color: white !important;
+	}
+
+	.body-red .form-control.text-color:hover {
+		color: #e74c3c;
+	}
+
 .body-blue .form-control {
 	background-color: #3498db;
 }
+
+	.body-blue .form-control.resize:hover {
+		border: 3px solid #3498db;
+		box-sizing:border-box;
+		background-color: white !important;
+	}
+
+	.body-blue .form-control.text-color:hover {
+		color: #3498db;
+	}
 
 .body-green .form-control {
 	background-color: #2ecc71;
 }
 
+	.body-green .form-control.resize:hover {
+		border: 3px solid #2ecc71;
+		background-color: white !important;
+	}
+
+	.body-green .form-control.text-color:hover {
+		color: #2ecc71;
+	}
+
 .body-asphalt .form-control {
 	background-color: #34495e;
 }
+
+	.body-asphalt .form-control.resize:hover {
+		border: 3px solid #34495e;
+		background-color: white !important;
+	}
+
+	.body-asphalt .form-control.text-color:hover {
+		color: #34495e;
+	}
 
 .form-control:focus {
 	background-color: white;
@@ -208,14 +252,15 @@ textarea.form-control {
 .btn-glass {
 	border: 1px solid white;
 	background: transparent;
-	color: white !important;
+	
+	font-size: 25px;
+
 }
 
 	.btn-glass:hover,
 	.btn-glass:focus,
 	.btn-glass:active {
 		background: white;
-		color: #333333 !important;
 		text-decoration: none;
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
@@ -232,16 +277,15 @@ textarea.form-control {
 }
 /*** Button Glass ***/
 .btn-glass {
-	border: 1px solid white;
+	border: 3px solid white;
 	background: transparent;
-	color: white !important;
 }
 
 	.btn-glass:hover,
 	.btn-glass:focus,
 	.btn-glass:active {
 		background: white !important;
-		color: #333333 !important;
+		color: #333333;
 		text-decoration: none;
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
@@ -260,7 +304,7 @@ textarea.form-control {
 	.body-red .btn-color:active {
 		background: #c0392b;
 		border-color: #c0392b;
-		color: white;
+		color: #c0392b;
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
 		box-shadow: none;
@@ -277,7 +321,7 @@ textarea.form-control {
 	.body-blue .btn-color:active {
 		background: #2980b9;
 		border-color: #2980b9;
-		color: white;
+		color: #2980b9;
 	}
 /*** Button Green ***/
 .body-green .btn-color {
@@ -291,7 +335,7 @@ textarea.form-control {
 	.body-green .btn-color:active {
 		background: #27ae60;
 		border-color: #27ae60;
-		color: white;
+		color: #27ae60;
 	}
 /*** Button Asphalt ***/
 .body-asphalt .btn-color {
@@ -305,10 +349,10 @@ textarea.form-control {
 	.body-asphalt .btn-color:active {
 		background: #2c3e50;
 		border-color: #2c3e50;
-		color: white;
+		color: #2c3e50;
 	}
 
-	
+
 .form-block {
 	padding: 50px;
 }

@@ -2,9 +2,122 @@
 	ViewBag.Title = "Index";
 }
 
-@* ВЫБОР ДАТЫ *@
-<h1 class="title">Выбор даты</h1>
-<div class="responsive-calendar">
+@* ВЫБОР ДАТЫ (МЕСЯЦЫ) *@
+
+<h1 class="title">Выбор даты (месяц)</h1>
+<div class="responsive-calendar" ng-show="false">
+	<div class="controls" style="margin-bottom:20px">
+		<a class="pull-left" data-go="prev12"><div class="calendar-btn left glyphicon glyphicon-arrow-left"></div></a>
+		<h4 class="calendar-title"><span data-head-year></span></h4>
+		<a class="pull-right" data-go="next12"><div class="calendar-btn right glyphicon glyphicon-arrow-right"></div></a>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="">
+				<div class="block text-color form-control resize month-background-color" style="height:100px;">
+					<div class="month-text-color">
+						<h3>Январь</h3>
+						<h4>50%</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Февраль</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Март</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Апрель</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Май</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Июнь</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Июль</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Август</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Сентябрь</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Октябрь</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Ноябрь</h3>
+					<p>50%</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6">
+			<div class="block text-color form-control resize month-background-color" style="height: 100px;">
+				<div class="month-text-color">
+					<h3>Декабрь</h3>
+					<h4>50%</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+
+@* ВЫБОР ДАТЫ (ДНИ) *@
+<h1 class="title">Выбор даты (день)</h1>
+<div class="responsive-calendar" ng-show="false">
 	<div class="controls">
 		<a class="pull-left" data-go="prev"><div class="calendar-btn left glyphicon glyphicon-arrow-left"></div></a>
 		<h4 class="calendar-title"><span data-head-year></span> <span data-head-month></span></h4>
@@ -31,26 +144,32 @@
 <hr />
 <h1 class="title field">Выбор зала</h1>
 <div class="row">
-	<div class="col-md-3 col-sm-3 col-xs-6">
-		<div class="block form-control resize" style=" color:white">
+	<div class="col-md-4 col-sm-4 col-xs-6">
+		<div class="block text-color form-control resize tile">
 			<h3>Бриллиантовый</h3>
 			<p>Описание</p>
 		</div>
 	</div>
-	<div class="col-md-3 col-sm-3 col-xs-6">
-		<div class="block form-control resize" style=" color:white">
+	<div class="col-md-4 col-sm-4 col-xs-6">
+		<div class="block text-color form-control resize tile">
 			<h3>Золотой</h3>
 			<p>Описание</p>
 		</div>
 	</div>
-	<div class="col-md-3 col-sm-3 col-xs-6">
-		<div class="block form-control resize" style="  color:white">
+	<div class="col-md-4 col-sm-4 col-xs-6">
+		<div class="block text-color form-control resize tile">
 			<h3>Розовый</h3>
 			<p>Описание</p>
 		</div>
 	</div>
-	<div class="col-md-3 col-sm-3 col-xs-6">
-		<div class="block form-control resize" style=" color:white">
+	<div class="col-md-4 col-sm-4 col-xs-6">
+		<div class="block text-color form-control resize tile">
+			<h3>Хрустальный</h3>
+			<p>Описание</p>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-6">
+		<div class="block text-color form-control resize tile">
 			<h3>Без торжества</h3>
 			<p>Описание</p>
 		</div>
@@ -73,7 +192,7 @@
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-xs-12">
 		<div class="block block-lg form-control form-block" color:white">
-			<h3>Жених</h3>
+			<h2>Жених</h2>
 			<p>Данные жениха</p>
 			<div class="row form-group">
 				<div class="col-md-6 col-sm-12 block-lg-label">
@@ -99,7 +218,7 @@
 	</div>
 	<div class="col-md-6 col-sm-6 col-xs-12">
 		<div class="block block-lg form-control form-block" color:white">
-			<h3>Невеста</h3>
+			<h2>Невеста</h2>
 			<p>Данные невесты</p>
 			<div class="row form-group">
 				<div class="col-md-6 col-sm-12 col-xs-12 block-lg-label">
@@ -126,5 +245,5 @@
 </div>
 
 <div class="btn-submit">
-	<button type="submit" class="btn btn-glass btn-color">Отправить заявку</button>
+	<input type="submit" value="Отправить заявку" class="btn btn-glass btn-color" />
 </div>
