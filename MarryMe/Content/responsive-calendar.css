@@ -18,7 +18,7 @@
 .responsive-calendar .day {
 	display: inline-block;
 	position: relative;
-	font-size: 20px;
+	font-size: 25px;
 	width: 14.285714285714286%;
 	text-align: center;
 }

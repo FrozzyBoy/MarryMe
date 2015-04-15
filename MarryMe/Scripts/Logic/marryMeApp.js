@@ -2,7 +2,7 @@
 
 marryApp.controller('appCtrl', function ($scope, $http,api) {
     $http.defaults.useXDomain = true;
-
+  
     completenessOfTheMonths(2015);
     completenessOfTheDays(2015, 4);
     getHolidays(2015, 4);
@@ -24,7 +24,7 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
 
             if (delay > 3) {
                 response = true;
-                dayInfo(1, year, month, day);
+                dayInfo(0, year, month, day);
             }                   
         }
     });
@@ -65,8 +65,9 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
             params: { 'roomId': roomId, 'time': new Date(year, month, day).toLocaleDateString('en-US') }
         }).success(function (data, status, headers, config) {
             console.log(data, status);
+            $scope.dayTimes = data;
         }).error(function (data, status) {
-
+            alert('err')
         });
     }
     function getHolidays(year, month) {
@@ -115,9 +116,10 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
     }
 });
 
+var site = 'http://marryme.somee.com/api';
 marryApp.constant('api', {
     calendar: {
-        days: 'http://marryme.somee.com/api' + '/calendar/days',
+        days: site + '/calendar/days',
         months: 'http://marryme.somee.com/api' + '/calendar/months',
         holidays: 'http://marryme.somee.com/api' + '/calendar/holidays'
     },
