@@ -12,7 +12,7 @@
 	/// <summary>
 	/// ReturnDa
 	/// </summary>
-	public class TestCalendarData : ICalendarData
+	public class CalendarData : ICalendarData
 	{
 		#region Члены ICalendarData
 

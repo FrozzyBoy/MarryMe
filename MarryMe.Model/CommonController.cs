@@ -9,7 +9,7 @@
 
 	#endregion
 
-	public class CommonControllerTest : ICommonController
+	public class CommonController : ICommonController
 	{
 		/// <summary>
 		/// Submit data obout marrige.
