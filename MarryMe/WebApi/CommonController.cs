@@ -58,15 +58,14 @@
 			marige.SubmitDate = DateTime.Now;
 			marige.Method = Text.MethodOfThreatMent;
 
-			bool result = _controller.SubmitData(marige);
-
-			if (result)
+			try
 			{
+				_controller.SubmitData(marige);
 				return Ok();
 			}
-			else
+			catch (Exception ex)
 			{
-				return BadRequest();
+				return BadRequest(ex.Message);
 			}
 		}
 

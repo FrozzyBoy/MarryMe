@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonControllerTest.cs" />
+    <Compile Include="CommonController.cs" />
     <Compile Include="Entity\DateSchedule.cs" />
     <Compile Include="Entity\DayStatistic.cs" />
     <Compile Include="Entity\Holiday.cs" />
@@ -54,7 +54,7 @@
       <DependentUpon>Text.resx</DependentUpon>
     </Compile>
     <Compile Include="RoomData.cs" />
-    <Compile Include="TestCalendarData.cs" />
+    <Compile Include="CalendarData.cs" />
     <Compile Include="Interfaces\ICalendarData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

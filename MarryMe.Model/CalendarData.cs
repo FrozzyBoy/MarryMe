@@ -38,7 +38,7 @@
 		}
 
 		/// <summary>
-		/// Get statistic dayes in month.
+		/// Get statistic days in month.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>
@@ -73,17 +73,6 @@
 			};
 
 			return result;
-		}
-
-		/// <summary>
-		/// Submit marrige.
-		/// </summary>
-		/// <param name="marige">marige info</param>
-		/// <returns></returns>
-		public bool SubmitData(MarriageFullInfo marige)
-		{
-			Thread.Sleep(5000);
-			return true;
 		}
 
 		#endregion

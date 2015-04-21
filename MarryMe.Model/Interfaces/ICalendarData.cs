@@ -29,14 +29,7 @@ namespace MarryMe.Model.Interfaces
 		/// <param name="month">selected month.</param>
 		/// <returns></returns>
 		Holiday[] GetHolidaysForMonth(int year, int month);
-
-		/// <summary>
-		/// Submit marrige.
-		/// </summary>
-		/// <param name="marige">marige info</param>
-		/// <returns></returns>
-		bool SubmitData(MarriageFullInfo marige);
-
+				
 		#endregion
 	}
 }

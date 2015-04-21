@@ -26,6 +26,7 @@
 
 		public string TelephoneNumber { get; set; }
 		public string PassportNumber { get; set; }
+		public string Email { get; set; }
 
 	}
 }
