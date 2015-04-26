@@ -14,5 +14,10 @@ namespace MarryMe.Controllers
         {
             return View();
         }
+
+		public ActionResult IndexTwo()
+		{
+			return View();
+		}
 	}
 }

@@ -19,7 +19,7 @@
 	display: inline-block;
 	position: relative;
 	font-size: 25px;
-	width: 14.285714285714286%;
+	width: 14.285714285714286% !important;
 	text-align: center;
 }
 
@@ -69,12 +69,11 @@
 	}
 
 .calendar-btn {
+	color: black;
 	font-size: 25px;
 	padding-top: 4px;
 }
 
-	.calendar-btn.left {
-	}
-
-	.calendar-btn.right {
+	.calendar-btn:hover {
+		color: #3498db;
 	}

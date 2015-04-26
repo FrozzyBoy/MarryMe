@@ -1,4 +1,8 @@
-﻿.body-red .month-background-color {
+﻿.month-background-color {
+	height: 100px;
+}
+
+.body-red .month-background-color {
 	background: linear-gradient(to right,#e74c3c 50%,white 50%);
 	border: 3px solid #e74c3c;
 }
@@ -14,18 +18,21 @@
 }
 
 .body-blue .month-background-color {
-	background: linear-gradient(to right,#3498db 50%,white 50%);
-	border: 3px solid #3498db;
+	color: #3498db;
+	background: rgba(255, 255, 255, 0.00);
+	border: 2px solid #3498db;
 }
 
 	.body-blue .month-background-color:hover {
 		cursor: pointer;
 	}
 
+.body-blue .progress-background {
+	background: #3498db;
+}
+
 .body-blue .month-text-color {
-	background: -webkit-linear-gradient(right,#3498db 50%,white 50%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: #3498db;
 }
 
 .body-green .month-background-color {
