@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,13 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonControllerTest.cs" />
+    <Compile Include="CommonController.cs" />
     <Compile Include="Entity\DateSchedule.cs" />
     <Compile Include="Entity\DayStatistic.cs" />
     <Compile Include="Entity\Holiday.cs" />
     <Compile Include="Entity\MarriageFullInfo.cs" />
     <Compile Include="Entity\Room.cs" />
     <Compile Include="Entity\Spouse.cs" />
+    <Compile Include="Factory\DBFactory.cs" />
     <Compile Include="Interfaces\ICommonController.cs" />
     <Compile Include="Interfaces\IRoomData.cs" />
     <Compile Include="Resources\Text.Designer.cs">
@@ -54,7 +56,7 @@
       <DependentUpon>Text.resx</DependentUpon>
     </Compile>
     <Compile Include="RoomData.cs" />
-    <Compile Include="TestCalendarData.cs" />
+    <Compile Include="CalendarData.cs" />
     <Compile Include="Interfaces\ICalendarData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,7 +15,7 @@ namespace MarryMe.Model.Interfaces
 		int[] GetMonthStatistic(int year);
 
 		/// <summary>
-		/// Get statistic dayes in month.
+		/// Get statistic days in month.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>
@@ -29,14 +29,7 @@ namespace MarryMe.Model.Interfaces
 		/// <param name="month">selected month.</param>
 		/// <returns></returns>
 		Holiday[] GetHolidaysForMonth(int year, int month);
-
-		/// <summary>
-		/// Submit marrige.
-		/// </summary>
-		/// <param name="marige">marige info</param>
-		/// <returns></returns>
-		bool SubmitData(MarriageFullInfo marige);
-
+				
 		#endregion
 	}
 }

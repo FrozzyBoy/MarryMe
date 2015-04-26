@@ -45,14 +45,7 @@
 		{
 			return true;
 		}
-
-		[HttpGet]
-		[Route("count")]
-		public IHttpActionResult GetRoomsCount()
-		{
-			return Ok(_room.GetRoomsCount());
-		}
-
+				
 		/// <summary>
 		/// Get statistic for selected room.
 		/// </summary>

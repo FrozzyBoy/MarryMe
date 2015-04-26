@@ -18,7 +18,7 @@
 		/// <summary>
 		/// Отчество.
 		/// </summary>
-		public string FatherName { get; set; }
+		public string MidleName { get; set; }
 		/// <summary>
 		/// Фамилия.
 		/// </summary>
@@ -26,6 +26,7 @@
 
 		public string TelephoneNumber { get; set; }
 		public string PassportNumber { get; set; }
+		public string Email { get; set; }
 
 	}
 }

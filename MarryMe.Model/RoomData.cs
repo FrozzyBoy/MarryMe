@@ -7,26 +7,20 @@
 	using System.Text;
 	using System.Threading.Tasks;
 	using MarryMe.Model.Entity;
+	using MarryMe.Model.Factory;
 	using MarryMe.Model.Interfaces;
 	#endregion
 
 	public class RoomData : IRoomData
 	{
 
-		private Room[] _rooms = new Room[]{new Room()
-				{
-					Id = 0,
-					Information = "информация",
-					Name = "Розовая комната",
-					Price = 10
-				},
-		new Room()
-				{
-					Id = 1,
-					Information = "информация",
-					Name = "не Розовая комната",
-					Price = 10
-				}};
+		#region Constants
+
+		private const string StoredGetRoomById = "[dbo].[GetRoomById]";
+		private const string StoredGetAllRooms = "[dbo].[GetAllRooms]";
+		private const string StoredGetSheduleRoom = "[dbo].[GetSheduleRoom]";
+
+		#endregion
 
 		#region implement IRoomData
 		/// <summary>
@@ -36,7 +30,29 @@
 		/// <returns></returns>
 		public Room GetInformation(int roomId)
 		{
-			return _rooms[roomId];
+			Room room = null;
+
+			using (var connection = DBFactory.GetConnection())
+			{
+				connection.Open();
+				using (var command = connection.CreateCommand())
+				{
+					command.CommandType = System.Data.CommandType.StoredProcedure;
+					command.CommandText = StoredGetRoomById;
+
+					DBFactory.AddParameter(command, "@roomId", roomId);
+
+					using (var reader = command.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							room = Room.ParseReader(reader);
+						}
+					}
+				}
+			}
+
+			return room;
 		}
 
 		/// <summary>
@@ -47,29 +63,31 @@
 		/// <returns></returns>
 		public DateSchedule[] GetSchedule(int roomId, DateTime day)
 		{
-			var elapse = new TimeSpan(0, 20, 0);
-			TimeSpan st = new TimeSpan(8, 0, 0);
-			TimeSpan end = new TimeSpan(17, 55, 0);
 			List<DateSchedule> result = new List<DateSchedule>();
 
-			var rnd = new Random();
-
-			for (TimeSpan i = st; i < end; i += elapse)
+			using (var connection = DBFactory.GetConnection())
 			{
-				result.Add(new DateSchedule() { IsUsing = rnd.Next(100) < 50, Time = i });
+				connection.Open();
+				using (var command = connection.CreateCommand())
+				{
+					command.CommandType = System.Data.CommandType.StoredProcedure;
+					command.CommandText = StoredGetSheduleRoom;
+
+					DBFactory.AddParameter(command, "@roomId", roomId);
+					DBFactory.AddParameter(command, "@date", day.Date);
+
+					using (var reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							var shedule = DateSchedule.ParseReader(reader);
+							result.Add(shedule);
+						}
+					}
+				}
 			}
 
 			return result.ToArray();
-		}
-
-
-		/// <summary>
-		/// Get rooms count.
-		/// </summary>
-		/// <returns>Rooms Count.</returns>
-		public int GetRoomsCount()
-		{
-			return _rooms.Length;
 		}
 
 		/// <summary>
@@ -78,7 +96,28 @@
 		/// <returns></returns>
 		public Room[] GetRooms()
 		{
-			return _rooms;
+			List<Room> rooms = new List<Room>();
+
+			using (var connection = DBFactory.GetConnection())
+			{
+				connection.Open();
+				using (var command = connection.CreateCommand())
+				{
+					command.CommandType = System.Data.CommandType.StoredProcedure;
+					command.CommandText = StoredGetAllRooms;
+					using (var reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							var room = Room.ParseReader(reader);
+							rooms.Add(room);
+						}
+					}
+				}
+			}
+
+			return rooms.ToArray();
+
 		}
 
 		#endregion
