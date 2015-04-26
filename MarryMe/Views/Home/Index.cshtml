@@ -179,9 +179,7 @@
 @* ВЫБОР ВРЕМЕНИ *@
 <hr />
 <h1 class="title field">Выбор времени</h1>
-<div ng-show="dayTimes.length != 0" ng-repeat="time in dayTimes | filter:{IsUsing:false}">
-    <input type="radio" name="roomTime" value="{{time.Time}}">{{time.Time}}<br />
-</div>
+
 <div ng-show="dayTimes == null">
     Выберите дату. Дата должна быть не раньше чем через 3 дня от текущей.
 </div>

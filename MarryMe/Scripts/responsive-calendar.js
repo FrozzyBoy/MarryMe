@@ -342,7 +342,7 @@
 					}
 					if ($(this).data("go") === "next12") {
 						for (var i = 0; i < 11; i++) {
-							data.next();
+						    data.next();
 						}
 						return data.next();
 					}
