@@ -15,7 +15,7 @@ namespace MarryMe.Model.Interfaces
 		int[] GetMonthStatistic(int year);
 
 		/// <summary>
-		/// Get statistic dayes in month.
+		/// Get statistic days in month.
 		/// </summary>
 		/// <param name="year">Year to get statistic.</param>
 		/// <param name="month">Month to get statistic.</param>

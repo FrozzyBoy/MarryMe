@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +47,7 @@
     <Compile Include="Entity\MarriageFullInfo.cs" />
     <Compile Include="Entity\Room.cs" />
     <Compile Include="Entity\Spouse.cs" />
+    <Compile Include="Factory\DBFactory.cs" />
     <Compile Include="Interfaces\ICommonController.cs" />
     <Compile Include="Interfaces\IRoomData.cs" />
     <Compile Include="Resources\Text.Designer.cs">

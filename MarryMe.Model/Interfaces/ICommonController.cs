@@ -9,7 +9,7 @@
 	public interface ICommonController
 	{
 		/// <summary>
-		/// Submit data obout marrige.
+		/// Submit data about marriage.
 		/// </summary>
 		/// <param name="fullInfo">Full info.</param>
 		/// <returns>True if ok.</returns>
