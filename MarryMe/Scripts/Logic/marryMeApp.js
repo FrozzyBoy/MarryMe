@@ -119,7 +119,7 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
 var site = 'http://marryme.somee.com/api';
 marryApp.constant('api', {
     calendar: {
-        days: site + '/calendar/days',
+        days: 'http://marryme.somee.com/api' + '/calendar/days',
         months: 'http://marryme.somee.com/api' + '/calendar/months',
         holidays: 'http://marryme.somee.com/api' + '/calendar/holidays'
     },
