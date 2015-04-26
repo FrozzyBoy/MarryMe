@@ -145,9 +145,9 @@ textarea.form-control {
 		color: #e74c3c;
 	}
 
-.body-blue .form-control {
-	background-color: #3498db;
-}
+/*.body-blue .form-control {
+	background-color: rgba(52, 152, 219, 0.40);
+}*/
 
 	.body-blue .form-control.resize:hover {
 		border: 2px solid #3498db;
@@ -158,6 +158,14 @@ textarea.form-control {
 	.body-blue .form-control.text-color:hover {
 		color: #3498db;
 	}
+
+.tile-blue {
+	background-color: rgba(52, 152, 219, 0.40);
+}
+
+.tile-pink {
+	background-color: rgba(219, 52, 205, 0.40);
+}
 
 .body-green .form-control {
 	background-color: #2ecc71;
