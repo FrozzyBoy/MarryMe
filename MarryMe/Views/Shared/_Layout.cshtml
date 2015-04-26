@@ -1,31 +1,67 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="marryMeApp">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewBag.Title – Могилевский ЗАГС</title>
 	@Styles.Render("~/Content/css")
+	<link href="~/Content/Tile.css" rel="stylesheet" />
 	<link href="~/Content/responsive-calendar.css" rel="stylesheet" />
 	<link href="~/Content/animation.css" rel="stylesheet" />
 	<link href="~/Content/Month.css" rel="stylesheet" />
+
+	<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+	<link href="~/Content/velvet.css" rel="stylesheet" />
+	<link href="~/Content/custom.css" rel="stylesheet" />
 	@Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="body-blue">
-	<div class="container body-content">
-		@RenderBody()
+<body class="body-blue" ng-controller="styleCtrl">
+	<nav class="navbar navbar-velvet navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand smooth-scroll" href="#intro"><span> Главная страница</span></a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#mission" class="smooth-scroll">Выбор даты</a></li>
+					<li><a href="#services" class="smooth-scroll">Выбор зала</a></li>
+					<li><a href="#portfolio" class="smooth-scroll">Личная информация</a></li>
+					<li><a href="#contact" class="smooth-scroll">Контакты</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-		<hr />
-		<footer>
-			<p>&copy; @DateTime.Now.Year – Могилевский ЗАГС</p>
-		</footer>
-	</div>
+	@RenderBody()
+
+	@*<div class="container body-content">
+
+
+			<hr />
+			<footer>
+				<p>&copy; @DateTime.Now.Year – Могилевский ЗАГС</p>
+			</footer>
+		</div>*@
 
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
+	<script src="~/Scripts/angular.min.js"></script>
+	<script src="~/Scripts/Logic/marryMe.js"></script>
+
 	<script src="~/Scripts/responsive-calendar.js"></script>
 	<script src="~/Scripts/Logic/Tile.js"></script>
 	<script src="~/Scripts/Logic/Calendar.js"></script>
+
+	<script src="~/Scripts/Style/curtains.js"></script>
+	<script src="~/Scripts/Style/isotope.pkgd.min.js"></script>
+	<script src="~/Scripts/Style/velvet.js"></script>
 	@RenderSection("scripts", required: false)
 </body>
 </html>
