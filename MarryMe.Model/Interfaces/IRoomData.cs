@@ -26,12 +26,6 @@
 		DateSchedule[] GetSchedule(int roomId, DateTime time);
 
 		/// <summary>
-		/// Get rooms count.
-		/// </summary>
-		/// <returns>Rooms Count.</returns>
-		int GetRoomsCount();
-
-		/// <summary>
 		/// Get all rooms.
 		/// </summary>
 		/// <returns></returns>

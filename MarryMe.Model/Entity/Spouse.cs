@@ -18,7 +18,7 @@
 		/// <summary>
 		/// Отчество.
 		/// </summary>
-		public string FatherName { get; set; }
+		public string MidleName { get; set; }
 		/// <summary>
 		/// Фамилия.
 		/// </summary>

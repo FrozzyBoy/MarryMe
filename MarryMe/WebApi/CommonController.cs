@@ -55,13 +55,9 @@
 		[Route("submit")]
 		public IHttpActionResult PostData([FromBody] MarriageFullInfo marige)
 		{
-			marige.SubmitDate = DateTime.Now;
-			marige.Method = Text.MethodOfThreatMent;
-
 			try
 			{
-				_controller.SubmitData(marige);
-				return Ok();
+				return Ok(_controller.SubmitData(marige));
 			}
 			catch (Exception ex)
 			{
