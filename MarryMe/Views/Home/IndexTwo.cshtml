@@ -36,7 +36,8 @@
 									<div class="col-md-4 col-sm-4 col-xs-6">
 										<div class="block text-color form-control resize month-background-color">
 											<div class="month-text-color">
-												<h3>{{month}} 70%</h3>
+												<h3 style="margin-top:5px; margin-bottom:5px">{{month}}</h3>
+												<h3 style="margin-top:0px; margin-bottom:5px">70%</h3>
 												<div class="progress">
 													<div class="progress-bar progress-background" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
 														<span class="sr-only">60% Complete</span>
@@ -128,8 +129,10 @@
 						<div ng-repeat="hall in halls">
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="block text-color form-control resize tile">
-									<h3>{{hall}}</h3>
-									<p>Описание</p>
+									<div class="month-text-color">
+										<h3>{{hall}}</h3>
+										<p>Описание</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -148,30 +151,31 @@
 		<div id="portfolioPlaceholder" class="col-lg-6 half bg1">
 			<div class="row">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="block block-lg form-control form-block" color:white">
+					<div class="block block-lg form-control form-block tile-blue" color:white">
 						<h2>Жених</h2>
 						<p>Данные жениха</p>
 						<div class="row form-group">
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Имя" />
-							</div> 
-							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Фамилия" />
+								<input type="text" class="form-control tile-blue" placeholder="Имя" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Отчество" />
+								<input type="text" class="form-control tile-blue" placeholder="Фамилия" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Телефон" />
+								<input type="text" class="form-control tile-blue" placeholder="Отчество" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="E-mail" />
+								<input type="text" class="form-control tile-blue" placeholder="Телефон" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Номер паспорта" />
+								<input type="text" class="form-control tile-blue" placeholder="E-mail" />
+							</div>
+							<div class="col-md-6 col-sm-12 block-lg-label">
+								<input type="text" class="form-control tile-blue" placeholder="Номер паспорта" />
 							</div>
 						</div>
 					</div>
+					<a class="btn btn-main smooth-scroll btn-blue pull-right" style="color:white; margin-bottom:10px" href="#services">Назад</a>
 				</div>
 			</div>
 		</div>
@@ -181,31 +185,31 @@
 			<div class="row">
 				<div class="col-lg-10 col-lg-offset-1">
 
-					<div class="block block-lg form-control form-block" color:white">
+					<div class="block block-lg form-control form-block tile-pink" color:white">
 						<h2>Невеста</h2>
 						<p>Данные невесты</p>
 						<div class="row form-group">
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Имя" />
+								<input type="text" class="form-control tile-pink" placeholder="Имя" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Фамилия" />
+								<input type="text" class="form-control tile-pink" placeholder="Фамилия" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Отчество" />
+								<input type="text" class="form-control tile-pink" placeholder="Отчество" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Телефон" />
+								<input type="text" class="form-control tile-pink" placeholder="Телефон" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="E-mail" />
+								<input type="text" class="form-control tile-pink" placeholder="E-mail" />
 							</div>
 							<div class="col-md-6 col-sm-12 block-lg-label">
-								<input type="text" class="form-control" placeholder="Номер паспорта" />
+								<input type="text" class="form-control tile-pink" placeholder="Номер паспорта" />
 							</div>
 						</div>
 					</div>
-
+					<a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px">Подтвердить</a>
 				</div>
 			</div>
 
@@ -216,7 +220,7 @@
 <section class="section" id="contact">
 	<div class="container-fluid">
 
-		<div class="col-lg-6 half bg"></div>
+		<div class="col-lg-6 half"></div>
 
 		<div class="col-lg-6 half">
 

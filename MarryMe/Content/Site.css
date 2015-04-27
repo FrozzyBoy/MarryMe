@@ -52,3 +52,26 @@ textarea {
 .text-color {
 	color: white;
 }
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.btn-blue {
+	background-color: rgba(52, 152, 219, 0.40);
+	border: 1px solid white;
+}
+
+	.btn-blue:hover {
+		background-color: rgba(52, 152, 219, 1.00);
+	}
+
+.btn-pink {
+	background-color: rgba(219, 52, 205, 0.40);
+	border: 1px solid white;
+}
+
+	.btn-pink:hover {
+		background-color: rgba(219, 52, 205, 1.00);
+	}
