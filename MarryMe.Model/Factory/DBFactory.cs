@@ -33,6 +33,7 @@
 							if (connectionString != null)
 							{
 								_connectionFactory = DbProviderFactories.GetFactory(connectionString.ProviderName);
+								ConnectionString = connectionString.ConnectionString;
 							}
 
 						}
@@ -41,6 +42,8 @@
 				return _connectionFactory;
 			}
 		}
+
+		private static string ConnectionString { get; set; }
 
 		#endregion
 
@@ -58,6 +61,7 @@
 			if (ConnectionFactory != null)
 			{
 				connection = ConnectionFactory.CreateConnection();
+				connection.ConnectionString = ConnectionString;
 			}
 			return connection;
 		}
