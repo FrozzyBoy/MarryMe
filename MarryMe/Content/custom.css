@@ -13,7 +13,7 @@
 }
 
 .bg1 {
-	background: url("../../img/date1.jpg");
+	background: url("../../img/date1.jpg") 100% 0 no-repeat;
 }
 
 .bg2 {
