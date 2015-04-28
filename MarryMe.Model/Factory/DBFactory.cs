@@ -12,8 +12,13 @@
 	public class DBFactory
 	{
 		public const string StatisticOutData = "statistic";
+
+		#region private fields
 		private const string DefaultConnectionStringName = "DefaultConnection";
 
+		private static string ConnectionString { get; set; }
+
+		#endregion
 		#region Singleton factory
 
 		private static object _lockFactory = new object();
@@ -42,8 +47,6 @@
 				return _connectionFactory;
 			}
 		}
-
-		private static string ConnectionString { get; set; }
 
 		#endregion
 

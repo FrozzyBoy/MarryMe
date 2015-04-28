@@ -16,11 +16,11 @@
 	/// </summary>
 	public class CalendarData : ICalendarData
 	{
-		#region Constatns
+		#region Constants
 
 		private const int MonthsInYear = 12;
-		private const string StoredMonthStat = "[dbo].[SelectStatisticForMonth]";
-		private const string StoredDaysStat = "[dbo].[SelectStatisticForDay]";
+		private const string StoredMonthStat = "[dbo].[GetStatisticForMonthInYear]";
+		private const string StoredDaysStat = "[dbo].[GetStatisticForAllDaysInMonth]";
 		private const string StoredHolidays = "[dbo].[GetHolidaysForMonth]";
 
 		#endregion
@@ -42,26 +42,19 @@
 				connection.Open();
 				using (var command = connection.CreateCommand())
 				{
-					for (int month = 1; month <= MonthsInYear; month++)
+					command.CommandText = StoredMonthStat;
+					command.CommandType = System.Data.CommandType.StoredProcedure;
+
+					string yearParam = string.Format("{0}-1-1", year);
+
+					command.Parameters.Clear();
+					DBFactory.AddParameter(command, "@firstDayOfMoth", yearParam);
+					using (var reader = command.ExecuteReader())
 					{
-						command.CommandText = StoredMonthStat;
-						command.CommandType = System.Data.CommandType.StoredProcedure;
-
-						string yearParam = string.Format("{0}-{1}-1", year, month);
-
-						command.Parameters.Clear();
-						DBFactory.AddParameter(command, "@date", yearParam);
-						using (var reader = command.ExecuteReader())
+						while (reader.Read())
 						{
-							if (reader.Read())
-							{
-								var parseData = (int)(reader[DBFactory.StatisticOutData]);
-								days.Add(parseData);
-							}
-							else
-							{
-								days.Add(-1);
-							}
+							var parseData = (int)(reader[DBFactory.StatisticOutData]);
+							days.Add(parseData);
 						}
 					}
 
@@ -81,7 +74,7 @@
 		/// <returns></returns>
 		public int[] GetStatisticForDays(int year, int month)
 		{
-			var result = new int[DateTime.DaysInMonth(year, month)];
+			var result = new List<int>();
 			using (var connection = DBFactory.GetConnection())
 			{
 				connection.Open();
@@ -91,31 +84,24 @@
 					command.CommandText = StoredDaysStat;
 					command.CommandType = System.Data.CommandType.StoredProcedure;
 
-					for (int day = 1; day <= MonthsInYear; day++)
+					yearParam = string.Format("{0}-{1}-1", year, month);
+
+					command.Parameters.Clear();
+					DBFactory.AddParameter(command, "@firstDayOfMoth", yearParam);
+
+					using (var reader = command.ExecuteReader())
 					{
-						yearParam = string.Format("{0}-{1}-{2}", year, month, day);
-
-						command.Parameters.Clear();
-						DBFactory.AddParameter(command, "@date", yearParam);
-
-						using (var reader = command.ExecuteReader())
+						while (reader.Read())
 						{
-							if (reader.Read())
-							{
-								var parseData = (int)(reader[DBFactory.StatisticOutData]);
-								result[day] = parseData;
-							}
-							else
-							{
-								result[day] = -1;
-							}
+							var parseData = (int)(reader[DBFactory.StatisticOutData]);
+							result.Add(parseData);
 						}
-
 					}
+
 				}
 			}
 
-			return result;
+			return result.ToArray();
 		}
 
 		/// <summary>

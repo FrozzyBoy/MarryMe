@@ -45,7 +45,7 @@
 		{
 			return true;
 		}
-				
+
 		/// <summary>
 		/// Get statistic for selected room.
 		/// </summary>
@@ -64,11 +64,14 @@
 		[Route("schedule")]
 		public IHttpActionResult GetRoomSchedule(int roomId, string time)
 		{
-			DateTime timeParsed = DateTime.Parse(time);
+			DateTime timeParsed;
+			if (DateTime.TryParse(time, out timeParsed))
+			{
+				DateSchedule[] result = _room.GetSchedule(roomId, timeParsed);
 
-			DateSchedule[] result = _room.GetSchedule(roomId, timeParsed);
-
-			return Ok(result);
+				return Ok(result);
+			}
+			return BadRequest("Дата не корректна.");
 		}
 
 		[HttpGet]
