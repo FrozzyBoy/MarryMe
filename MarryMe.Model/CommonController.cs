@@ -52,21 +52,21 @@
 					#endregion
 
 					#region men info
-					DBFactory.AddParameter(command, "@mName", fullInfo.Men.FirstName);
-					DBFactory.AddParameter(command, "@mLastName", fullInfo.Men.LastName);
-					DBFactory.AddParameter(command, "@mMidleName", fullInfo.Men.MidleName);
-					DBFactory.AddParameter(command, "@mTelNum", fullInfo.Men.TelephoneNumber);
-					DBFactory.AddParameter(command, "@mPassportId", fullInfo.Men.PassportNumber);
-					DBFactory.AddParameter(command, "@mEmail", fullInfo.Men.Email);
+					DBFactory.AddParameter(command, "@mName", fullInfo.Man.FirstName);
+					DBFactory.AddParameter(command, "@mLastName", fullInfo.Man.LastName);
+					DBFactory.AddParameter(command, "@mMidleName", fullInfo.Man.MiddleName);
+					DBFactory.AddParameter(command, "@mTelNum", fullInfo.Man.TelephoneNumber);
+					DBFactory.AddParameter(command, "@mPassportId", fullInfo.Man.PassportNumber);
+					DBFactory.AddParameter(command, "@mEmail", fullInfo.Man.Email);
 					#endregion
 
 					#region women info
-					DBFactory.AddParameter(command, "@wName", fullInfo.Women.FirstName);
-					DBFactory.AddParameter(command, "@wLastName", fullInfo.Women.LastName);
-					DBFactory.AddParameter(command, "@wMidleName", fullInfo.Women.MidleName);
-					DBFactory.AddParameter(command, "@wTelNum", fullInfo.Women.TelephoneNumber);
-					DBFactory.AddParameter(command, "@wPassportId", fullInfo.Women.PassportNumber);
-					DBFactory.AddParameter(command, "@wEmail", fullInfo.Women.Email);
+					DBFactory.AddParameter(command, "@wName", fullInfo.Woman.FirstName);
+					DBFactory.AddParameter(command, "@wLastName", fullInfo.Woman.LastName);
+					DBFactory.AddParameter(command, "@wMidleName", fullInfo.Woman.MiddleName);
+					DBFactory.AddParameter(command, "@wTelNum", fullInfo.Woman.TelephoneNumber);
+					DBFactory.AddParameter(command, "@wPassportId", fullInfo.Woman.PassportNumber);
+					DBFactory.AddParameter(command, "@wEmail", fullInfo.Woman.Email);
 					#endregion
 
 					command.ExecuteNonQuery();
@@ -76,8 +76,8 @@
 
 		private void Validation(MarriageFullInfo fullInfo)
 		{
-			bool wEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Women.Email);
-			bool mEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Men.Email);
+			bool wEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Woman.Email);
+			bool mEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Man.Email);
 
 			if (!wEmailFilled
 				|| !mEmailFilled)
@@ -87,7 +87,7 @@
 
 			if (wEmailFilled)
 			{
-				if (!CheckMail(fullInfo.Women.Email))
+				if (!CheckMail(fullInfo.Woman.Email))
 				{
 					throw new ArgumentException("Электронный адрес супруги заполнен не правильно.");
 				}
@@ -95,7 +95,7 @@
 
 			if (mEmailFilled)
 			{
-				if (!CheckMail(fullInfo.Men.Email))
+				if (!CheckMail(fullInfo.Man.Email))
 				{
 					throw new ArgumentException("Электронный адрес супруга заполнен не правильно.");
 				}
