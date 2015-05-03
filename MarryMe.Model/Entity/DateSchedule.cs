@@ -16,8 +16,8 @@
 			DateSchedule result = new DateSchedule();
 
 			result.IsUsing = reader.GetBoolean(reader.GetOrdinal("IsFree"));
-			string registerTime = reader.GetString(reader.GetOrdinal("RegisterTime"));
-			result.Time = TimeSpan.Parse(registerTime);
+			var registerTime = reader.GetDateTime(reader.GetOrdinal("RegisterTime"));
+            result.Time = registerTime.TimeOfDay;
 
 			return result;
 		}
