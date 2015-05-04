@@ -145,11 +145,18 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
             url: api.room.schedule,
             params: { 'roomId': roomId, 'time': year+'-'+month+'-'+day }
         }).success(function (data, status, headers, config) {
-            console.log(data, status);
-            $scope.times = data;
+            $scope.times = splitTime(data);
         }).error(function (data, status) {
             alert('err')
         });
+
+        function splitTime(data) {
+            angular.forEach(data,function (item,key) {
+              var temp = item.Time.split(':');
+              item.Time = temp[0] + ':' + temp[1];     
+            });
+            return data;
+        }
     }// заполнение дня(время)
 
     function getHolidays(year, month) {
@@ -197,7 +204,7 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
         }).success(function (data,status) {
             alert('success');
         }).error(function (data, status, headers, config) {
-            alert('error' + status)
+            alert('error' + status + ' ' + data);
         });
     }
 });
