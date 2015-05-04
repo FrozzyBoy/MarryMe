@@ -57,9 +57,7 @@
 							days.Add(parseData);
 						}
 					}
-
 				}
-
 			}
 
 			return days.ToArray();

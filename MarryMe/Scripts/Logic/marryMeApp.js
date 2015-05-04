@@ -79,7 +79,7 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
         var year = $scope.selectedYear;
         var month = $scope.selectedMonth;
         var day = $scope.selectedDay;
-        $scope.submitData.RegistrationDate = new Date(year,month-1,day, hour, minutes);
+        $scope.submitData.RegistrationDate = new Date(Date.UTC(year, month - 1, day, hour, minutes));
     } //выбор времени
 
     $scope.hallClick = function (clickedId) {

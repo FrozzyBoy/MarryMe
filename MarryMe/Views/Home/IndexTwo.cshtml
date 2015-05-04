@@ -167,7 +167,7 @@
                                     <input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
                                 </div>
                                 <div class="col-md-6 col-sm-12 block-lg-label">
-                                    <input type="text" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
+                                    <input type="email" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
                                 </div>
                                 <div class="col-md-6 col-sm-12 block-lg-label">
                                     <input type="text" class="form-control tile-blue" placeholder="Номер паспорта" name="manPassportNumber" ng-model="Man.PassportNumber" />
@@ -201,7 +201,7 @@
                                     <input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
                                 </div>
                                 <div class="col-md-6 col-sm-12 block-lg-label">
-                                    <input type="text" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
+                                    <input type="email" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
                                 </div>
                                 <div class="col-md-6 col-sm-12 block-lg-label">
                                     <input type="text" class="form-control tile-pink" placeholder="Номер паспорта" name="womanPassportNumber" ng-model="Woman.PassportNumber" />
@@ -210,30 +210,32 @@
                         </div>
                         <a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" ng-click="applyForm()">Подтвердить</a>
                     </div>
-                   <!-- <ul>
-                        <li style="color:red"
-                            ng-show="(inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.required)  ||
-            (inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.required) ||
-            (inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.required) ||
-            (inputForm.brideName.$dirty && inputForm.brideName.$error.required) ||
-            (inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.required) ||
-            (inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.required)
+                   <ul>
+                       <li style="color:red"
+                           ng-show="
+            inputForm.manFirstName.$dirty && inputForm.manFirstName.$error.required  ||
+            inputForm.manLastName.$dirty && inputForm.manLastName.$error.required ||
+            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.required ||
+            inputForm.womanFirstName.$dirty && inputForm.womanFirstName.$error.required ||
+            inputForm.womanLastName.$dirty && inputForm.womanLastName.$error.required ||
+            inputForm.womanMiddleName.$dirty && inputForm.womanMiddleName.$error.required
             ">Заполните обязательные поля</li>
-                        <li style="color:red"
-                            ng-show="inputForm.bridegroomEmail.$dirty && inputForm.bridegroomEmail.$error.email ||
-            inputForm.brideEmail.$dirty && inputForm.brideEmail.$error.email
+                       <li style="color:red"
+                           ng-show="inputForm.manEmail.$dirty && inputForm.manEmail.$error.email ||
+            inputForm.womanEmail.$dirty && inputForm.womanEmail.$error.email
             ">Не верный e-mail</li>
-                        <li style="color:red"
-                            ng-show="inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.pattern  ||
-            inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.pattern ||
-            inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.pattern ||
-            inputForm.brideName.$dirty && inputForm.brideName.$error.pattern ||
-            inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.pattern ||
-            inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.pattern
+                       <li style="color:red"
+                           ng-show="
+            inputForm.manFirstName.$dirty && inputForm.manFirstName.$error.pattern  ||
+            inputForm.manLastName.$dirty && inputForm.manLastName.$error.pattern ||
+            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.pattern ||
+            inputForm.womanFirstName.$dirty && inputForm.womanFirstName.$error.pattern ||
+            inputForm.womanLastName.$dirty && inputForm.womanLastName.$error.pattern ||
+            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.pattern
             ">Используйте русские буквы</li>
-                        <li style="color:red"
-                            ng-show="inputForm.bridegroomPhoneNumber.$error.pattern && inputForm.bridePhoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
-                    </ul> -->
+                       <li style="color:red"
+                           ng-show="inputForm.manTelephoneNumber.$error.pattern && inputForm.womanTelephoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
+                    </ul>
                 </div>
             </div>
         </div>
