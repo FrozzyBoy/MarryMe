@@ -16,7 +16,7 @@
 
 		public DateTime RegistrationDate { get; set; }
 
-		public Spouse Men { get; set; }
-		public Spouse Women { get; set; }
+		public Spouse Man { get; set; }
+		public Spouse Woman { get; set; }
 	}
 }

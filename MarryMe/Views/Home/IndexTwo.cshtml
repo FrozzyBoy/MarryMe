@@ -101,21 +101,11 @@
 					<div class="section-header" style="margin-bottom:10px">
 						<h1 class="title field">Выбор времени</h1>
 					</div>
-
-					@*<div ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}">
-							<div class="col-md-4 col-sm-4 col-xs-4">
-								<div class="block text-color form-control resize month-background-color">
-									<div class="month-text-color">
-										<h3>{{time.Time}}</h3>
-									</div>
-								</div>
-							</div>
-						</div>*@
-					<div ng-repeat="time1 in times1">
-						<div class="col-md-3 col-sm-3 col-xs-3">
+					<div ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}">
+						<div class="col-md-3 col-sm-3 col-xs-3" ng-click="timeClick(time.Time)">
 							<div class="block text-color form-control time-background-color">
 								<div class="time-text-color">
-									<h3 class="text-h3">{{time1}}</h3>
+									<h3>{{time.Time}}</h3>
 								</div>
 							</div>
 						</div>
@@ -135,10 +125,10 @@
 
 					<div class="row">
 						<div ng-repeat="hall in halls">
-							<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:5px;padding-right:0px">
+							<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:5px;padding-right:0px" ng-click="hallClick(hall.Id)">
 								<div class="block form-control resize tile hall-background-color">
 									<div class="hall-text-color">
-										<h3>{{hall}}</h3>
+										<h3>{{hall.Name}}</h3>
 										<p>Описание</p>
 									</div>
 								</div>
@@ -154,8 +144,8 @@
 </section><!-- /#services -->
 
 <section class="section" id="portfolio">
-	<div class="container-fluid">
-		<form name="inputForm">
+	<form name=" inputform">
+		<div class="container-fluid">
 			<div id="portfolioPlaceholder" class="col-lg-6 half bg1">
 				<div class="row">
 					<div class="col-lg-10 col-lg-offset-1">
@@ -164,22 +154,22 @@
 							<p>Данные жениха</p>
 							<div class="row form-group">
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Имя" name="bridegroomName" ng-model="bridegroom.name" required ng-pattern="/^[а-яА-Я]+$/" />
+									<input type="text" class="form-control tile-blue" placeholder="Имя" name="manFirstName" ng-model="Man.FirstName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Фамилия" name="bridegroomSurName" ng-model="broom.surName" required ng-pattern="/^[а-яА-Я]+$/" />
+									<input type="text" class="form-control tile-blue" placeholder="Фамилия" name="manLastName" ng-model="Man.LastName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Отчество" name="bridegroomMiddleName" ng-model="bridegroom.middleName" required ng-pattern="/^[а-яА-Я]+$/" />
+									<input type="text" class="form-control tile-blue" placeholder="Отчество" name="manMiddleName" ng-model="Man.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="bridegroomPhoneNumber" ng-model="bridegroom.phoneNumber" ng-pattern="/\+[0-9]{12}/" />
+									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="E-mail" name="bridegroomEmail" ng-model="bridegroom.email" />
+									<input type="text" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Номер паспорта" name="bridegroomPersinalNumber" ng-model="bridegroom.personalNumber" />
+									<input type="text" class="form-control tile-blue" placeholder="Номер паспорта" name="manPassportNumber" ng-model="Man.PassportNumber" />
 								</div>
 							</div>
 						</div>
@@ -198,56 +188,66 @@
 							<p>Данные невесты</p>
 							<div class="row form-group">
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Имя" name="brideName" ng-model="bride.name" required ng-pattern="/^[а-яА-Я]+$/" />
+									<input type="text" class="form-control tile-pink" placeholder="Имя" name="womanFirstName" ng-model="Woman.FirstName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Фамилия" name="brideSurName" ng-model="bride.surName" required ng-pattern="/^[а-яА-Я]+$/" />
+									<input type="text" class="form-control tile-pink" placeholder="Фамилия" name="womanLastName" ng-model="Woman.LastName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Отчество" name="brideMiddleName" ng-model="bride.middleName" required ng-pattern="/^[а-яА-Я]+$/" />
+									<input type="text" class="form-control tile-pink" placeholder="Отчество" name="womanMiddleName" ng-model="Woman.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="bridePhoneNumber" ng-model="bride.phoneNumber" ng-pattern="/\+[0-9]{12}/" />
+									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="E-mail" name="brideEmail" ng-model="bride.email" />
+									<input type="text" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Номер паспорта" name="bridePersonalNumber" ng-model="bride.personalNumber" />
+									<input type="text" class="form-control tile-pink" placeholder="Номер паспорта" name="womanPassportNumber" ng-model="Woman.PassportNumber" />
 								</div>
 							</div>
 						</div>
-						<a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px">Подтвердить</a>
+						<a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" ng-click="applyForm()">Подтвердить</a>
 					</div>
-					<ul>
-						<li style="color:red"
-							ng-show="(inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.required)  ||
-            (inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.required) ||
-            (inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.required) ||
-            (inputForm.brideName.$dirty && inputForm.brideName.$error.required) ||
-            (inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.required) ||
-            (inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.required)
-            ">Заполните обязательные поля</li>
-						<li style="color:red"
-							ng-show="inputForm.bridegroomEmail.$dirty && inputForm.bridegroomEmail.$error.email ||
-            inputForm.brideEmail.$dirty && inputForm.brideEmail.$error.email
-            ">Не верный e-mail</li>
-						<li style="color:red"
-							ng-show="inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.pattern  ||
-            inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.pattern ||
-            inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.pattern ||
-            inputForm.brideName.$dirty && inputForm.brideName.$error.pattern ||
-            inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.pattern ||
-            inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.pattern
-            ">Используйте русские буквы</li>
-						<li style="color:red"
-							ng-show="inputForm.bridegroomPhoneNumber.$error.pattern && inputForm.bridePhoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
-					</ul>
+					<!-- <ul>
+											<li style="color:red"
+												ng-show="(inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.required)  ||
+					>>>>>>> 8913c51d1d83ae4a8aee172a45ce770dac01ca0e
+								(inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.required) ||
+								(inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.required) ||
+								(inputForm.brideName.$dirty && inputForm.brideName.$error.required) ||
+								(inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.required) ||
+								(inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.required)
+								">Заполните обязательные поля</li>
+											<li style="color:red"
+												ng-show="inputForm.bridegroomEmail.$dirty && inputForm.bridegroomEmail.$error.email ||
+								inputForm.brideEmail.$dirty && inputForm.brideEmail.$error.email
+								">Не верный e-mail</li>
+											<li style="color:red"
+												ng-show="inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.pattern  ||
+								inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.pattern ||
+								inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.pattern ||
+								inputForm.brideName.$dirty && inputForm.brideName.$error.pattern ||
+								inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.pattern ||
+								inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.pattern
+								">Используйте русские буквы</li>
+					<<<<<<< HEAD
+											<li style="color:red"
+												ng-show="inputForm.bridegroomPhoneNumber.$error.pattern && inputForm.bridePhoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</div>
+
+					=======
+											<li style="color:red"
+												ng-show="inputForm.bridegroomPhoneNumber.$error.pattern && inputForm.bridePhoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
+										</ul> -->
 				</div>
 			</div>
-		</form>
-	</div>
-
+		</div>
+	</form>
 </section><!-- /#portfolio -->
 
 <section class="section" id="contact">

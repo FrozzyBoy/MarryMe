@@ -2,17 +2,19 @@
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$http.defaults.useXDomain = true;
-	var currentYear = new Date().getFullYear()
+	// $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+	var currentYear = new Date().getFullYear();
+
 	completenessOfTheMonths(currentYear);
-
-	$scope.halls = ["Бриллиантовый", "Золотой", "Розовый", "Хрустальный"];
-	$scope.times = [];
-
-	completenessOfTheDays(2015, 4);
-	getHolidays(2015, 4);
-	roomCount();
-	roomInfo(0);
 	allRooms();
+
+	$scope.halls = {};
+	$scope.times = [];
+	$scope.Man = {};
+	$scope.Woman = {};
+	$scope.submitData = {};
+
 
 
 
@@ -21,6 +23,11 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			$scope.selectedYear = $(this).data('year');
 			$scope.selectedMonth = $(this).data('month');
 			$scope.selectedDay = $(this).data('day');
+			$scope.$apply();
+
+			if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
+				dayInfo($scope.submitData.RoomId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+			}
 
 			var year = $scope.selectedYear;
 			var month = $scope.selectedMonth;
@@ -32,20 +39,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 			$scope.isCorrectDate = false;
 			if (delay > 3) {
-				dayInfo(0, year, month - 1, day);
 				$scope.isCorrectDate = true;
 			}
-			else {
-				$scope.$apply();
+
+			if (month < 9) {
+				month = '0' + month;
 			}
-
-
-
-			if ($scope.selectedMonth < 9) {
-				month = '0' + $scope.selectedMonth;
-			}
-			if ($scope.selectedDay < 9) {
-				day = '0' + $scope.selectedDay;
+			if (day < 9) {
+				day = '0' + day;
 			}
 			var key = $(this).data('year') + '-' + month + '-' + day
 			var qwe = {};
@@ -63,28 +64,29 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		}
 	});
 
-	$scope.bridegroom = [];
-	$scope.bride = [];
-
-	function getTimesForMe() {
-		for (var i = 8; i < 18; i++) {
-
-			for (var j = 0; j < 41; j += 20) {
-
-				var time = j;
-
-				if (j == 0) {
-					time = "00";
-				}
-
-				$scope.times1.push(i.toString() + '.' + time);
-			}
-
-		}
-		$scope.$apply();
+	$scope.applyForm = function () {
+		$scope.submitData.Man = $scope.Man;
+		$scope.submitData.Woman = $scope.Woman;
+		var object = $scope.submitData;
+		submit(object);
 	}
-	$scope.times1 = [];
-	getTimesForMe();
+
+	$scope.timeClick = function (time) {
+
+		var temp = time.split(':');
+		var hour = temp[0];
+		var minutes = temp[1];
+		var year = $scope.selectedYear;
+		var month = $scope.selectedMonth;
+		var day = $scope.selectedDay;
+		$scope.submitData.RegistrationDate = new Date(year, month - 1, day, hour, minutes);
+	} //выбор времени
+
+	$scope.hallClick = function (clickedId) {
+		$scope.submitData.RoomId = clickedId;
+		console.log($scope.submitData.RoomId + ' ' + $scope.selectedYear + ' ' + $scope.selectedMonth + ' ' + $scope.selectedDay + ' ' + 'hall')
+		dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+	} //event выбор зала
 
 	$scope.yearChange = function (flag) {
 		if (flag == 1) {
@@ -93,11 +95,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		else {
 			currentYear--;
 		}
-
 		completenessOfTheMonths(currentYear);
-	} // event yearChange
+	} // event смена года
 
-	function completenessOfTheDays(year, month) { // заполнение дней месяца(%)
+	function completenessOfTheDays(year, month) {
 		var persents;
 		$http({
 			method: 'GET',
@@ -111,9 +112,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		});
 
 
-	};
+	};// заполнение дней месяца(%)
 
-	function completenessOfTheMonths(year) { //заполнение месяцов(%)
+	function completenessOfTheMonths(year) {
 		var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 		$scope.monthsInfo = [];
 		$http({
@@ -127,18 +128,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 		});
 
-		function getM(persents) { //добавление объектов в массив
+		function getM(persents) {
 			for (var i = 0; i < 12; i++) {
 				$scope.monthsInfo.push({
 					name: months[i],
 					persent: persents[i]
 				})
 			}
-		}
-	}
+		} //добавление объектов в массив
+	} //заполнение месяцов(%)
 
 	function dayInfo(roomId, year, month, day) {
-		// заполнение дня
+
 		$http({
 			method: 'GET',
 			url: api.room.schedule,
@@ -149,10 +150,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		}).error(function (data, status) {
 			alert('err')
 		});
-	}
+	}// заполнение дня(время)
 
 	function getHolidays(year, month) {
-		$http({ // праздники
+		$http({
 			method: 'GET',
 			url: api.calendar.holidays,
 			params: { 'year': year, 'month': month }
@@ -161,21 +162,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		}).error(function (data, status) {
 
 		});
-	}
-
-	function roomCount() {
-		$http({ // кол-во комнат
-			method: 'GET',
-			url: api.room.count,
-		}).success(function (data, status, headers, config) {
-			console.log(data, status);
-		}).error(function (data, status) {
-
-		});
-	}
+	} // праздники(список)
 
 	function roomInfo(id) {
-		$http({ //инфо по комнате
+		$http({
 			method: 'GET',
 			url: api.room.info,
 			params: { 'roomId': id }
@@ -184,16 +174,30 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		}).error(function (data, status) {
 
 		});
-	}
+	}//инфо по комнате
 
 	function allRooms() {
-		$http({ // все комнаты
+		$http({
 			method: 'GET',
 			url: api.room.all,
 		}).success(function (data, status, headers, config) {
-			console.log(data, status);
+			$scope.halls = data;
 		}).error(function (data, status) {
 
+		});
+	} // все комнаты
+
+	function submit(object) {
+		console.log(object);
+		$http({
+			method: 'POST',
+			url: api.submit,
+			data: JSON.stringify(object),
+			headers: { 'Content-Type': 'application/json' }
+		}).success(function (data, status) {
+
+		}).error(function (data, status, headers, config) {
+			alert('error' + status)
 		});
 	}
 });
