@@ -195,7 +195,7 @@ marryApp.controller('appCtrl', function ($scope, $http,api) {
             data: JSON.stringify(object),
             headers: { 'Content-Type': 'application/json' }
         }).success(function (data,status) {
-            
+            alert('success');
         }).error(function (data, status, headers, config) {
             alert('error' + status)
         });
