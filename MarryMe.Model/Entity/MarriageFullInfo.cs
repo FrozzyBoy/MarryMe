@@ -15,14 +15,8 @@
 		public int RoomId { get; set; }
 
 		public DateTime RegistrationDate { get; set; }
-		public DateTime SubmitDate { get; set; }
 
-		/// <summary>
-		/// Способ обращения.
-		/// </summary>
-		public string Method { get; set; }
-
-		public Spouse Men { get; set; }
-		public Spouse Women { get; set; }
+		public Spouse Man { get; set; }
+		public Spouse Woman { get; set; }
 	}
 }

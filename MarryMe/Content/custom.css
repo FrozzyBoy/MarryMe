@@ -20,6 +20,14 @@
 	background: url("../../img/date2.jpg");
 }
 
+.bird1 {
+	background: url("../../img/Part21.jpg") 100% 0 no-repeat;
+}
+
+.bird2 {
+	background: url("../../img/Part22.jpg");
+}
+
 
 #services .half.bg {
 	background-image: url("../../img/superfamous-01.jpg");

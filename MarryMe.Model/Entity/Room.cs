@@ -4,6 +4,7 @@
 	#region Using
 
 	using System;
+	using System.Data;
 
 	#endregion
 
@@ -12,6 +13,22 @@
 	/// </summary>
 	public class Room
 	{
+		#region static
+
+		public static Room ParseReader(IDataReader reader)
+		{
+			Room result = new Room();
+
+			result.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+			result.Name = reader.GetString(reader.GetOrdinal("Name"));
+			result.Price = 0;
+			result.Information = "";
+
+			return result;
+		}
+
+		#endregion
+
 		/// <summary>
 		/// Id column.
 		/// </summary>

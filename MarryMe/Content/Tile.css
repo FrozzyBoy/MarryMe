@@ -149,15 +149,15 @@ textarea.form-control {
 	background-color: rgba(52, 152, 219, 0.40);
 }*/
 
-	.body-blue .form-control.resize:hover {
-		border: 2px solid #3498db;
-		box-sizing: border-box;
-		background-color: white !important;
-	}
+.body-blue .form-control.resize:hover {
+	/*border: 2px solid #3498db;*/
+	box-sizing: border-box;
+	/*background-color: brown;*/
+}
 
-	.body-blue .form-control.text-color:hover {
-		color: #3498db;
-	}
+.body-blue .form-control.text-color:hover {
+	color: #3498db;
+}
 
 .tile-blue {
 	background-color: rgba(52, 152, 219, 0.40);
@@ -173,7 +173,7 @@ textarea.form-control {
 
 	.body-green .form-control.resize:hover {
 		border: 2px solid #2ecc71;
-		background-color: white !important;
+		background-color: white;
 	}
 
 	.body-green .form-control.text-color:hover {

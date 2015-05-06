@@ -5,7 +5,7 @@
 @* ВЫБОР ДАТЫ (МЕСЯЦЫ) *@
 
 <h1 class="title">Выбор даты (месяц)</h1>
-<div class="responsive-calendar" ng-show="false">
+<div class="responsive-calendar">
 	<div class="controls" style="margin-bottom:20px">
 		<a class="pull-left" data-go="prev12"><div class="calendar-btn left glyphicon glyphicon-arrow-left"></div></a>
 		<h4 class="calendar-title"><span data-head-year></span></h4>
@@ -117,7 +117,7 @@
 
 @* ВЫБОР ДАТЫ (ДНИ) *@
 <h1 class="title">Выбор даты (день)</h1>
-<div class="responsive-calendar" ng-show="false">
+<div class="responsive-calendar">
 	<div class="controls">
 		<a class="pull-left" data-go="prev"><div class="calendar-btn left glyphicon glyphicon-arrow-left"></div></a>
 		<h4 class="calendar-title"><span data-head-year></span> <span data-head-month></span></h4>
@@ -179,16 +179,15 @@
 @* ВЫБОР ВРЕМЕНИ *@
 <hr />
 <h1 class="title field">Выбор времени</h1>
-<div>
-	<label>10.00 - 10.20</label>
-	<label>11.00 - 10.20</label>
-	<label>12.00 - 10.20</label>
-	<label>13.00 - 10.20</label>
+
+<div ng-show="dayTimes == null">
+    Выберите дату. Дата должна быть не раньше чем через 3 дня от текущей.
 </div>
 
 @* ЛИЧНЫЕ ДАННЫЕ *@
 <hr />
 <h1 class="title field">Личные данные</h1>
+<form name="inputForm">
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-xs-12">
 		<div class="block block-lg form-control form-block" color:white">
@@ -196,22 +195,22 @@
 			<p>Данные жениха</p>
 			<div class="row form-group">
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Имя" />
+                    <input type="text" class="form-control" placeholder="Имя" name="bridegroomName" ng-model="bridegroom.name" required ng-pattern="/^[а-яА-Я]+$/" />                   
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Фамилия" />
+                    <input type="text" class="form-control" placeholder="Фамилия" name="bridegroomSurName" ng-model="broom.surName" required ng-pattern="/^[а-яА-Я]+$/" />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Отчество" />
+                    <input type="text" class="form-control" placeholder="Отчество" name="bridegroomMiddleName" ng-model="bridegroom.middleName" required ng-pattern="/^[а-яА-Я]+$/" />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Телефон" />
+                    <input type="text" class="form-control" placeholder="Телефон" name="bridegroomPhoneNumber" ng-model="bridegroom.phoneNumber" ng-pattern="/\+[0-9]{12}/"/>
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="E-mail" />
+                    <input type="email" class="form-control" placeholder="E-mail" name="bridegroomEmail" ng-model="bridegroom.email" />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Номер паспорта" />
+                    <input type="text" class="form-control" placeholder="Номер паспорта" name="bridegroomPersinalNumber" ng-model="bridegroom.personalNumber" />
 				</div>
 			</div>
 		</div>
@@ -222,28 +221,55 @@
 			<p>Данные невесты</p>
 			<div class="row form-group">
 				<div class="col-md-6 col-sm-12 col-xs-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Имя" />
+                    <input type="text" class="form-control" placeholder="Имя" name="brideName" ng-model="bride.name" required ng-pattern="/^[а-яА-Я]+$/" />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Фамилия" />
+                    <input type="text" class="form-control" placeholder="Фамилия" name="brideSurName" ng-model="bride.surName" required ng-pattern="/^[а-яА-Я]+$/" />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Отчество" />
+                    <input type="text" class="form-control" placeholder="Отчество" name="brideMiddleName" ng-model="bride.middleName" required ng-pattern="/^[а-яА-Я]+$/" />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Телефон" />
+                    <input type="text" class="form-control" placeholder="Телефон" name="bridePhoneNumber" ng-model="bride.phoneNumber" ng-pattern="/\+[0-9]{12}/"  />
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="E-mail" />
+                    <input type="email" class="form-control" placeholder="E-mail" name="brideEmail" ng-model="bride.email"/>
 				</div>
 				<div class="col-md-6 col-sm-12 block-lg-label">
-					<input type="text" class="form-control" placeholder="Номер паспорта" />
+                    <input type="text" class="form-control" placeholder="Номер паспорта" name="bridePersonalNumber" ng-model="bride.personalNumber" />
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
+    <ul>
+        <li style="color:red"
+            ng-show="(inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.required)  || 
+            (inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.required) ||
+            (inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.required) ||
+            (inputForm.brideName.$dirty && inputForm.brideName.$error.required) ||
+            (inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.required) ||
+            (inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.required)
+            ">Заполните обязательные поля</li>
+        <li style="color:red"
+            ng-show="inputForm.bridegroomEmail.$dirty && inputForm.bridegroomEmail.$error.email ||
+            inputForm.brideEmail.$dirty && inputForm.brideEmail.$error.email
+            ">Не верный e-mail</li>
+        <li style="color:red"
+            ng-show="inputForm.bridegroomName.$dirty && inputForm.bridegroomName.$error.pattern  ||
+            inputForm.bridegroomSurName.$dirty && inputForm.bridegroomSurName.$error.pattern ||
+            inputForm.bridegroomMiddleName.$dirty && inputForm.bridegroomMiddleName.$error.pattern ||
+            inputForm.brideName.$dirty && inputForm.brideName.$error.pattern ||
+            inputForm.brideSurName.$dirty && inputForm.brideSurName.$error.pattern ||
+            inputForm.brideMiddleName.$dirty && inputForm.brideMiddleName.$error.pattern
+            ">Используйте русские буквы</li>
+        <li style="color:red" 
+            ng-show="inputForm.bridegroomPhoneNumber.$error.pattern && inputForm.bridePhoneNumber.$error.pattern"
+            >Заполните хотябы одно поле с номером телефона</li>
+    </ul>    
 <div class="btn-submit">
-	<input type="submit" value="Отправить заявку" class="btn btn-glass btn-color" />
+	<button type="submit" class="btn btn-glass btn-color" ng-disabled="inputForm.$invalid">Отправить заявку</button>
 </div>
+</form>
+
+

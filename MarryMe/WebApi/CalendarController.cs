@@ -66,8 +66,12 @@
 		[Route("months")]
 		public IHttpActionResult GetMonthlyStats(int year)
 		{
-			int[] result = _calendar.GetMonthStatistic(year);
-			return Ok(result);
+			if (CheckDate(year))
+			{
+				int[] result = _calendar.GetMonthStatistic(year);
+				return Ok(result);
+			}
+			return BadRequest("Не корректная дата.");
 		}
 
 		/// <summary>
@@ -81,10 +85,15 @@
 		[Route("days")]
 		public IHttpActionResult GetDayStatistics(int year, int month)
 		{
-			int daysInMonth = DateTime.DaysInMonth(year, month);
-			var result = Ok(_calendar.GetStatisticForDays(year, month));
+			if (CheckDate(year, month))
+			{
+				int daysInMonth = DateTime.DaysInMonth(year, month);
+				var result = Ok(_calendar.GetStatisticForDays(year, month));
 
-			return result;
+				return result;
+			}
+			return BadRequest("Не корректная дата.");
+
 		}
 
 		/// <summary>
@@ -97,13 +106,27 @@
 		[Route("holidays")]
 		public IHttpActionResult GetHolidays(int year, int month)
 		{
-			int daysInMonth = DateTime.DaysInMonth(year, month);
-			var result = _calendar.GetHolidaysForMonth(year, month);
+			if (CheckDate(year, month))
+			{
+				var result = _calendar.GetHolidaysForMonth(year, month);
 
-			return Ok(result);
+				return Ok(result);
+			}
+			return BadRequest("Не корректная дата.");
 		}
 
 		#endregion
+
+		#endregion
+
+		#region validation
+
+		private bool CheckDate(int year, int month = 1, int day = 1)
+		{
+			DateTime checkParse;
+			string comeDate = string.Format("{0}-{1}-1", year, month);
+			return DateTime.TryParse(comeDate, out checkParse);
+		}
 
 		#endregion
 
