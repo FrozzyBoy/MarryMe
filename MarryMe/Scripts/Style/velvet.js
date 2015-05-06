@@ -27,7 +27,9 @@ $(function () {
 	$('a.smooth-scroll').click(function (e) {
 		e.preventDefault();
 		var target = $($.attr(this, 'href'));
-		$('body,html').animate({ 'scrollTop': target.offset().top }, 1500, function () { animating = false; });
+		if (target.offset() != undefined) {
+			$('body,html').animate({ 'scrollTop': target.offset().top }, 1500, function () { animating = false; });
+		}
 	});
 
 	///* Isotope */

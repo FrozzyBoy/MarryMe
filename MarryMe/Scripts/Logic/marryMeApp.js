@@ -71,7 +71,13 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		submit(object);
 	}
 
-	$scope.timeClick = function (time) {
+	$scope.isSelected = function (time) {
+		return $scope.selected === time;
+	}
+
+	$scope.timeClick = function (time,timeObject) {
+
+		$scope.selected = timeObject;
 
 		var temp = time.split(':');
 		var hour = temp[0];
@@ -79,10 +85,23 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		var year = $scope.selectedYear;
 		var month = $scope.selectedMonth;
 		var day = $scope.selectedDay;
-		$scope.submitData.RegistrationDate = new Date(year, month - 1, day, hour, minutes);
+		$scope.submitData.RegistrationDate = new Date(Date.UTC(year, month - 1, day, hour, minutes));
 	} //выбор времени
 
+	function changeElementStyle(clickedId) {
+		var halls = [];
+		var hall = $('#' + clickedId);
+		for (var i = 1; i < 5; i++) {
+			halls.push($('#' + i));
+			halls[i - 1].removeClass('hall-background-color-click');
+		}
+		hall.addClass("hall-background-color-click");
+	}
+
 	$scope.hallClick = function (clickedId) {
+
+		changeElementStyle(clickedId);
+
 		$scope.submitData.RoomId = clickedId;
 		console.log($scope.submitData.RoomId + ' ' + $scope.selectedYear + ' ' + $scope.selectedMonth + ' ' + $scope.selectedDay + ' ' + 'hall')
 		dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
@@ -141,15 +160,23 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	function dayInfo(roomId, year, month, day) {
 
 		$http({
+			async: true,
 			method: 'GET',
 			url: api.room.schedule,
 			params: { 'roomId': roomId, 'time': year + '-' + month + '-' + day }
 		}).success(function (data, status, headers, config) {
-			console.log(data, status);
-			$scope.times = data;
+			$scope.times = splitTime(data);
 		}).error(function (data, status) {
 			alert('err')
 		});
+
+		function splitTime(data) {
+			angular.forEach(data, function (item, key) {
+				var temp = item.Time.split(':');
+				item.Time = temp[0] + ':' + temp[1];
+			});
+			return data;
+		}
 	}// заполнение дня(время)
 
 	function getHolidays(year, month) {
@@ -195,9 +222,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			data: JSON.stringify(object),
 			headers: { 'Content-Type': 'application/json' }
 		}).success(function (data, status) {
-
+			alert('success');
 		}).error(function (data, status, headers, config) {
-			alert('error' + status)
+			alert('error' + status + ' ' + data);
 		});
 	}
 });

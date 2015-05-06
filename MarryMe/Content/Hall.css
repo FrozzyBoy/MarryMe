@@ -12,6 +12,10 @@
 		cursor: pointer;
 	}
 
+.hall-background-color-click {
+	background: rgba(255, 255, 255, 1);
+}
+
 .hall-text-color {
 	color: black;
 }
