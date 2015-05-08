@@ -1,4 +1,9 @@
-﻿var marryApp = angular.module('marryApp', [])
+﻿var marryApp = angular.module('marryApp', ['uiGmapgoogle-maps'])
+
+marryApp.controller('mapCtrl', function ($scope) {
+    $scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
+    $scope.marker = { idKey: 1, coords: { latitude: 53.894672, longitude: 30.331377 }, options: {labelContent:'Мы находимся здесь!'} }
+});
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$http.defaults.useXDomain = true;

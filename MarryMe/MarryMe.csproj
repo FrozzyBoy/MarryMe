@@ -231,6 +231,7 @@
     <Content Include="Content\Demo.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Hall.css" />
+    <Content Include="Content\map.css" />
     <Content Include="Content\Month.css" />
     <Content Include="Content\responsive-calendar.css" />
     <Content Include="Content\Tile.css" />
@@ -256,6 +257,9 @@
     <Content Include="img\superfamous-06.jpg" />
     <Content Include="img\superfamous-07.jpg" />
     <Content Include="img\superfamous-08.jpg" />
+    <Content Include="Scripts\angular-google-maps-street-view.js" />
+    <Content Include="Scripts\angular-google-maps-street-view.min.js" />
+    <Content Include="Scripts\angular-google-maps.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -1028,6 +1032,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lodash.js" />
+    <Content Include="Scripts\lodash.min.js" />
     <Content Include="Scripts\Logic\Calendar.js" />
     <Content Include="Scripts\Logic\marryMe.js" />
     <Content Include="Scripts\Logic\marryMeApp.js" />
