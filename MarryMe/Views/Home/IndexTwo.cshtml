@@ -99,6 +99,7 @@
 
 					<div class="section-header" style="margin-bottom:10px">
 						<h1 class="title field" style="margin-bottom:0px">Выбор времени</h1>
+						<h2 class="title field">Для начала выберите зал.</h2>	
 					</div>
 
 					<div ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}">
@@ -111,7 +112,7 @@
 						</div>
 					</div>
 
-					<a class="btn btn-main smooth-scroll btn-black col-xs-12" style="color: black; margin-bottom: 10px; margin-top:5px; float: left; clear: left; display: inline" href="#portfolio">Далее</a>
+					@*<a class="btn btn-main smooth-scroll btn-black col-xs-12" style="color: black; margin-bottom: 10px; margin-top:5px; float: left; clear: left; display: inline" href="#portfolio">Далее</a>*@
 				</div>
 			</div>
 		</div>
@@ -248,36 +249,25 @@
 	<div class="container-fluid">
 
 		<div class="col-lg-6 half" ng-controller="mapCtrl">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-                <ui-gmap-marker coords="marker.coords" idkey="marker.idKey" options="marker.options">
-                </ui-gmap-marker>
-            </ui-gmap-google-map>
-        </div>
+			<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+				<ui-gmap-marker coords="marker.coords" idkey="marker.idKey" options="marker.options">
+				</ui-gmap-marker>
+			</ui-gmap-google-map>
+		</div>
 
 		<div class="col-lg-6 half">
 
 			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
+				<div class="col-lg-8 col-lg-offset-2" style="position: fixed; top: 50%; left: 50%; margin-left:-150px;margin-top:-150px">
 
 					<div class="section-header">
-						<h2 class="section-title">Contact</h2>
-						<h3 class="section-subtitle">We love talking</h3>
+						<h2>Контактные данные</h2>
 					</div>
 
-					<form id="contact" method="post" class="form" role="form">
-						<div class="form-group">
-							<input class="form-control" id="subject" name="subject" placeholder="Subject" type="text" />
-						</div>
-						<div class="form-group">
-							<input class="form-control" id="name" name="name" placeholder="Name" type="text" />
-						</div>
-						<div class="form-group">
-							<input class="form-control" id="email" name="email" placeholder="Email" type="text" />
-						</div>
-						<textarea class="form-control" id="message" name="message" placeholder="Message" rows="6"></textarea>
-						<br />
-						<button class="btn btn-velvet" type="submit">Submit</button>
-					</form>
+					<div class="form-horizontal">
+						<p>Наш телефон: 34-34-34</p>
+						<p>Наш e-mail: zags@gmail.com</p>
+					</div>
 
 				</div>
 			</div>
