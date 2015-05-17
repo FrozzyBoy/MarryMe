@@ -245,6 +245,8 @@
     <Content Include="img\date1.jpg" />
     <Content Include="img\date2.jpg" />
     <Content Include="img\icon-arrow.svg" />
+    <Content Include="img\icon-heart.ico" />
+    <Content Include="img\icon-heart.png" />
     <Content Include="img\Part11.jpg" />
     <Content Include="img\Part12.jpg" />
     <Content Include="img\Part21.jpg" />
@@ -1034,6 +1036,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
+    <Content Include="Scripts\Logic\BlockScroll.js" />
     <Content Include="Scripts\Logic\Calendar.js" />
     <Content Include="Scripts\Logic\marryMe.js" />
     <Content Include="Scripts\Logic\marryMeApp.js" />
