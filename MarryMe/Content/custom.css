@@ -1,0 +1,45 @@
+#intro.bg-image .container-fluid {
+	background-image: url("../../img/superfamous-05.jpg");
+}
+
+#about .half.bg {
+	background-image: url("../../img/superfamous-03.jpg");
+	background-size: cover;
+}
+
+#mission .half.bg {
+	background-image: url("../../img/superfamous-05.jpg");
+	background-size: cover;
+}
+
+.bg1 {
+	background: url("../../img/date1.jpg") 100% 0 no-repeat;
+}
+
+.bg2 {
+	background: url("../../img/date2.jpg");
+}
+
+.bird1 {
+	background: url("../../img/Part21.jpg") 100% 0 no-repeat;
+}
+
+.bird2 {
+	background: url("../../img/Part22.jpg");
+}
+
+
+#services .half.bg {
+	background-image: url("../../img/superfamous-01.jpg");
+	background-size: cover;
+}
+
+#portfolio .half.bg {
+	background-image: url("../../img/superfamous-02.jpg");
+	background-size: cover;
+}
+
+#contact .half.bg {
+	background-image: url("../../img/superfamous-07.jpg");
+	background-size: cover;
+}

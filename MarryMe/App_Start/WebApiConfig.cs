@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-
-namespace MarryMe
+﻿namespace MarryMe
 {
-    public static class WebApiConfig
-    {
-        public static void Register(HttpConfiguration config)
-        {
-            // Конфигурация и службы веб-API
+	#region Using
 
-            // Маршруты веб-API
-            config.MapHttpAttributeRoutes();
+	using System.Web.Http;
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-        }
-    }
+	#endregion
+
+	public static class WebApiConfig
+	{
+		public static void Register(HttpConfiguration config)
+		{
+
+			//разрешить кросс доменные запросы
+			config.EnableCors();
+
+			// Конфигурация и службы веб-API
+
+			// Маршруты веб-API
+			config.MapHttpAttributeRoutes();
+
+			config.Routes.MapHttpRoute(
+				name: "DefaultApi",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { id = RouteParameter.Optional }
+			);
+		}
+	}
 }

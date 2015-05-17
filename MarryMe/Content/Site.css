@@ -1,24 +1,86 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+	/*padding-top: 30px;
+	padding-bottom: 20px;*/
 }
 
+hr {
+	border-top: 1px solid black;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
-
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
-    white-space: normal;
+	white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
 }
+
+#calendar {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.calendar-title {
+	font-size: 40px;
+}
+
+.title {
+	/*text-decoration: underline;*/
+	text-align: center;
+	margin-bottom: 4%;
+}
+
+	.title.field {
+		margin-top: 40px;
+	}
+
+.btn-submit {
+	margin-top: 10px;
+	text-align: center;
+}
+
+
+.text-color {
+	color: white;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.btn-blue {
+	background-color: rgba(52, 152, 219, 0.40);
+	border: 1px solid white;
+}
+
+	.btn-blue:hover {
+		background-color: rgba(52, 152, 219, 1.00);
+	}
+
+.btn-pink {
+	background-color: rgba(219, 52, 205, 0.40);
+	border: 1px solid white;
+}
+
+	.btn-pink:hover {
+		background-color: rgba(219, 52, 205, 1.00);
+	}
+
+.btn-black {
+	background-color: rgba(255, 255, 255, 0.00);
+	border: 2px solid black;
+}
+
+	.btn-black:hover {
+		background-color: rgba(255, 255, 255, 0.40);
+	}
