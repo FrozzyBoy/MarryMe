@@ -99,7 +99,7 @@
 
 					<div class="section-header" style="margin-bottom:10px">
 						<h1 class="title field" style="margin-bottom:0px">Выбор времени</h1>
-						<h2 class="title field">Для начала выберите зал.</h2>	
+						@*<h2 class="title field">Для начала выберите зал.</h2>*@	
 					</div>
 
 					<div ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}">
@@ -112,7 +112,7 @@
 						</div>
 					</div>
 
-					@*<a class="btn btn-main smooth-scroll btn-black col-xs-12" style="color: black; margin-bottom: 10px; margin-top:5px; float: left; clear: left; display: inline" href="#portfolio">Далее</a>*@
+					<a class="btn btn-main smooth-scroll btn-black col-xs-12" style="color: black; margin-bottom: 10px; margin-top:5px; float: left; clear: left; display: inline" href="#portfolio">Далее</a>
 				</div>
 			</div>
 		</div>
@@ -166,7 +166,7 @@
 									<input type="text" class="form-control tile-blue" placeholder="Отчество" name="manMiddleName" ng-model="Man.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
+									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="{{CONST.PatternTelNum}}" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
 									<input type="email" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
@@ -200,7 +200,7 @@
 									<input type="text" class="form-control tile-pink" placeholder="Отчество" name="womanMiddleName" ng-model="Woman.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
+									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="{{CONST.PatternTelNum}}" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
 									<input type="email" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
@@ -275,10 +275,4 @@
 		</div>
 
 	</div>
-</section><!-- /#contact -->
-@*<nav id="vertical-nav">
-		<ul>
-			<li><a href="#0" class="prev btn btn-main smooth-scroll btn-black" style="color: black; padding:10px; margin-left: 50px">Назад</a></li>
-			<li><a href="#0" class="next btn btn-main smooth-scroll btn-black" style="color: black; padding:10px; margin-left: 50px">Далее</a></li>
-		</ul>
-	</nav>*@<!-- /#vertical-nav -->
+</section>
