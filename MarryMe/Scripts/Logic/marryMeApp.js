@@ -1,8 +1,8 @@
 ﻿var marryApp = angular.module('marryApp', ['uiGmapgoogle-maps'])
 
 marryApp.controller('mapCtrl', function ($scope) {
-    $scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
-    $scope.marker = { idKey: 1, coords: { latitude: 53.894672, longitude: 30.331377 }, options: {labelContent:'Мы находимся здесь!'} }
+	$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
+	$scope.marker = { idKey: 1, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
@@ -76,13 +76,17 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		submit(object);
 	}
 
-	$scope.isSelected = function (time) {
-		return $scope.selected === time;
+	$scope.isSelectedTime = function (time) {
+		return $scope.selectedTime === time;
 	}
 
-	$scope.timeClick = function (time,timeObject) {
+	$scope.isSelectedMonth = function (month) {
+		return $scope.selectedMonth === month;
+	}
 
-		$scope.selected = timeObject;
+	$scope.timeClick = function (time, timeObject) {
+
+		$scope.selectedTime = timeObject;
 
 		var temp = time.split(':');
 		var hour = temp[0];
@@ -92,6 +96,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		var day = $scope.selectedDay;
 		$scope.submitData.RegistrationDate = new Date(Date.UTC(year, month - 1, day, hour, minutes));
 	} //выбор времени
+
+	$scope.monthClick = function (month, monthObject) {
+		$scope.selectedMonth = monthObject;
+	}
 
 	function changeElementStyle(clickedId) {
 		var halls = [];

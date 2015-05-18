@@ -17,21 +17,28 @@
 	-webkit-text-fill-color: transparent;
 }
 
-.body-blue .month-background-color {
+.month-background-color {
 	color: #3498db;
 	background: rgba(255, 255, 255, 0.00);
 	border: 2px solid #3498db;
+	-webkit-transition: background 300ms, color 300ms, border 300ms;
+	-moz-transition: background 300ms, color 300ms, border 300ms;
+	transition: background 300ms, color 300ms, border 300ms;
 }
 
-	.body-blue .month-background-color:hover {
+	.month-background-color:hover {
 		cursor: pointer;
 	}
 
-.body-blue .progress-background {
+.month-background-color-click {
+	background: rgb(255, 0, 0);
+}
+
+.progress-background {
 	background: #3498db;
 }
 
-.body-blue .month-text-color {
+.month-text-color {
 	color: #3498db;
 }
 
