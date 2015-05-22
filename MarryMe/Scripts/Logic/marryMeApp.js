@@ -14,6 +14,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	// $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 	var currentYear = new Date().getFullYear();
+	var currentMonth = new Date().getMonth();
+
+	function setMonth() {
+		currentMonth++;
+
+		if (currentMonth < 9) {
+			currentMonth = '0' + currentMonth;
+		}
+	}
+
+	setMonth();
+
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
 	monthsDictionary["Февраль"] = "02";
@@ -36,12 +48,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$scope.Man = {};
 	$scope.Woman = {};
 	$scope.submitData = {};
-
-	$scope.yearClick = function (flag) {
-		$scope.yearChange(flag);
-		var dateString = currentYear + "-01";
-		$('.responsive-calendar').responsiveCalendar(dateString);
-	}
 
 	$('.responsive-calendar').responsiveCalendar({
 		onDayClick: function (events) {
@@ -121,8 +127,32 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		$scope.selectedMonthUI = monthObject;
 
 		var dateString = currentYear + "-" + monthsDictionary[month];
+		currentMonth = monthsDictionary[month];
 
 		$('.responsive-calendar').responsiveCalendar(dateString);
+		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+	}
+
+	$scope.moveMonthClick = function (flag) {
+		if (flag == 1) {
+			currentMonth++;
+
+			if (currentMonth > 12) {
+				currentYear++;
+				currentMonth = "01";
+			}
+
+		} else {
+			currentMonth--;
+
+			if (currentMonth < 1) {
+				currentYear--;
+				currentMonth = "12";
+			}
+		}
+		var dateString = currentYear + "-" + currentMonth;
+		$('.responsive-calendar').responsiveCalendar(dateString);
+		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 	}
 
 	function changeElementStyle(clickedId) {
@@ -157,6 +187,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		$('.responsive-calendar').responsiveCalendar(dateString);
 
 		completenessOfTheMonths(currentYear);
+		$(".responsive-calendar").responsiveCalendar('setCurrYear', currentYear);
 	} // event смена года
 
 	function completenessOfTheDays(year, month) {
