@@ -2,14 +2,31 @@
 
 marryApp.controller('mapCtrl', function ($scope) {
 	$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
-	$scope.marker = { idKey: 1, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
+	//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
+
+	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
+	$scope.CONST = { PatternTelNum: '/[(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}]/' };
+
 	$http.defaults.useXDomain = true;
 	// $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 	var currentYear = new Date().getFullYear();
+	var monthsDictionary = {};
+	monthsDictionary["Январь"] = "01";
+	monthsDictionary["Февраль"] = "02";
+	monthsDictionary["Март"] = "03";
+	monthsDictionary["Апрель"] = "04";
+	monthsDictionary["Май"] = "05";
+	monthsDictionary["Июнь"] = "06";
+	monthsDictionary["Июль"] = "07";
+	monthsDictionary["Август"] = "08";
+	monthsDictionary["Сентябрь"] = "09";
+	monthsDictionary["Октябрь"] = "10";
+	monthsDictionary["Ноябрь"] = "11";
+	monthsDictionary["Декабрь"] = "12";
 
 	completenessOfTheMonths(currentYear);
 	allRooms();
@@ -20,8 +37,11 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$scope.Woman = {};
 	$scope.submitData = {};
 
-
-
+	$scope.yearClick = function (flag) {
+		$scope.yearChange(flag);
+		var dateString = currentYear + "-01";
+		$('.responsive-calendar').responsiveCalendar(dateString);
+	}
 
 	$('.responsive-calendar').responsiveCalendar({
 		onDayClick: function (events) {
@@ -81,7 +101,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	}
 
 	$scope.isSelectedMonth = function (month) {
-		return $scope.selectedMonth === month;
+		return $scope.selectedMonthUI === month;
 	}
 
 	$scope.timeClick = function (time, timeObject) {
@@ -98,7 +118,11 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	} //выбор времени
 
 	$scope.monthClick = function (month, monthObject) {
-		$scope.selectedMonth = monthObject;
+		$scope.selectedMonthUI = monthObject;
+
+		var dateString = currentYear + "-" + monthsDictionary[month];
+
+		$('.responsive-calendar').responsiveCalendar(dateString);
 	}
 
 	function changeElementStyle(clickedId) {
@@ -121,12 +145,17 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	} //event выбор зала
 
 	$scope.yearChange = function (flag) {
+
 		if (flag == 1) {
 			currentYear++;
 		}
 		else {
 			currentYear--;
 		}
+
+		var dateString = currentYear + "-01";
+		$('.responsive-calendar').responsiveCalendar(dateString);
+
 		completenessOfTheMonths(currentYear);
 	} // event смена года
 

@@ -25,11 +25,10 @@
 
 						<div class="section-header" style="margin-bottom:10px">
 							<div class="controls" style="margin-bottom:20px">
-								<a class="pull-left" data-go="prev12"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="yearChange(0)"></div></a>
+								<a class="pull-left"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="yearChange(0)"></div></a>
 								<h4 class="calendar-title" style="color:black">Год: <span data-head-year></span></h4>
-								<a class="pull-right" data-go="next12"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="yearChange(1)"></div></a>
+								<a class="pull-right"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="yearChange(1)"></div></a>
 							</div>
-
 
 							<div class="row">
 								<div ng-repeat="month in monthsInfo">
@@ -51,7 +50,7 @@
 
 						</div>  <!-- Header -->
 
-						<p class="text-lg text-italic text-muted col-lg-12">*в процентах показана занятость месяца.</p>
+						<p class="text-lg text-italic text-muted col-lg-12" style="color:black">*в процентах показана занятость месяца.</p>
 					</div>
 				</div>
 			</div>
@@ -82,7 +81,7 @@
 							</div>
 						</div>
 						<a id="nextButton" class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" href="#services">Далее</a>
-						<p class="text-lg text-italic text-muted col-lg-8 pull-right">Выбранная вами дата: {{selectedDay}} {{selectedMonth}} {{selectedYear}}</p>
+						<p class="text-lg text-italic text-muted col-lg-8 pull-right" style="color:black">Выбранная вами дата: {{selectedDay}} {{selectedMonth}} {{selectedYear}}</p>
 					</div>
 				</div>
 			</div>
@@ -167,7 +166,7 @@
 									<input type="text" class="form-control tile-blue" placeholder="Отчество" name="manMiddleName" ng-model="Man.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
+									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="CONST.PatternTelNum" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
 									<input type="email" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
@@ -201,7 +200,7 @@
 									<input type="text" class="form-control tile-pink" placeholder="Отчество" name="womanMiddleName" ng-model="Woman.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="/\+[0-9]{12}/" />
+									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="CONST.PatternTelNum" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
 									<input type="email" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
@@ -241,6 +240,7 @@
 					</ul>
 				</div>
 			</div>
+
 		</form>
 	</div>
 
@@ -276,10 +276,4 @@
 		</div>
 
 	</div>
-</section><!-- /#contact -->
-@*<nav id="vertical-nav">
-		<ul>
-			<li><a href="#0" class="prev btn btn-main smooth-scroll btn-black" style="color: black; padding:10px; margin-left: 50px">Назад</a></li>
-			<li><a href="#0" class="next btn btn-main smooth-scroll btn-black" style="color: black; padding:10px; margin-left: 50px">Далее</a></li>
-		</ul>
-	</nav>*@<!-- /#vertical-nav -->
+</section>
