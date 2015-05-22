@@ -246,7 +246,6 @@
     <Content Include="img\date2.jpg" />
     <Content Include="img\icon-arrow.svg" />
     <Content Include="img\icon-heart.ico" />
-    <Content Include="img\icon-heart.png" />
     <Content Include="img\Part11.jpg" />
     <Content Include="img\Part12.jpg" />
     <Content Include="img\Part21.jpg" />
@@ -321,8 +320,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\IndexTwo.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

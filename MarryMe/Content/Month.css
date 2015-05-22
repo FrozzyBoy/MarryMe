@@ -18,7 +18,8 @@
 }
 
 .month-background-color {
-	color: #3498db;
+	/*color: #3498db;*/
+	color: black;
 	background: rgba(255, 255, 255, 0.00);
 	border: 2px solid #3498db;
 	-webkit-transition: background 300ms, color 300ms, border 300ms;
@@ -31,7 +32,7 @@
 	}
 
 .month-background-color-click {
-	background: rgb(255, 0, 0);
+	background: rgb(255, 255, 255);
 }
 
 .progress-background {
@@ -39,7 +40,7 @@
 }
 
 .month-text-color {
-	color: #3498db;
+	color: black;
 }
 
 .body-green .month-background-color {

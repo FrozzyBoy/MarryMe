@@ -74,8 +74,21 @@
 			}
 		}
 
+		#region Validation
 		private void Validation(MarriageFullInfo fullInfo)
 		{
+			string manValidation = ValidateSpouse(fullInfo.Man, "жениха");
+			if (!string.IsNullOrWhiteSpace(manValidation))
+			{
+				throw new ArgumentNullException(manValidation);
+			}
+
+			string womanValidation = ValidateSpouse(fullInfo.Man, "невесты");
+			if (!string.IsNullOrWhiteSpace(womanValidation))
+			{
+				throw new ArgumentNullException(womanValidation);
+			}
+
 			bool wEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Woman.Email);
 			bool mEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Man.Email);
 
@@ -107,11 +120,36 @@
 			}
 		}
 
+		private string ValidateSpouse(Spouse sp, string spName)
+		{
+			string result = string.Empty;
+
+			if (string.IsNullOrWhiteSpace(sp.FirstName))
+			{
+				result = "Имя {0} нужно обязательно заполнить.";
+			}
+
+			if (string.IsNullOrWhiteSpace(sp.MiddleName))
+			{
+				result = "Отчество {0} нужно обязательно заполнить.";
+			}
+
+			if (string.IsNullOrWhiteSpace(sp.LastName))
+			{
+				result = "Фамилию {0} нужно обязательно заполнить.";
+			}
+
+			result = string.Format(result, spName);
+
+			return result;
+		}
+
 		private bool CheckMail(string mail)
 		{
 			Regex reg = new Regex(RegexEmail);
 			return reg.IsMatch(mail);
 		}
+		#endregion
 
 	}
 }

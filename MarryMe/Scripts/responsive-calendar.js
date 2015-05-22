@@ -334,18 +334,6 @@
 					if ($(this).data("go") === "next") {
 						return data.next();
 					}
-					if ($(this).data("go") === "prev12") {
-						for (var i = 0; i < 11; i++) {
-							data.prev();
-						}
-						return data.prev();
-					}
-					if ($(this).data("go") === "next12") {
-						for (var i = 0; i < 11; i++) {
-						    data.next();
-						}
-						return data.next();
-					}
 				});
 			};
 			return this.each(function () {
@@ -366,7 +354,7 @@
 				return null;
 			});
 		};
-		$.fn.responsiveCalendar.qwerty = function() {
+		$.fn.responsiveCalendar.qwerty = function () {
 			return currMonth;
 		};
 		$.fn.responsiveCalendar.defaults = {
