@@ -1,8 +1,9 @@
 //// Loading Gif
-//$(window).load(function() {
+//$(window).load(function () {
+
 //	setTimeout(function () {
-//		$(".loading").fadeOut("slow");
-//	},1000);
+//		$("#load").fadeOut("slow");
+//	}, 1000);
 //});
 
 //// On scroll

@@ -161,6 +161,13 @@
 			getCurrMonth: function () {
 				currMonth = this.currentMonth;
 			},
+			setCurrYear: function (value) {
+				this.currentYear = value;
+			},
+			setCurrMonth: function (value) {
+				value--;
+				this.currentMonth = value;
+			},
 			addOthers: function (day, dayEvents) {
 				var badge;
 				if (typeof dayEvents === "object") {
@@ -318,7 +325,9 @@
 				getYearMonth: 'getYearMonth',
 				jump: 'jump',
 				curr: 'curr',
-				getCurrMonth: 'getCurrMonth'
+				getCurrMonth: 'getCurrMonth',
+				setCurrYear: 'setCurrYear',
+				setCurrMonth: 'setCurrMonth'
 			};
 			init = function ($this) {
 				var data;

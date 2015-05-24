@@ -3,9 +3,12 @@
 marryApp.controller('mapCtrl', function ($scope) {
 	$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
 	//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
+	$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
+	window.location.href = '/#intro'; //relative to domain
+	$scope.hide = true;
 
 	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
 	$scope.CONST = { PatternTelNum: '/[(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}]/' };
@@ -14,6 +17,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	// $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 	var currentYear = new Date().getFullYear();
+	var currentMonth = new Date().getMonth();
+
+	function setMonth() {
+		currentMonth++;
+
+		if (currentMonth < 9) {
+			currentMonth = '0' + currentMonth;
+		}
+	}
+
+	setMonth();
+
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
 	monthsDictionary["Февраль"] = "02";
@@ -36,12 +51,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$scope.Man = {};
 	$scope.Woman = {};
 	$scope.submitData = {};
-
-	$scope.yearClick = function (flag) {
-		$scope.yearChange(flag);
-		var dateString = currentYear + "-01";
-		$('.responsive-calendar').responsiveCalendar(dateString);
-	}
 
 	$('.responsive-calendar').responsiveCalendar({
 		onDayClick: function (events) {
@@ -121,8 +130,32 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		$scope.selectedMonthUI = monthObject;
 
 		var dateString = currentYear + "-" + monthsDictionary[month];
+		currentMonth = monthsDictionary[month];
 
 		$('.responsive-calendar').responsiveCalendar(dateString);
+		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+	}
+
+	$scope.moveMonthClick = function (flag) {
+		if (flag == 1) {
+			currentMonth++;
+
+			if (currentMonth > 12) {
+				currentYear++;
+				currentMonth = "01";
+			}
+
+		} else {
+			currentMonth--;
+
+			if (currentMonth < 1) {
+				currentYear--;
+				currentMonth = "12";
+			}
+		}
+		var dateString = currentYear + "-" + currentMonth;
+		$('.responsive-calendar').responsiveCalendar(dateString);
+		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 	}
 
 	function changeElementStyle(clickedId) {
@@ -157,6 +190,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		$('.responsive-calendar').responsiveCalendar(dateString);
 
 		completenessOfTheMonths(currentYear);
+		$(".responsive-calendar").responsiveCalendar('setCurrYear', currentYear);
 	} // event смена года
 
 	function completenessOfTheDays(year, month) {
@@ -269,6 +303,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			alert('error' + status + ' ' + data);
 		});
 	}
+
+	$(window).load(function () {
+		$scope.hide = false;
+		$scope.$apply();
+		setTimeout(function () {
+			$("#load").fadeOut("slow");
+		}, 1000);
+	});
 });
 
 
