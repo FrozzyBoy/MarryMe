@@ -3,9 +3,12 @@
 marryApp.controller('mapCtrl', function ($scope) {
 	$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
 	//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
+	$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
+	window.location.href = '/#intro'; //relative to domain
+	$scope.hide = true;
 
 	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
 	$scope.CONST = { PatternTelNum: '/[(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}]/' };
@@ -300,6 +303,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			alert('error' + status + ' ' + data);
 		});
 	}
+
+	$(window).load(function () {
+		$scope.hide = false;
+		$scope.$apply();
+		setTimeout(function () {
+			$("#load").fadeOut("slow");
+		}, 1000);
+	});
 });
 
 

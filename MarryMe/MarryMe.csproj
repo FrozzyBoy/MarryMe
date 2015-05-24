@@ -246,6 +246,7 @@
     <Content Include="img\date2.jpg" />
     <Content Include="img\icon-arrow.svg" />
     <Content Include="img\icon-heart.ico" />
+    <Content Include="img\loading.gif" />
     <Content Include="img\Part11.jpg" />
     <Content Include="img\Part12.jpg" />
     <Content Include="img\Part21.jpg" />
