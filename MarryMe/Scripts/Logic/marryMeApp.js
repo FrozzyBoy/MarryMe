@@ -7,8 +7,8 @@ marryApp.controller('mapCtrl', function ($scope) {
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
-	window.location.href = '/#intro'; //relative to domain
-	$scope.hide = true;
+	//window.location.href = '/#intro'; //relative to domain
+	//$scope.hide = true;
 
 	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
 	$scope.CONST = { PatternTelNum: '/[(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}]/' };
@@ -304,13 +304,13 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		});
 	}
 
-	$(window).load(function () {
-		$scope.hide = false;
-		$scope.$apply();
-		setTimeout(function () {
-			$("#load").fadeOut("slow");
-		}, 1000);
-	});
+	//$(window).load(function () {
+	//	$scope.hide = false;
+	//	$scope.$apply();
+	//	setTimeout(function () {
+	//		$("#load").fadeOut("slow");
+	//	}, 1000);
+	//});
 });
 
 

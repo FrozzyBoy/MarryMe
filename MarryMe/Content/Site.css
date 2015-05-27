@@ -1,5 +1,5 @@
 ﻿body {
-	/*padding-top: 30px;
+	/*padding-top: 50px;
 	padding-bottom: 20px;*/
 }
 
@@ -84,3 +84,97 @@ textarea {
 	.btn-black:hover {
 		background-color: rgba(255, 255, 255, 0.40);
 	}
+
+.intro-text {
+	color: white;
+}
+
+.intro-btn {
+}
+
+	.intro-btn:hover {
+		color: white;
+	}
+
+/*PARALLAX*/
+.bg-img {
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover !important;
+}
+
+.overlay-dark, .overlay-dark80, .overlay-light, .overlay-light80 {
+	position: relative;
+	z-index: 1;
+}
+
+	.overlay-dark:before, .overlay-dark80:before, .overlay-light:before, .overlay-light80:before {
+		left: 0;
+		top: 0;
+		position: absolute;
+		width: 100%;
+		content: "";
+		z-index: -1;
+	}
+
+	.overlay-dark:before {
+		background-color: rgba(32,32,32, 0.2);
+	}
+
+	.overlay-dark80:before {
+		background-color: rgba(32,32,32,0.8);
+	}
+
+.full-screen-intro {
+	overflow: hidden;
+	position: relative;
+}
+
+.navbar {
+	background-color: rgba(0, 0, 0, 0.20);
+	border-color: transparent;
+	margin-bottom: 0;
+	opacity: 1;
+}
+
+.navbar-top-text {
+	color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: white;
+}
+
+.content-caption {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.full-cap-wrapper {
+	display: table;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	z-index: 1;
+}
+
+.site-section {
+	margin-top: 60px;
+}
+
+.center-element {
+	text-align: center;
+}
+
+.content-caption {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.display-default {
+	display: initial;
+}

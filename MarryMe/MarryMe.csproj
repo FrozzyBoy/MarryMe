@@ -244,13 +244,16 @@
     <Content Include="img\arrow-down.png" />
     <Content Include="img\date1.jpg" />
     <Content Include="img\date2.jpg" />
+    <Content Include="img\date3.jpg" />
     <Content Include="img\icon-arrow.svg" />
     <Content Include="img\icon-heart.ico" />
     <Content Include="img\loading.gif" />
+    <Content Include="img\mount-sky.jpg" />
     <Content Include="img\Part11.jpg" />
     <Content Include="img\Part12.jpg" />
     <Content Include="img\Part21.jpg" />
     <Content Include="img\Part22.jpg" />
+    <Content Include="img\Part23.jpg" />
     <Content Include="img\superfamous-01.jpg" />
     <Content Include="img\superfamous-02.jpg" />
     <Content Include="img\superfamous-03.jpg" />
@@ -259,6 +262,7 @@
     <Content Include="img\superfamous-06.jpg" />
     <Content Include="img\superfamous-07.jpg" />
     <Content Include="img\superfamous-08.jpg" />
+    <Content Include="img\wedding-wallpapers-free-download-6.jpg" />
     <Content Include="Scripts\angular-google-maps-street-view.js" />
     <Content Include="Scripts\angular-google-maps-street-view.min.js" />
     <Content Include="Scripts\angular-google-maps.js" />
@@ -297,6 +301,7 @@
     <Content Include="Scripts\Logic\Calendar.js" />
     <Content Include="Scripts\Logic\marryMe.js" />
     <Content Include="Scripts\Logic\marryMeApp.js" />
+    <Content Include="Scripts\Logic\SmoothScroll.js" />
     <Content Include="Scripts\Logic\Tile.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
@@ -308,6 +313,9 @@
     <Content Include="Scripts\responsive-calendar.min.js" />
     <Content Include="Scripts\Style\curtains.js" />
     <Content Include="Scripts\Style\isotope.pkgd.min.js" />
+    <Content Include="Scripts\Style\parallax.js" />
+    <Content Include="Scripts\Style\parallax.min.js" />
+    <Content Include="Scripts\Style\pollyfill.js" />
     <Content Include="Scripts\Style\velvet.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -323,6 +331,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\IndexTwo.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\MarryMe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

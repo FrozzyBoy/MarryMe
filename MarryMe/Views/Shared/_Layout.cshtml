@@ -13,48 +13,44 @@
 	<link href="~/Content/Hall.css" rel="stylesheet" />
 	<link href="~/Content/Time.css" rel="stylesheet" />
 	<link href="~/Content/map.css" rel="stylesheet" />
-	<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-	<link href="~/Content/velvet.css" rel="stylesheet" />
-	<link href="~/Content/custom.css" rel="stylesheet" />
-	@Scripts.Render("~/bundles/modernizr")
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	@*<link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+	@*<link href="~/Content/velvet.css" rel="stylesheet" />*@
+	@*<link href="~/Content/custom.css" rel="stylesheet" />*@
+	@*@Scripts.Render("~/bundles/modernizr")*@
+	@*<script src='https://www.google.com/recaptcha/api.js'></script>*@
 </head>
-<body class="body-blue" ng-controller="appCtrl">
-	<div id="load" style="background: url('../img/loading.gif') center no-repeat #fff; width:100%; height:100%; position:fixed; z-index:9000"></div>
-	<div id="site" ng-hide="hide" ng-cloak>
-		<nav class="navbar navbar-velvet navbar-fixed-top shrink">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand smooth-scroll" href="#intro"><span> Главная страница</span></a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#mission" class="smooth-scroll">Выбор даты</a></li>
-						<li><a href="#services" class="smooth-scroll">Выбор зала</a></li>
-						<li><a href="#portfolio" class="smooth-scroll">Личная информация</a></li>
-						<li><a href="#contact" class="smooth-scroll">Контакты</a></li>
-					</ul>
-				</div>
+<body ng-controller="appCtrl">
+	@*<div id="load" style="background: url('../img/loading.gif') center no-repeat #fff; width:100%; height:100%; position:fixed; z-index:9000"></div>*@
+	@*<div id="site" ng-hide="hide" ng-cloak>*@
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand smooth-scroll" href="#intro"><span class="navbar-top-text"> Главная страница</span></a>
 			</div>
-		</nav>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#mission" class="smooth-scroll navbar-top-text">Выбор даты</a></li>
+					<li><a href="#services" class="smooth-scroll navbar-top-text">Выбор зала</a></li>
+					<li><a href="#portfolio" class="smooth-scroll navbar-top-text">Личная информация</a></li>
+					<li><a href="#contact" class="smooth-scroll navbar-top-text">Контакты</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-		@RenderBody()
+	@RenderBody()
+	@*</div>*@
+
+	<div class="container body-content">
+		<footer>
+			<p>&copy; @DateTime.Now.Year – Могилевский ЗАГС</p>
+		</footer>
 	</div>
-
-	@*<div class="container body-content">
-
-
-			<hr />
-			<footer>
-				<p>&copy; @DateTime.Now.Year – Могилевский ЗАГС</p>
-			</footer>
-		</div>*@
 
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
@@ -66,9 +62,12 @@
 
 	<script src="~/Scripts/responsive-calendar.js"></script>
 	<script src="~/Scripts/Logic/Tile.js"></script>
+	<script src="~/Scripts/Logic/SmoothScroll.js"></script>
 
-	<script src="~/Scripts/Style/curtains.js"></script>
-	<script src="~/Scripts/Style/velvet.js"></script>
+	<script src="~/Scripts/Style/pollyfill.js"></script>
+	<script src="~/Scripts/Style/parallax.min.js"></script>
+	@*<script src="~/Scripts/Style/curtains.js"></script>*@
+	@*<script src="~/Scripts/Style/velvet.js"></script>*@
 
 	@RenderSection("scripts", required: false)
 </body>

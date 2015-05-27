@@ -6,16 +6,21 @@ using System.Web.Mvc;
 
 namespace MarryMe.Controllers
 {
-    public class HomeController : Controller
-    {
-        //
-        // GET: /Home/
-        public ActionResult Index()
-        {
-            return View();
-        }
+	public class HomeController : Controller
+	{
+		//
+		// GET: /Home/
+		public ActionResult Index()
+		{
+			return View();
+		}
 
 		public ActionResult IndexTwo()
+		{
+			return View();
+		}
+
+		public ActionResult MarryMe()
 		{
 			return View();
 		}
