@@ -229,6 +229,7 @@ textarea.form-control {
 /*** Button Glass ***/
 .btn-glass {
 	border: 2px solid white;
+	border-radius: 40px;
 	background: transparent;
 }
 

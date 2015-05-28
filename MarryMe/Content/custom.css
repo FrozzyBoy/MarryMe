@@ -1,4 +1,4 @@
-#intro.bg-image .container-fluid {
+/*#intro.bg-image .container-fluid {
 	background-image: url("../../img/superfamous-05.jpg");
 }
 
@@ -29,11 +29,11 @@
 }
 
 .grass1 {
-	/*background: url("../../img/wedding-wallpapers-free-download-6 1.jpg") 100% 0 no-repeat;*/
+	background: url("../../img/wedding-wallpapers-free-download-6 1.jpg") 100% 0 no-repeat;
 }
 
 .grass2 {
-	/*background: url("../../img/wedding-wallpapers-free-download-6 2.jpg");*/
+	background: url("../../img/wedding-wallpapers-free-download-6 2.jpg");
 }
 
 #services .half.bg {
@@ -49,4 +49,20 @@
 #contact .half.bg {
 	background-image: url("../../img/superfamous-07.jpg");
 	background-size: cover;
+}*/
+
+.introBgImage {
+	background-image: url("../../img/mount-sky.jpg");
+}
+
+.missionBgImage {
+	background-image: url("../../img/wedding-wallpapers-free-download-6.jpg");
+}
+
+.servicesBgImage {
+	background-image: url("../../img/Part23.jpg");
+}
+
+.portfolioBgImage {
+	background-image: url("../../img/date3.jpg");
 }

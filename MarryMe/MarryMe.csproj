@@ -287,6 +287,9 @@
     <None Include="Properties\PublishProfiles\marryme2 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\marryme2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\Detect\detect.js" />
+    <Content Include="Scripts\Detect\detect.min.js" />
+    <Content Include="Scripts\Detect\regexes.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -312,6 +315,7 @@
     <Content Include="Scripts\responsive-calendar.js" />
     <Content Include="Scripts\responsive-calendar.min.js" />
     <Content Include="Scripts\Style\curtains.js" />
+    <Content Include="Scripts\Style\IEScript.js" />
     <Content Include="Scripts\Style\isotope.pkgd.min.js" />
     <Content Include="Scripts\Style\parallax.js" />
     <Content Include="Scripts\Style\parallax.min.js" />
