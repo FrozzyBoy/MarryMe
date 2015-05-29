@@ -7,7 +7,7 @@ marryApp.controller('mapCtrl', function ($scope) {
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
-	//window.location.href = '/#intro'; //relative to domain
+	window.location.href = '/#intro'; //relative to domain
 	//$scope.hide = true;
 
 	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
@@ -111,6 +111,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 	$scope.isSelectedMonth = function (month) {
 		return $scope.selectedMonthUI === month;
+	}
+
+	$scope.isSelectedNav = function (nav) {
+		return $scope.selectedNav === nav;
+	}
+
+	$scope.navClick = function (nav) {
+		$scope.selectedNav = nav;
 	}
 
 	$scope.timeClick = function (time, timeObject) {
