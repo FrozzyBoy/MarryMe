@@ -231,6 +231,7 @@
     <Content Include="Content\Demo.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Hall.css" />
+    <Content Include="Content\Loader.css" />
     <Content Include="Content\map.css" />
     <Content Include="Content\Month.css" />
     <Content Include="Content\responsive-calendar.css" />
@@ -245,6 +246,10 @@
     <Content Include="img\date1.jpg" />
     <Content Include="img\date2.jpg" />
     <Content Include="img\date3.jpg" />
+    <Content Include="img\Halls\mog_diam.jpg" />
+    <Content Include="img\Halls\mog_gold.jpg" />
+    <Content Include="img\Halls\mog_ice.jpg" />
+    <Content Include="img\Halls\mog_ping.jpg" />
     <Content Include="img\icon-arrow.svg" />
     <Content Include="img\icon-heart.ico" />
     <Content Include="img\loading.gif" />
@@ -320,6 +325,7 @@
     <Content Include="Scripts\Style\parallax.js" />
     <Content Include="Scripts\Style\parallax.min.js" />
     <Content Include="Scripts\Style\pollyfill.js" />
+    <Content Include="Scripts\Style\smoothscroll.js" />
     <Content Include="Scripts\Style\velvet.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

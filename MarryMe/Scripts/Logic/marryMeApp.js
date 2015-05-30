@@ -8,7 +8,42 @@ marryApp.controller('mapCtrl', function ($scope) {
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
 	window.location.href = '/#intro'; //relative to domain
-	//$scope.hide = true;
+	$scope.hide = true;
+
+	$scope.timeLoader = true;
+	$scope.timeElement = false;
+	$scope.timeNextButton = true;
+
+	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
+
+	$scope.myStyleFunction = function (hall) {
+		switch (hall.Id) {
+			case 1:
+				return {
+					'background': $scope.hallsImages[0]
+				}
+			case 2:
+				return {
+					'background': $scope.hallsImages[1]
+				}
+			case 3:
+				return {
+					'background': $scope.hallsImages[2]
+				}
+			case 4:
+				return {
+					'background': $scope.hallsImages[3]
+				}
+		}
+	}
+
+	function isMobile() {
+		if (window.innerWidth < 1199) {
+			//$scope.timeNextButton = false;
+		}
+	}
+
+	isMobile();
 
 	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
 	$scope.CONST = { PatternTelNum: '/[(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}]/' };
@@ -105,6 +140,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		submit(object);
 	}
 
+	$scope.isSelectedHall = function (hall) {
+		return $scope.selectedHall === hall;
+	}
+
 	$scope.isSelectedTime = function (time) {
 		return $scope.selectedTime === time;
 	}
@@ -177,8 +216,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	}
 
 	$scope.hallClick = function (clickedId) {
-
-		changeElementStyle(clickedId);
+		$scope.selectedHall = clickedId;
+		//changeElementStyle(clickedId);
 
 		$scope.submitData.RoomId = clickedId;
 		console.log($scope.submitData.RoomId + ' ' + $scope.selectedYear + ' ' + $scope.selectedMonth + ' ' + $scope.selectedDay + ' ' + 'hall')
@@ -243,15 +282,19 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 	function dayInfo(roomId, year, month, day) {
 
+		beginLoadTime();
+
 		$http({
 			async: true,
 			method: 'GET',
 			url: api.room.schedule,
 			params: { 'roomId': roomId, 'time': year + '-' + month + '-' + day }
 		}).success(function (data, status, headers, config) {
+			endLoadTime();
 			$scope.times = splitTime(data);
 		}).error(function (data, status) {
-			alert('err')
+			endLoadTime();
+			alert('err');
 		});
 
 		function splitTime(data) {
@@ -312,13 +355,34 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		});
 	}
 
-	//$(window).load(function () {
-	//	$scope.hide = false;
-	//	$scope.$apply();
-	//	setTimeout(function () {
-	//		$("#load").fadeOut("slow");
-	//	}, 1000);
-	//});
+	function beginLoadTime() {
+		if (window.innerWidth > 1199) {
+			$scope.timeLoader = false;
+			$scope.timeNextButton = true;
+		}
+		else {
+			$scope.timeNextButton = false;
+		}
+		$scope.timeElement = true;
+	}
+
+	function endLoadTime() {
+		if (window.innerWidth > 1199) {
+			$scope.timeLoader = true;
+		}
+		$(window).resize();
+		$scope.timeNextButton = false;
+		$scope.timeElement = true;
+	}
+
+	$(window).load(function () {
+		$scope.hide = false;
+		$scope.$apply();
+		blockSize();
+		setTimeout(function () {
+			$("#load").fadeOut("slow");
+		}, 1000);
+	});
 });
 
 
