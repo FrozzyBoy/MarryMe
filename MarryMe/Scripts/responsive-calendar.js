@@ -161,6 +161,13 @@
 			getCurrMonth: function () {
 				currMonth = this.currentMonth;
 			},
+			setCurrYear: function (value) {
+				this.currentYear = value;
+			},
+			setCurrMonth: function (value) {
+				value--;
+				this.currentMonth = value;
+			},
 			addOthers: function (day, dayEvents) {
 				var badge;
 				if (typeof dayEvents === "object") {
@@ -318,7 +325,9 @@
 				getYearMonth: 'getYearMonth',
 				jump: 'jump',
 				curr: 'curr',
-				getCurrMonth: 'getCurrMonth'
+				getCurrMonth: 'getCurrMonth',
+				setCurrYear: 'setCurrYear',
+				setCurrMonth: 'setCurrMonth'
 			};
 			init = function ($this) {
 				var data;
@@ -332,18 +341,6 @@
 						data.prev();
 					}
 					if ($(this).data("go") === "next") {
-						return data.next();
-					}
-					if ($(this).data("go") === "prev12") {
-						for (var i = 0; i < 11; i++) {
-							data.prev();
-						}
-						return data.prev();
-					}
-					if ($(this).data("go") === "next12") {
-						for (var i = 0; i < 11; i++) {
-							data.next();
-						}
 						return data.next();
 					}
 				});
@@ -366,7 +363,7 @@
 				return null;
 			});
 		};
-		$.fn.responsiveCalendar.qwerty = function() {
+		$.fn.responsiveCalendar.qwerty = function () {
 			return currMonth;
 		};
 		$.fn.responsiveCalendar.defaults = {

@@ -1,0 +1,283 @@
+﻿@{
+	ViewBag.Title = "MarryMe";
+}
+
+<section id="intro">
+	<div id="introImage" class="overlay-dark bg-img full-screen-intro" data-parallax="scroll" data-image-src="/img/mount-sky.jpg">
+		<canvas id="pollyfill-canvas1"></canvas>
+	</div>
+	<div class="full-cap-wrapper">
+		<div class="content-caption">
+			<div class="container">
+				<h1 class="intro-text" style="margin-bottom:20px">Регистрация брака</h1>
+				<h4 class="intro-text">На этом сайте вы можете подать заявку на регистрацию брака.</h4>
+				<br />
+				<div>
+					<a class="btn btn-glass btn-main smooth-scroll intro-btn" href="#mission">Начать регистрацию</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section><!-- /#intro -->
+
+
+<div id="missionImage" class="overlay-dark bg-img full-screen-intro" data-parallax="scroll" data-image-src="/img/wedding-wallpapers-free-download-6.jpg">
+	<section style="width: 100%;  height: 100%;  overflow: hidden; margin-bottom:30px" id="mission">
+		<div class="content-caption display-default">
+			<div class="container-fluid">
+				<h1 class="center-element site-section" style="margin-bottom:50px">Выбор даты</h1>
+				<div class="responsive-calendar">
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col-lg-9 col-lg-offset-1">
+
+								<div class="section-header" style="margin-bottom:10px">
+									<div class="controls" style="margin-bottom:20px">
+										<a class="pull-left"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="yearChange(0)"></div></a>
+										<h4 class="calendar-title" style="color:black">Год: <span data-head-year></span></h4>
+										<a class="pull-right"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="yearChange(1)"></div></a>
+									</div>
+
+									<div class="row">
+										<div ng-repeat="month in monthsInfo">
+											<div class="col-md-4 col-sm-4 col-xs-6" style="padding-right:0px" ng-click="monthClick(month.name,month)">
+												<div class="block text-color form-control resize month-background-color" ng-class="{'month-background-color-click' : isSelectedMonth(month)}" style="margin-bottom:0px">
+													<div class="month-text-color">
+														<h3 style="margin-top:5px; margin-bottom:5px">{{month.name}}</h3>
+														<h3 style="margin-top:0px; margin-bottom:5px">{{month.persent}}%</h3>
+														<div class="progress">
+															<div class="progress-bar progress-background" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{month.persent}}%;">
+																<span class="sr-only">60% Complete</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>  <!-- Header -->
+
+								<h4 class="text-lg text-italic text-muted col-lg-12" style="color:black;margin-top:15px; margin-bottom:40px">*в процентах показана занятость месяца.</h4>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+
+						<div class="row">
+							<div class="col-lg-9 col-lg-offset-1">
+
+								<div class="section-header" style="margin-bottom:10px">
+									<div class="controls">
+										<a class="pull-left"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="moveMonthClick(0)"></div></a>
+										<h4 class="calendar-title" style="color:black">Месяц: <span data-head-month></span></h4>
+										<a class="pull-right"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="moveMonthClick(1)"></div></a>
+									</div>
+									<hr />
+									<div class="day-headers">
+										<div class="day header">Пн</div>
+										<div class="day header">Вт</div>
+										<div class="day header">Ср</div>
+										<div class="day header">Чт</div>
+										<div class="day header">Пт</div>
+										<div class="day header">Сб</div>
+										<div class="day header">Вс</div>
+									</div>
+									<div class="days" data-group="days">
+
+									</div>
+								</div>
+								<div class="col-lg-2">
+									<a id="nextButton" class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" href="#services">Далее</a>
+								</div>
+								<h4 class="text-lg text-italic text-muted col-lg-8 pull-right" style="color:black; margin-top:15px">Выбранная вами дата: {{selectedDay}} {{selectedMonth}} {{selectedYear}}</h4>
+							</div>
+						</div>
+					</div>
+				</div><!-- Calendar -->
+			</div>
+		</div>
+	</section><!-- /#mission -->
+</div>
+<div id="servicesImage" class="overlay-dark bg-img full-screen-intro" data-parallax="scroll" data-image-src="/img/Part23.jpg">
+	<section id="services" style="width: 100%;  height: 100%;  overflow: hidden;  position: relative;margin-bottom:30px">
+		<div class="container-fluid">
+			<h1 class="center-element site-section">Выбор зала и времени</h1>
+			<div class="col-lg-6">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+
+						<div class="section-header" style="margin-bottom:10px">
+							<h1 class="title field" style="margin-bottom:0px">Выбор зала</h1>
+							<h2 class="title field">Для начала выберите дату.</h2>
+						</div>
+
+						<div class="row">
+							<div ng-repeat="hall in halls">
+								<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:5px;padding-right:0px" ng-click="hallClick(hall.Id)">
+									<div id="{{hall.Id}}" class="block form-control resize tile hall-background-color">
+										<div class="hall-text-color">
+											<h3>{{hall.Name}}</h3>
+											<p>Описание</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+
+						<div class="section-header" style="margin-bottom:10px">
+							<h1 class="title field" style="margin-bottom:0px">Выбор времени</h1>
+							<h2 class="title field">Для начала выберите зал.</h2>
+						</div>
+
+						<div ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}">
+							<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left:0px" ng-click="timeClick(time.Time,time)">
+								<div class="block text-color form-control time-background-color" ng-class="{'time-background-color-click' : isSelectedTime(time)}" style="margin-bottom:0px; margin-top:3px">
+									<div class="time-text-color">
+										<h3 style="margin:0px">{{time.Time}}</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<a class="btn btn-main smooth-scroll btn-black col-xs-12" style="color: black; margin-bottom: 10px; margin-top:5px; float: left; clear: left; display: inline" href="#portfolio">Далее</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- /#services -->
+</div>
+<div id="portfolioImage" class="overlay-dark bg-img full-screen-intro" data-parallax="scroll" data-image-src="/img/date3.jpg">
+	<section class="section" style="width: 100%;  height: 100%;  overflow: hidden;  position: relative;margin-bottom:30px" id="portfolio">
+		<div class="container-fluid">
+			<h1 class="center-element site-section" style="margin-top:70px; margin-bottom:50px">Личная информация</h1>
+			<form name="inputForm">
+				<div id="portfolioPlaceholder" class="col-lg-6 half bg1">
+					<div class="row">
+						<div class="col-lg-10 col-lg-offset-1">
+							<div class="block block-lg form-control form-block tile-blue" color:white">
+								<h2>Жених</h2>
+								<p>Данные жениха</p>
+								<div class="row form-group">
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-blue" placeholder="Имя" name="manFirstName" ng-model="Man.FirstName" required ng-pattern="/^[а-яА-Я]+$/" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-blue" placeholder="Фамилия" name="manLastName" ng-model="Man.LastName" required ng-pattern="/^[а-яА-Я]+$/" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-blue" placeholder="Отчество" name="manMiddleName" ng-model="Man.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="CONST.PatternTelNum" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="email" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-blue" placeholder="Номер паспорта" name="manPassportNumber" ng-model="Man.PassportNumber" />
+									</div>
+								</div>
+							</div>
+							<a class="btn btn-main smooth-scroll btn-blue pull-right" style="color:white; margin-bottom:10px" href="#services">Назад</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 half bg2">
+
+					<div class="row">
+						<div class="col-lg-10 col-lg-offset-1">
+
+							<div class="block block-lg form-control form-block tile-pink" color:white">
+								<h2>Невеста</h2>
+								<p>Данные невесты</p>
+								<div class="row form-group">
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-pink" placeholder="Имя" name="womanFirstName" ng-model="Woman.FirstName" required ng-pattern="/^[а-яА-Я]+$/" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-pink" placeholder="Фамилия" name="womanLastName" ng-model="Woman.LastName" required ng-pattern="/^[а-яА-Я]+$/" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-pink" placeholder="Отчество" name="womanMiddleName" ng-model="Woman.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="CONST.PatternTelNum" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="email" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
+									</div>
+									<div class="col-md-6 col-sm-12 block-lg-label">
+										<input type="text" class="form-control tile-pink" placeholder="Номер паспорта" name="womanPassportNumber" ng-model="Woman.PassportNumber" />
+									</div>
+								</div>
+							</div>
+							<a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" ng-click="applyForm()">Подтвердить</a>
+						</div>
+						<ul>
+							<li style="color:red"
+								ng-show="
+            inputForm.manFirstName.$dirty && inputForm.manFirstName.$error.required  ||
+            inputForm.manLastName.$dirty && inputForm.manLastName.$error.required ||
+            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.required ||
+            inputForm.womanFirstName.$dirty && inputForm.womanFirstName.$error.required ||
+            inputForm.womanLastName.$dirty && inputForm.womanLastName.$error.required ||
+            inputForm.womanMiddleName.$dirty && inputForm.womanMiddleName.$error.required
+            ">Заполните обязательные поля</li>
+							<li style="color:red"
+								ng-show="inputForm.manEmail.$dirty && inputForm.manEmail.$error.email ||
+            inputForm.womanEmail.$dirty && inputForm.womanEmail.$error.email
+            ">Не верный e-mail</li>
+							<li style="color:red"
+								ng-show="
+            inputForm.manFirstName.$dirty && inputForm.manFirstName.$error.pattern  ||
+            inputForm.manLastName.$dirty && inputForm.manLastName.$error.pattern ||
+            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.pattern ||
+            inputForm.womanFirstName.$dirty && inputForm.womanFirstName.$error.pattern ||
+            inputForm.womanLastName.$dirty && inputForm.womanLastName.$error.pattern ||
+            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.pattern
+            ">Используйте русские буквы</li>
+							<li style="color:red"
+								ng-show="inputForm.manTelephoneNumber.$error.pattern && inputForm.womanTelephoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
+						</ul>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+	</section><!-- /#portfolio -->
+</div>
+<section id="contact">
+	<div class="container-fluid">
+		<div class="col-lg-6">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="section-header">
+						<h2>Контактные данные</h2>
+					</div>
+
+					<div class="form-horizontal">
+						<p>Наш телефон: 34-34-34</p>
+						<p>Наш e-mail: zags@gmail.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6" ng-controller="mapCtrl">
+			<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+				<ui-gmap-marker coords="marker.coords" idkey="marker.idKey" options="marker.options">
+				</ui-gmap-marker>
+			</ui-gmap-google-map>
+		</div>
+	</div>
+</section>

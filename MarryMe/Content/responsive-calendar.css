@@ -19,7 +19,7 @@
 	display: inline-block;
 	position: relative;
 	font-size: 25px;
-	width: 14.285714285714286%;
+	width: 14.285714285714286% !important;
 	text-align: center;
 }
 
@@ -31,7 +31,7 @@
 	}
 
 		.responsive-calendar .day a:hover {
-			background-color: #eee;
+			background-color: #fff;
 			text-decoration: none;
 		}
 
@@ -40,12 +40,15 @@
 	}
 
 	.responsive-calendar .day.active a {
-		background-color: #1d86c8;
+		background: url("../../img/icon-heart.ico") no-repeat;
+		background-size: contain;
+		background-position: center center;
+		/*background-color: #6edb34;*/
 		color: #ffffff;
 	}
 
 		.responsive-calendar .day.active a:hover {
-			background-color: #36a0e2;
+			/*background-color: #36a0e2;*/
 		}
 
 	.responsive-calendar .day.active .not-current {
@@ -58,7 +61,7 @@
 		}
 
 	.responsive-calendar .day.not-current a {
-		color: #ddd;
+		color: rgba(219,52,205, 0.70);
 	}
 
 	.responsive-calendar .day .badge {
@@ -69,12 +72,11 @@
 	}
 
 .calendar-btn {
+	color: black;
 	font-size: 25px;
 	padding-top: 4px;
 }
 
-	.calendar-btn.left {
-	}
-
-	.calendar-btn.right {
+	.calendar-btn:hover {
+		color: #3498db;
 	}

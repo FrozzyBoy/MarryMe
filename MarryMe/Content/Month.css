@@ -1,4 +1,8 @@
-﻿.body-red .month-background-color {
+﻿.month-background-color {
+	height: 100px;
+}
+
+.body-red .month-background-color {
 	background: linear-gradient(to right,#e74c3c 50%,white 50%);
 	border: 3px solid #e74c3c;
 }
@@ -13,19 +17,30 @@
 	-webkit-text-fill-color: transparent;
 }
 
-.body-blue .month-background-color {
-	background: linear-gradient(to right,#3498db 50%,white 50%);
-	border: 3px solid #3498db;
+.month-background-color {
+	/*color: #3498db;*/
+	color: black;
+	background: rgba(255, 255, 255, 0.00);
+	border: 2px solid #3498db;
+	-webkit-transition: background 300ms, color 300ms, border 300ms;
+	-moz-transition: background 300ms, color 300ms, border 300ms;
+	transition: background 300ms, color 300ms, border 300ms;
 }
 
-	.body-blue .month-background-color:hover {
+	.month-background-color:hover {
 		cursor: pointer;
 	}
 
-.body-blue .month-text-color {
-	background: -webkit-linear-gradient(right,#3498db 50%,white 50%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+.month-background-color-click {
+	background: rgb(255, 255, 255);
+}
+
+.progress-background {
+	background: #3498db;
+}
+
+.month-text-color {
+	color: black;
 }
 
 .body-green .month-background-color {

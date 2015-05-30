@@ -17,7 +17,21 @@ function blockSize2() {
 		}
 	});
 }
+
+//function buttonPosition() {
+//	var eTop = $('#backButton').offset().top;
+//	var d = $('#nextButton');
+//	d.offset({ top: eTop, left: d.offsetLeft });
+//}
+
+//function buttonPosition2() {
+//	var eTop = $('#backButton2').offset().top;
+//	var d = $('#nextButton2');
+//	d.offset({ top: eTop, left: d.offsetLeft });
+//}
+
 blockSize();
 blockSize2();
+
 $(window).resize(blockSize);
 $(window).resize(blockSize2);
