@@ -24,5 +24,10 @@ namespace MarryMe.Controllers
 		{
 			return View();
 		}
+
+		public ActionResult Modal()
+		{
+			return View();
+		}
 	}
 }
