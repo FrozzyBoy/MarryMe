@@ -19,5 +19,11 @@
 		/// <param name="fullInfo">Full info.</param>
 		/// <returns>Token.</returns>
 		string SubmitData(MarriageFullInfo fullInfo);
+
+		/// <summary>
+		/// Approve marriage.
+		/// </summary>
+		/// <param name="token">Token to get data.</param>
+		void ApproveData(string token);
 	}
 }

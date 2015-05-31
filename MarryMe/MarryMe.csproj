@@ -216,6 +216,7 @@
     <Compile Include="Infrastructure\ContainerConfig.cs" />
     <Compile Include="Infrastructure\UnityControllerActivator.cs" />
     <Compile Include="Infrastructure\UnityHttpControllerActivator.cs" />
+    <Compile Include="Model\ApproveModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebApi\CalendarController.cs" />
@@ -337,6 +338,7 @@
     <Content Include="Views\Home\IndexTwo.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\MarryMe.cshtml" />
+    <Content Include="Views\Home\Approve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

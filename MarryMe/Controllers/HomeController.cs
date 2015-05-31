@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MarryMe.Model;
 using MarryMe.Model.Interfaces;
 
 namespace MarryMe.Controllers
@@ -43,7 +44,18 @@ namespace MarryMe.Controllers
 
 		public ActionResult Approve(string id)
 		{
-			return View();
+			var model = new ApproveModel() { IsApproved = true };
+
+			try
+			{
+				_common.ApproveData(id);
+			}
+			catch(Exception ex)
+			{
+				model.IsApproved = false;
+				model.Message = ex.Message;
+			}
+			return View(model);
 		}
 
 	}

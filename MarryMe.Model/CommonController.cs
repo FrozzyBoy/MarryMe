@@ -18,6 +18,7 @@
 
 		private const string StoredAddRegistration = "[dbo].[RegisterMarriage]";
 		private const string RegexEmail = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+		private const string StoredApprove = "[dbo].[ApproveRegistration]";
 
 		#endregion
 
@@ -60,6 +61,29 @@
 
 			return token;
 		}
+
+
+		/// <summary>
+		/// Approve marriage.
+		/// </summary>
+		/// <param name="token">Token to get data.</param>
+		public void ApproveData(string token)
+		{
+			using (var connection = DBFactory.GetConnection())
+			{
+				connection.Open();
+				using (var command = connection.CreateCommand())
+				{
+					command.CommandType = System.Data.CommandType.StoredProcedure;
+					command.CommandText = StoredApprove;
+
+					DBFactory.AddParameter(command, "@token", token);
+					command.ExecuteNonQuery();
+
+				}
+			}
+		}
+
 		#endregion
 
 		private string InsertData(MarriageFullInfo fullInfo)
@@ -98,7 +122,7 @@
 					#endregion
 
 					var token = command.ExecuteScalar();
-					result =  token.ToString();
+					result = token.ToString();
 				}
 			}
 
