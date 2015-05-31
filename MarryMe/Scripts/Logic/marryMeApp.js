@@ -13,6 +13,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$scope.timeLoader = true;
 	$scope.timeElement = false;
 	$scope.timeNextButton = true;
+	$scope.timeElement1 = false;
 
 	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
 
@@ -89,12 +90,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 	$('.responsive-calendar').responsiveCalendar({
 		onDayClick: function (events) {
+			$scope.timeElement1 = true;
 			$scope.selectedYear = $(this).data('year');
 			$scope.selectedMonth = $(this).data('month');
 			$scope.selectedDay = $(this).data('day');
 			$scope.$apply();
 
 			if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
+
 				dayInfo($scope.submitData.RoomId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
 			}
 
@@ -218,10 +221,13 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$scope.hallClick = function (clickedId) {
 		$scope.selectedHall = clickedId;
 		//changeElementStyle(clickedId);
-
+		$scope.timeElement = true;
 		$scope.submitData.RoomId = clickedId;
 		console.log($scope.submitData.RoomId + ' ' + $scope.selectedYear + ' ' + $scope.selectedMonth + ' ' + $scope.selectedDay + ' ' + 'hall')
-		dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+		if ($scope.timeElement1) {
+			dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+		}
+
 	} //event выбор зала
 
 	$scope.yearChange = function (flag) {
@@ -294,7 +300,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			$scope.times = splitTime(data);
 		}).error(function (data, status) {
 			endLoadTime();
-			alert('err');
 		});
 
 		function splitTime(data) {
@@ -382,6 +387,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		setTimeout(function () {
 			$("#load").fadeOut("slow");
 		}, 1000);
+		$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
+		//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
+		$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 	});
 });
 
