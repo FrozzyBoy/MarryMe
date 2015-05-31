@@ -7,50 +7,53 @@
 			Проверьте введенную информацию
 		</h3>
 	</div>
-	<div class="modal-body" ng-show="{{InputForm.$valid}}">
-		Дата:
-		<ul>
-			<li>День: {{selectedDay}}</li>
-			<li>Месяц: {{selectedMonth}}</li>
-			<li>Год: {{selectedYear}}</li>
-		</ul>
-		Зал:
-		<ul>
-			<li>Название:</li>
-			<li>Время: {{selectedTime}}</li>
-		</ul>
-		Жених:
-		<ul>
-			<li>Фамилия: {{SubmitData.Man.LastName}}</li>
-			<li>Имя: {{SubmitData.Man.FirstName}}</li>
-			<li>Отчество: {{SubmitData.Man.MiddleName}}</li>
-			<li>Личный номер(паспорт): {{SubmitData.Man.PassportNumber}}</li>
-			<li>Номер телефона: {{SubmitData.Man.TelephoneNumber}}</li>
-		</ul>
-		Невеста:
-		<ul>
-			<li>Фамилия: {{SubmitData.Woman.LastName}}</li>
-			<li>Имя: {{SubmitData.Woman.FirstName}}</li>
-			<li>Отчество: {{SubmitData.Woman.MiddleName}}</li>
-			<li>Личный номер(паспорт): {{SubmitData.Woman.PassportNumber}}</li>
-			<li>Номер телефона: {{SubmitData.Woman.TelephoneNumber}}</li>
-		</ul>
-		Контактный E-mail:
-		<ul>
-			<li>{{SubmitData.Man.Email}}</li>
-		</ul>
-		<div class="g-recaptcha" data-sitekey="6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo"></div>
-	</div>
-	<div class="modal-body" ng-show="!{{InputForm.$valid}}">
+	<div class="modal-body" ng-show="!{{FullValid}}">
 		<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-primary" ng-model="btnSend" ng-disabled="!{{InputForm.$valid}}">
-			Отправить
-		</button>
-		<button type="button" class="btn btn-primary" ng-model="btnCancel" ng-click="cancel()">
-			Отмена
-		</button>
-	</div>
-</div>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+		<div class="modal-body" ng-show="{{FullValid}}">
+			Дата:
+			<ul>
+				<li>День: {{selectedDay}}</li>
+				<li>Месяц: {{selectedMonth}}</li>
+				<li>Год: {{selectedYear}}</li>
+			</ul>
+			Зал:
+			<ul>
+				<li>Название:</li>
+				<li>Время: {{selectedTime}}</li>
+			</ul>
+			Жених:
+			<ul>
+				<li>Фамилия: {{SubmitData.Man.LastName}}</li>
+				<li>Имя: {{SubmitData.Man.FirstName}}</li>
+				<li>Отчество: {{SubmitData.Man.MiddleName}}</li>
+				<li>Личный номер(паспорт): {{SubmitData.Man.PassportNumber}}</li>
+				<li>Номер телефона: {{SubmitData.Man.TelephoneNumber}}</li>
+			</ul>
+			Невеста:
+			<ul>
+				<li>Фамилия: {{SubmitData.Woman.LastName}}</li>
+				<li>Имя: {{SubmitData.Woman.FirstName}}</li>
+				<li>Отчество: {{SubmitData.Woman.MiddleName}}</li>
+				<li>Личный номер(паспорт): {{SubmitData.Woman.PassportNumber}}</li>
+				<li>Номер телефона: {{SubmitData.Woman.TelephoneNumber}}</li>
+			</ul>
+			Контактный E-mail:
+			<ul>
+				<li>{{SubmitData.Man.Email}}</li>
+			</ul>
+			<div id="html_element"></div></div><div class="g-recaptcha" data-sitekey="6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo"></div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-primary" ng-model="btnSend" ng-click="submit()">
+				Отправить
+			</button>
+			<button type="button" class="btn btn-primary" ng-model="btnCancel" ng-click="cancel()">
+				Отмена
+			</button>
+		</div>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+
+

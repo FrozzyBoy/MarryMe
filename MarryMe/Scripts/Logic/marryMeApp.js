@@ -273,7 +273,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			params: { 'year': year, 'month': month }
 		}).success(function (data) {
 			persents = data;
-			console.log(data)
 		}).error(function (data, status) {
 
 		});
@@ -296,6 +295,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		function getM(persents) {
 			for (var i = 0; i < 12; i++) {
+				if (persents[i] == -1) {
+					persents[i] = 'Нет данных';
+				}
+				else {
+					persents[i] = persents[i] + '%';
+				}
 				$scope.monthsInfo.push({
 					name: months[i],
 					persent: persents[i]
@@ -335,7 +340,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			url: api.calendar.holidays,
 			params: { 'year': year, 'month': month }
 		}).success(function (data, status, headers, config) {
-			console.log(data, status);
 		}).error(function (data, status) {
 
 		});
@@ -366,18 +370,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		});
 	} // все комнаты
 
-	function submit(object) {
-		$http({
-			method: 'POST',
-			url: api.submit,
-			data: JSON.stringify(object),
-			headers: { 'Content-Type': 'application/json' }
-		}).success(function (data, status) {
-			alert('success');
-		}).error(function (data, status, headers, config) {
-			alert('error' + status + ' ' + data);
-		});
-	}
+	
 
 	function beginLoadTime() {
 		if (window.innerWidth > 1199) {
@@ -410,11 +403,15 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
 		$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 	});
-}).controller('ModalController', function ($scope, $modalInstance, submitData, InputForm, inputValid) {
+}).controller('ModalController', function ($scope,$http,api, $modalInstance, submitData, InputForm, inputValid) {
 	$scope.SubmitData = submitData;
 	$scope.InputForm = InputForm;
 	$scope.InputValid = inputValid;
+	$scope.FullValid = false;
+	$scope.reCaptcha = false;
 	$scope.alerts = [];
+
+	
 
 	if ($scope.InputForm.$valid == false) {
 		if ($scope.InputForm.manFirstName.$error.required == true) {
@@ -473,6 +470,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	if ($scope.InputValid.TimeValid == undefined || $scope.InputValid.TimeValid == false) {
 		$scope.alerts.push({ type: 'danger', msg: 'Не выбрано время' });
 	}
+	if ($scope.InputValid.dayValid == true && $scope.InputValid.HallValid == true && $scope.InputValid.TimeValid == true && $scope.InputForm.$valid == true) {
+		$scope.FullValid = true;
+	}
 
 
 	if (submitData.RegistrationDate != undefined) {
@@ -491,6 +491,21 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		$scope.selectedYear = object.getFullYear();
 		$scope.selectedTime = object.getUTCHours() + ':' + object.getUTCMinutes();
 	}
+
+	$scope.submit = function () {
+		$http.defaults.useXDomain = true;
+
+		if (captcha == true) {
+			$http({
+				method: 'POST',
+				url: api.submit,
+				data: JSON.stringify($scope.SubmitData),
+				headers: { 'Content-Type': 'application/json' }
+			}).success(function (data, status) {
+			}).error(function (data, status, headers, config) {
+			});
+		}
+	}
 });
 
 
@@ -508,3 +523,12 @@ marryApp.constant('api', {
 	},
 	submit: '/api/submit'
 });
+var onloadCallback = function () {
+	grecaptcha.render('html_element', {
+		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
+		'callback': function (response) {
+			captcha = true;
+		}
+	});
+};
+var captcha = false;
