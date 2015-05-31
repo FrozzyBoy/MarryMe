@@ -214,6 +214,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ContainerConfig.cs" />
+    <Compile Include="Infrastructure\UnityControllerActivator.cs" />
     <Compile Include="Infrastructure\UnityHttpControllerActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

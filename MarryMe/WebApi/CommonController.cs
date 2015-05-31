@@ -59,9 +59,13 @@
 			{
 				return Ok(_controller.SubmitData(marige));
 			}
-			catch (Exception ex)
+			catch (ArgumentException ex)
 			{
 				return BadRequest(ex.Message);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest("Произошла ошибка, обратитесь в ЗАГС для регистрации.");
 			}
 		}
 

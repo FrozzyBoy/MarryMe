@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MarryMe.Model.Interfaces;
 
 namespace MarryMe.Controllers
 {
 	public class HomeController : Controller
 	{
-		//
-		// GET: /Home/
+		private readonly ICommonController _common;
+
+		public HomeController(ICommonController common)
+		{
+			_common = common;
+		}
+
 		public ActionResult Index()
 		{
 			return View();
@@ -22,7 +28,23 @@ namespace MarryMe.Controllers
 
 		public ActionResult MarryMe()
 		{
+			var contactUsUrlBuilder =
+			new UriBuilder(Request.Url.AbsoluteUri)
+			{
+				Path = Url.Action("Approve", "Home")
+			};
+
+			var contactUsUri = contactUsUrlBuilder.Uri;
+			var contactUsUriString = contactUsUrlBuilder.ToString();
+
+			_common.Url = contactUsUriString + "/";
 			return View();
 		}
+
+		public ActionResult Approve(string id)
+		{
+			return View();
+		}
+
 	}
 }

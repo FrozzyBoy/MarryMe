@@ -9,10 +9,15 @@
 	public interface ICommonController
 	{
 		/// <summary>
+		/// Url to site.
+		/// </summary>
+		string Url { get; set; }
+
+		/// <summary>
 		/// Submit data about marriage.
 		/// </summary>
 		/// <param name="fullInfo">Full info.</param>
-		/// <returns>True if ok.</returns>
-		bool SubmitData(MarriageFullInfo fullInfo);
+		/// <returns>Token.</returns>
+		string SubmitData(MarriageFullInfo fullInfo);
 	}
 }
