@@ -21,8 +21,8 @@
 
 			result.Id = reader.GetInt32(reader.GetOrdinal("Id"));
 			result.Name = reader.GetString(reader.GetOrdinal("Name"));
-			result.Price = 0;
-			result.Information = "";
+			result.Price = reader.GetInt32(reader.GetOrdinal("Cost"));
+			result.Information = reader.GetString(reader.GetOrdinal("Information"));
 
 			return result;
 		}
