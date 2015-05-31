@@ -8,7 +8,43 @@ marryApp.controller('mapCtrl', function ($scope) {
 
 marryApp.controller('appCtrl', function ($scope, $http, api) {
 	window.location.href = '/#intro'; //relative to domain
-	//$scope.hide = true;
+	$scope.hide = true;
+
+	$scope.timeLoader = true;
+	$scope.timeElement = false;
+	$scope.timeNextButton = true;
+	$scope.timeElement1 = false;
+
+	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
+
+	$scope.myStyleFunction = function (hall) {
+		switch (hall.Id) {
+			case 1:
+				return {
+					'background': $scope.hallsImages[0]
+				}
+			case 2:
+				return {
+					'background': $scope.hallsImages[1]
+				}
+			case 3:
+				return {
+					'background': $scope.hallsImages[2]
+				}
+			case 4:
+				return {
+					'background': $scope.hallsImages[3]
+				}
+		}
+	}
+
+	function isMobile() {
+		if (window.innerWidth < 1199) {
+			//$scope.timeNextButton = false;
+		}
+	}
+
+	isMobile();
 
 	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
 	$scope.CONST = { PatternTelNum: '/[(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}]/' };
@@ -54,12 +90,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 	$('.responsive-calendar').responsiveCalendar({
 		onDayClick: function (events) {
+			$scope.timeElement1 = true;
 			$scope.selectedYear = $(this).data('year');
 			$scope.selectedMonth = $(this).data('month');
 			$scope.selectedDay = $(this).data('day');
 			$scope.$apply();
 
 			if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
+
 				dayInfo($scope.submitData.RoomId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
 			}
 
@@ -103,6 +141,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		$scope.submitData.Woman = $scope.Woman;
 		var object = $scope.submitData;
 		submit(object);
+	}
+
+	$scope.isSelectedHall = function (hall) {
+		return $scope.selectedHall === hall;
 	}
 
 	$scope.isSelectedTime = function (time) {
@@ -177,12 +219,15 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	}
 
 	$scope.hallClick = function (clickedId) {
-
-		changeElementStyle(clickedId);
-
+		$scope.selectedHall = clickedId;
+		//changeElementStyle(clickedId);
+		$scope.timeElement = true;
 		$scope.submitData.RoomId = clickedId;
 		console.log($scope.submitData.RoomId + ' ' + $scope.selectedYear + ' ' + $scope.selectedMonth + ' ' + $scope.selectedDay + ' ' + 'hall')
-		dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+		if ($scope.timeElement1) {
+			dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+		}
+
 	} //event выбор зала
 
 	$scope.yearChange = function (flag) {
@@ -243,15 +288,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 	function dayInfo(roomId, year, month, day) {
 
+		beginLoadTime();
+
 		$http({
 			async: true,
 			method: 'GET',
 			url: api.room.schedule,
 			params: { 'roomId': roomId, 'time': year + '-' + month + '-' + day }
 		}).success(function (data, status, headers, config) {
+			endLoadTime();
 			$scope.times = splitTime(data);
 		}).error(function (data, status) {
-			alert('err')
+			endLoadTime();
 		});
 
 		function splitTime(data) {
@@ -312,13 +360,37 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		});
 	}
 
-	//$(window).load(function () {
-	//	$scope.hide = false;
-	//	$scope.$apply();
-	//	setTimeout(function () {
-	//		$("#load").fadeOut("slow");
-	//	}, 1000);
-	//});
+	function beginLoadTime() {
+		if (window.innerWidth > 1199) {
+			$scope.timeLoader = false;
+			$scope.timeNextButton = true;
+		}
+		else {
+			$scope.timeNextButton = false;
+		}
+		$scope.timeElement = true;
+	}
+
+	function endLoadTime() {
+		if (window.innerWidth > 1199) {
+			$scope.timeLoader = true;
+		}
+		$(window).resize();
+		$scope.timeNextButton = false;
+		$scope.timeElement = true;
+	}
+
+	$(window).load(function () {
+		$scope.hide = false;
+		$scope.$apply();
+		blockSize();
+		setTimeout(function () {
+			$("#load").fadeOut("slow");
+		}, 1000);
+		$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
+		//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
+		$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
+	});
 });
 
 

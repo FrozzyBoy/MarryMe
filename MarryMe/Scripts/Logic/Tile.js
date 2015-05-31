@@ -1,5 +1,5 @@
 ﻿function blockSize() {
-	$('.tile').height(function () {
+	$('.hall-bg-image').height(function () {
 		return $(this).width();
 	});
 }

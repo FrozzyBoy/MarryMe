@@ -22,5 +22,17 @@
 }
 
 .time-background-color-click {
+<<<<<<< HEAD
 	background: rgba(255, 255, 255, 1);
+=======
+	background: rgb(0, 0, 0);
+}
+
+	.time-background-color-click:hover {
+		background: rgb(0, 0, 0);
+	}
+
+.time-h-color {
+	color: white;
+>>>>>>> Calendar
 }
