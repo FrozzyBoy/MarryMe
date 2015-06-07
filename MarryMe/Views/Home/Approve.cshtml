@@ -1,0 +1,36 @@
+﻿@model MarryMe.Model.ApproveModel
+
+@{
+	ViewBag.Title = "";
+	Layout = null;
+}
+
+<h2>Подтверждение</h2>
+
+<div>
+	<hr />
+	<dl class="dl-horizontal">
+		@if (Model.IsApproved)
+		{
+			<dt>
+				Поздравляю, вы успешно зарегистрированы.<br />
+				Не забудьте подать документы в ЗАГС не позднее чем за 3 дня до церемонии.<br />
+				За подробностями можете обратиться в ЗАГС.
+			</dt>
+		}
+		else
+		{
+			<dt>
+				Произошла оишбка регистрации.<br />
+				@if (!string.IsNullOrWhiteSpace(Model.Message))
+				{
+					<p>
+						@Model.Message
+					</p>
+				}
+				За дополнительной информацией обращайтесь в ЗАГС.
+			</dt>
+		}
+
+	</dl>
+</div>

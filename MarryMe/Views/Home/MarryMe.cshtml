@@ -167,7 +167,7 @@
 							</div>
 
 							<div ng-hide="timeNextButton" ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}" style="z-index:100">
-								<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left:0px" ng-click="timeClick(time.Time,time)">
+								<div class="col-md-3 col-sm-3 col-xs-4" style="padding-left:0px" ng-click="timeClick(time.Time,time)">
 									<div class="block text-color form-control time-background-color" ng-class="{'time-background-color-click' : isSelectedTime(time)}" style="margin-bottom:0px; margin-top:3px">
 										<div class="time-text-color" ng-class="{'time-h-color' : isSelectedTime(time)}">
 											<h3 style="margin:0px">{{time.Time}}</h3>

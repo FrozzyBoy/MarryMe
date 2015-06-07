@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonController.cs" />
+    <Compile Include="CommonEmailSenderController.cs" />
     <Compile Include="Entity\DateSchedule.cs" />
     <Compile Include="Entity\DayStatistic.cs" />
     <Compile Include="Entity\Holiday.cs" />
@@ -50,6 +51,11 @@
     <Compile Include="Factory\DBFactory.cs" />
     <Compile Include="Interfaces\ICommonController.cs" />
     <Compile Include="Interfaces\IRoomData.cs" />
+    <Compile Include="Resources\PagesRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PagesRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Text.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -61,10 +67,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\PagesRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PagesRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Text.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Text.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ApproveEmail.HTML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,6 +19,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
 
 	$scope.myStyleFunction = function (hall) {
+		console.log("hall");
 		switch (hall.Id) {
 			case 1:
 				return {
@@ -33,10 +34,11 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					'background': $scope.hallsImages[2]
 				}
 			case 4:
+				$(window).resize();
 				return {
 					'background': $scope.hallsImages[3]
 				}
-		}
+		};
 	}
 
 	function isMobile() {
@@ -370,7 +372,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		});
 	} // все комнаты
 
-	
+
 
 	function beginLoadTime() {
 		if (window.innerWidth > 1199) {
@@ -403,7 +405,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
 		$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 	});
-}).controller('ModalController', function ($scope,$http,api, $modalInstance, submitData, InputForm, inputValid) {
+}).controller('ModalController', function ($scope, $http, api, $modalInstance, submitData, InputForm, inputValid) {
 	$scope.SubmitData = submitData;
 	$scope.InputForm = InputForm;
 	$scope.InputValid = inputValid;
@@ -411,7 +413,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.reCaptcha = false;
 	$scope.alerts = [];
 
-	
+
 
 	if ($scope.InputForm.$valid == false) {
 		if ($scope.InputForm.manFirstName.$error.required == true) {
@@ -498,11 +500,13 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		if (captcha == true) {
 			$http({
 				method: 'POST',
-				url: api.submit,
+				url: '/api/submit',
 				data: JSON.stringify($scope.SubmitData),
 				headers: { 'Content-Type': 'application/json' }
 			}).success(function (data, status) {
+				$scope.alerts.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
 			}).error(function (data, status, headers, config) {
+				$scope.alerts.push({ type: 'danger', msg: 'На данный e-mail уже была проведена регистрация' });
 			});
 		}
 	}

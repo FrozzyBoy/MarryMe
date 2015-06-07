@@ -44,7 +44,7 @@
 			</ul>
 			<div id="html_element"></div></div><div class="g-recaptcha" data-sitekey="6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo"></div>
 		</div>
-
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 		<div class="modal-footer">
 			<button type="submit" class="btn btn-primary" ng-model="btnSend" ng-click="submit()">
 				Отправить

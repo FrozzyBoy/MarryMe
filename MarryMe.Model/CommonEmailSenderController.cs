@@ -1,0 +1,41 @@
+﻿namespace MarryMe.Model
+{
+	#region Using
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+	using System.Threading.Tasks;
+	using MarryMe.Model.Interfaces;
+	using MarryMe.Model.Resources;
+	#endregion
+
+	public class CommonEmailSenderController : CommonController, ICommonController
+	{
+		public override string SubmitData(Entity.MarriageFullInfo fullInfo)
+		{
+			var token = base.SubmitData(fullInfo);
+
+			SendEmail(token, fullInfo);
+
+			return token;
+		}
+
+		private void SendEmail (string token, Entity.MarriageFullInfo fullInfo)
+		{
+			System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+			var msg = new System.Net.Mail.MailMessage();
+			msg.To.Add(fullInfo.Man.Email);
+			msg.Subject = "Подтверждение регистрации.";
+			msg.IsBodyHtml = true;
+			msg.Priority = System.Net.Mail.MailPriority.High;
+			msg.Body = string.Format( PagesRes.ApproveEmail, 
+				fullInfo.RegistrationDate.ToString(), fullInfo.RoomId, 
+				fullInfo.Man.FirstName, fullInfo.Man.LastName, fullInfo.Man.MiddleName, fullInfo.Man.TelephoneNumber ?? "",
+				fullInfo.Woman.FirstName, fullInfo.Woman.LastName, fullInfo.Woman.MiddleName, fullInfo.Woman.TelephoneNumber ?? "",
+				base.Url + token);
+			client.Send(msg);
+		}
+
+	}
+}

@@ -18,26 +18,78 @@
 
 		private const string StoredAddRegistration = "[dbo].[RegisterMarriage]";
 		private const string RegexEmail = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+		private const string StoredApprove = "[dbo].[ApproveRegistration]";
+
+		#endregion
+
+		#region Static
+
+		private static string _fullUrl = string.Empty;
+		private static string FullUrl
+		{
+			set
+			{
+				if (string.IsNullOrWhiteSpace(_fullUrl))
+				{
+					_fullUrl = value;
+				}
+			}
+			get
+			{
+				return _fullUrl;
+			}
+		}
 
 		#endregion
 
 		#region members ICommonController
+
+		/// <summary>
+		/// Url to site.
+		/// </summary>
+		public string Url { get { return FullUrl; } set { FullUrl = value; } }
+
 		/// <summary>
 		/// Submit data about marriage.
 		/// </summary>
 		/// <param name="fullInfo">Full info.</param>
-		/// <returns>True if ok.</returns>
-		public bool SubmitData(MarriageFullInfo fullInfo)
+		/// <returns>Token.</returns>
+		public virtual string SubmitData(MarriageFullInfo fullInfo)
 		{
 			Validation(fullInfo);
-			InsertData(fullInfo);
+			var token = InsertData(fullInfo);
 
-			return true;
+			return token;
 		}
+
+
+		/// <summary>
+		/// Approve marriage.
+		/// </summary>
+		/// <param name="token">Token to get data.</param>
+		public void ApproveData(string token)
+		{
+			using (var connection = DBFactory.GetConnection())
+			{
+				connection.Open();
+				using (var command = connection.CreateCommand())
+				{
+					command.CommandType = System.Data.CommandType.StoredProcedure;
+					command.CommandText = StoredApprove;
+
+					DBFactory.AddParameter(command, "@token", token);
+					command.ExecuteNonQuery();
+
+				}
+			}
+		}
+
 		#endregion
 
-		private void InsertData(MarriageFullInfo fullInfo)
+		private string InsertData(MarriageFullInfo fullInfo)
 		{
+			string result = string.Empty;
+
 			using (var connection = DBFactory.GetConnection())
 			{
 				connection.Open();
@@ -69,9 +121,12 @@
 					DBFactory.AddParameter(command, "@wEmail", fullInfo.Woman.Email);
 					#endregion
 
-					command.ExecuteNonQuery();
+					var token = command.ExecuteScalar();
+					result = token.ToString();
 				}
 			}
+
+			return result;
 		}
 
 		#region Validation
@@ -83,27 +138,11 @@
 				throw new ArgumentNullException(manValidation);
 			}
 
-			string womanValidation = ValidateSpouse(fullInfo.Man, "невесты");
-			if (!string.IsNullOrWhiteSpace(womanValidation))
-			{
-				throw new ArgumentNullException(womanValidation);
-			}
-
-			bool wEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Woman.Email);
 			bool mEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Man.Email);
 
-			if (!wEmailFilled
-				|| !mEmailFilled)
+			if (!mEmailFilled)
 			{
-				throw new ArgumentException("Нужно указать электронную почту хотя бы одного брачующегося.");
-			}
-
-			if (wEmailFilled)
-			{
-				if (!CheckMail(fullInfo.Woman.Email))
-				{
-					throw new ArgumentException("Электронный адрес супруги заполнен не правильно.");
-				}
+				throw new ArgumentException("Нужно указать электронную почту для подтверждения регистрации.");
 			}
 
 			if (mEmailFilled)

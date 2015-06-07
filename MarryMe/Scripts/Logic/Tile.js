@@ -1,5 +1,6 @@
 ﻿function blockSize() {
 	$('.hall-bg-image').height(function () {
+		console.log("resize");
 		return $(this).width();
 	});
 }
