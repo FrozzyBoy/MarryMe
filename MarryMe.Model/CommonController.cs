@@ -176,11 +176,11 @@
 
 		private static string ValidateSpouse(Spouse sp, string spName)
 		{
-			sp.Email = sp.Email.Trim();
-			sp.LastName = sp.LastName = sp.LastName.Trim();
-			sp.MiddleName = sp.MiddleName.Trim();
-			sp.PassportNumber = sp.PassportNumber.Trim();
-			sp.TelephoneNumber = sp.TelephoneNumber.Trim();
+			sp.Email = TrimString(sp.Email);
+			sp.LastName = TrimString(sp.LastName);
+			sp.MiddleName = TrimString(sp.MiddleName);
+			sp.PassportNumber = TrimString(sp.PassportNumber);
+			sp.TelephoneNumber = TrimString(sp.TelephoneNumber);
 
 			string result = string.Empty;
 			
@@ -208,6 +208,16 @@
 		{
 			Regex reg = new Regex(pattern);
 			return reg.IsMatch(check);
+		}
+
+		private static string TrimString(string trimming)
+		{
+			string trimReturn = string.Empty;
+			if (!string.IsNullOrWhiteSpace(trimming))
+			{
+				trimReturn = trimming.Trim();
+			}
+			return trimReturn;
 		}
 
 		#endregion

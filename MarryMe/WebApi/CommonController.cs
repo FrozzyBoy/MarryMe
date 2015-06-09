@@ -65,7 +65,7 @@
 			}
 			catch (Exception ex)
 			{
-				return BadRequest("Произошла ошибка, обратитесь в ЗАГС для регистрации.");
+				return BadRequest(ex.Message);
 			}
 		}
 
