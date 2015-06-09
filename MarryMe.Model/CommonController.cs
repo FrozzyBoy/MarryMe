@@ -19,7 +19,7 @@
 		private const string StoredAddRegistration = "[dbo].[RegisterMarriage]";
 		private const string RegexEmail = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
 		private const string StoredApprove = "[dbo].[ApproveRegistration]";
-
+		private const string RegexPassId = @"([0-9]{7}[A-Z][0-9]{3})((PB)|(GB)|(ВА)|(BI))[0-9]";
 		#endregion
 
 		#region Static
@@ -86,6 +86,8 @@
 
 		#endregion
 
+		#region Private implementation
+
 		private string InsertData(MarriageFullInfo fullInfo)
 		{
 			string result = string.Empty;
@@ -130,12 +132,18 @@
 		}
 
 		#region Validation
-		private void Validation(MarriageFullInfo fullInfo)
+		private static void Validation(MarriageFullInfo fullInfo)
 		{
 			string manValidation = ValidateSpouse(fullInfo.Man, "жениха");
 			if (!string.IsNullOrWhiteSpace(manValidation))
 			{
 				throw new ArgumentNullException(manValidation);
+			}
+
+			string womanValidation = ValidateSpouse(fullInfo.Woman, "невесты");
+			if (!string.IsNullOrWhiteSpace(womanValidation))
+			{
+				throw new ArgumentNullException(womanValidation);
 			}
 
 			bool mEmailFilled = !string.IsNullOrWhiteSpace(fullInfo.Man.Email);
@@ -147,9 +155,9 @@
 
 			if (mEmailFilled)
 			{
-				if (!CheckMail(fullInfo.Man.Email))
+				if (!RegexCheck(fullInfo.Man.Email, RegexEmail))
 				{
-					throw new ArgumentException("Электронный адрес супруга заполнен не правильно.");
+					throw new ArgumentException("Электронный адрес заполнен не правильно.");
 				}
 			}
 
@@ -157,12 +165,25 @@
 			{
 				throw new ArgumentNullException("Нужно выбрать время в будущем.");
 			}
+
+			if (!RegexCheck(fullInfo.Man.PassportNumber, RegexPassId)
+				&& !RegexCheck(fullInfo.Woman.PassportNumber, RegexPassId))
+			{
+				throw new ArgumentException("Паспортные данные не прошли проверку.");
+			}
+
 		}
 
-		private string ValidateSpouse(Spouse sp, string spName)
+		private static string ValidateSpouse(Spouse sp, string spName)
 		{
-			string result = string.Empty;
+			sp.Email = sp.Email.Trim();
+			sp.LastName = sp.LastName = sp.LastName.Trim();
+			sp.MiddleName = sp.MiddleName.Trim();
+			sp.PassportNumber = sp.PassportNumber.Trim();
+			sp.TelephoneNumber = sp.TelephoneNumber.Trim();
 
+			string result = string.Empty;
+			
 			if (string.IsNullOrWhiteSpace(sp.FirstName))
 			{
 				result = "Имя {0} нужно обязательно заполнить.";
@@ -183,12 +204,15 @@
 			return result;
 		}
 
-		private bool CheckMail(string mail)
+		private static bool RegexCheck(string check, string pattern)
 		{
-			Regex reg = new Regex(RegexEmail);
-			return reg.IsMatch(mail);
+			Regex reg = new Regex(pattern);
+			return reg.IsMatch(check);
 		}
+
 		#endregion
 
+		#endregion
+		
 	}
 }
