@@ -8,13 +8,13 @@
 function blockSize2() {
 	$('.form-block').height(function () {
 		if (window.innerWidth < 767) {
-			return 600;
+			return 540;
 		}
 		if (window.innerWidth < 992) {
 			return 600;
 		}
 		else {
-			return 600;
+			return 530;
 		}
 	});
 }
