@@ -41,12 +41,13 @@
 		</ul>
 		<div id="html_element"></div>
 	</div><div class="g-recaptcha" data-sitekey="6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo"></div>
+	<alert ng-repeat="message in messages" type="{{message.type}}">{{message.msg}}</alert>
 </div>
 <div class="modal-body" ng-show="!{{FullValid}}">
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
 <div class="modal-footer">
-	<button type="submit" class="btn btn-primary" ng-model="btnSend" ng-click="submit()">
+	<button type="submit" class="btn btn-primary" ng-model="btnSend" ng-disabled="" ng-click="submit()">
 		Отправить
 	</button>
 	<button type="button" class="btn btn-primary" ng-model="btnCancel" ng-click="cancel()">

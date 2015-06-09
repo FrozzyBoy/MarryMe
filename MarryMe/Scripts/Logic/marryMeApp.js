@@ -412,6 +412,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.FullValid = false;
 	$scope.reCaptcha = false;
 	$scope.alerts = [];
+	$scope.messages = [];
 
 
 
@@ -460,6 +461,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		if ($scope.InputForm.manEmail.$error.email == true) {
 			$scope.alerts.push({ type: 'danger', msg: 'Не валидный е-mail.' });
 		}
+		if ($scope.InputForm.manPassportNumber.$error.pattern == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Не верно введен личный номер жениха.' });
+		}
+		if ($scope.InputForm.womanPassportNumber.$error.pattern == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Не верно введен личный номер невесты.' });
+		}
 
 	}
 
@@ -496,7 +503,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	$scope.submit = function () {
 		$http.defaults.useXDomain = true;
-
+		$scope.messages = [];
 		if (captcha == true) {
 			$http({
 				method: 'POST',
@@ -504,9 +511,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				data: JSON.stringify($scope.SubmitData),
 				headers: { 'Content-Type': 'application/json' }
 			}).success(function (data, status) {
-				$scope.alerts.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
+				$scope.messages.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
 			}).error(function (data, status, headers, config) {
-				$scope.alerts.push({ type: 'danger', msg: 'На данный e-mail уже была проведена регистрация' });
+				$scope.messages.push({ type: 'danger', msg: data.Message });
 			});
 		}
 	}
