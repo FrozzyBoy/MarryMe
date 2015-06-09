@@ -12,6 +12,25 @@
 
 	public class CommonEmailSenderController : CommonController, ICommonController
 	{
+
+		#region Private memebers
+
+		private IRoomData _room = null;
+
+		#endregion
+
+		#region constructor
+		public CommonEmailSenderController(IRoomData room)
+		{
+			if (room == null)
+			{
+				throw new ArgumentNullException("room");
+			}
+
+			_room = room;
+		} 
+		#endregion
+
 		public override string SubmitData(Entity.MarriageFullInfo fullInfo)
 		{
 			var token = base.SubmitData(fullInfo);
@@ -30,7 +49,7 @@
 			msg.IsBodyHtml = true;
 			msg.Priority = System.Net.Mail.MailPriority.High;
 			msg.Body = string.Format( PagesRes.ApproveEmail, 
-				fullInfo.RegistrationDate.ToString(), fullInfo.RoomId, 
+				fullInfo.RegistrationDate.ToString(), _room.GetInformation(fullInfo.RoomId).Name, 
 				fullInfo.Man.FirstName, fullInfo.Man.LastName, fullInfo.Man.MiddleName, fullInfo.Man.TelephoneNumber ?? "",
 				fullInfo.Woman.FirstName, fullInfo.Woman.LastName, fullInfo.Woman.MiddleName, fullInfo.Woman.TelephoneNumber ?? "",
 				base.Url + token);
