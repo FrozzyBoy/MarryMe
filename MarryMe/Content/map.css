@@ -1,6 +1,7 @@
 ﻿.angular-google-map,
+angular-ui-google-map,
 .angular-google-map-container {
-	margin-top: 70px;
+	margin-top: 0px;
 	width: 100%;
-	height: 100%;
+	height: 300px;
 }

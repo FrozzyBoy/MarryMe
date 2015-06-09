@@ -18,4 +18,26 @@
 
 .hall-text-color {
 	color: black;
+	text-align: center;
+	padding-top: 35%;
+}
+
+.hall-bg-image {
+	border-radius: 50%;
+}
+
+.hall {
+	padding: 10px;
+	opacity: 0.5;
+	-webkit-transition: opacity 300ms, color 300ms, border 300ms;
+	-moz-transition: opacity 300ms, color 300ms, border 300ms;
+	transition: opacity 300ms, color 300ms, border 300ms;
+}
+
+	.hall:hover {
+		opacity: 1;
+	}
+
+.hall-background-opacity {
+	opacity: 1;
 }

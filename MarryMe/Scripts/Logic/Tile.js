@@ -1,5 +1,6 @@
 ﻿function blockSize() {
-	$('.tile').height(function () {
+	$('.hall-bg-image').height(function () {
+		console.log("resize");
 		return $(this).width();
 	});
 }
@@ -7,13 +8,13 @@
 function blockSize2() {
 	$('.form-block').height(function () {
 		if (window.innerWidth < 767) {
-			return 400;
+			return 600;
 		}
 		if (window.innerWidth < 992) {
-			return 400;
+			return 600;
 		}
 		else {
-			return 250;
+			return 600;
 		}
 	});
 }

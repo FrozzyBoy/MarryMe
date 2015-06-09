@@ -1,19 +1,74 @@
-﻿var marryApp = angular.module('marryApp', ['uiGmapgoogle-maps'])
+﻿
+var marryApp = angular.module('marryApp', ['uiGmapgoogle-maps', 'ui.bootstrap'])
 
 marryApp.controller('mapCtrl', function ($scope) {
-    $scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
-    $scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: {labelContent:'Мы находимся здесь!'} }
+	$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
+	$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 });
 
-marryApp.controller('appCtrl', function ($scope, $http, api) {
+marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
+	window.location.href = '/#intro'; //relative to domain
 
-	//$scope.CONST.PatternTelNum = '^(\+\d{1,3}\s)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$';
-	$scope.CONST = { PatternTelNum: '^(\+\d{1,3}(\s)?)?\(?\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}$' };
+	$scope.hide = true;
+
+	$scope.timeLoader = true;
+	$scope.timeElement = false;
+	$scope.timeNextButton = true;
+	$scope.timeElement1 = false;
+
+	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
+
+	$scope.myStyleFunction = function (hall) {
+		console.log("hall");
+		switch (hall.Id) {
+			case 1:
+				return {
+					'background': $scope.hallsImages[0]
+				}
+			case 2:
+				return {
+					'background': $scope.hallsImages[1]
+				}
+			case 3:
+				return {
+					'background': $scope.hallsImages[2]
+				}
+			case 4:
+				$(window).resize();
+				return {
+					'background': $scope.hallsImages[3]
+				}
+		};
+	}
+
+	function isMobile() {
+		if (window.innerWidth < 1199) {
+			//$scope.timeNextButton = false;
+		}
+	}
+
+	isMobile();
 
 	$http.defaults.useXDomain = true;
-	// $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 	var currentYear = new Date().getFullYear();
+	var currentMonth = new Date().getMonth();
+
+	setMonth();
+
+	var monthsDictionary = {};
+	monthsDictionary["Январь"] = "01";
+	monthsDictionary["Февраль"] = "02";
+	monthsDictionary["Март"] = "03";
+	monthsDictionary["Апрель"] = "04";
+	monthsDictionary["Май"] = "05";
+	monthsDictionary["Июнь"] = "06";
+	monthsDictionary["Июль"] = "07";
+	monthsDictionary["Август"] = "08";
+	monthsDictionary["Сентябрь"] = "09";
+	monthsDictionary["Октябрь"] = "10";
+	monthsDictionary["Ноябрь"] = "11";
+	monthsDictionary["Декабрь"] = "12";
 
 	completenessOfTheMonths(currentYear);
 	allRooms();
@@ -23,18 +78,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	$scope.Man = {};
 	$scope.Woman = {};
 	$scope.submitData = {};
-
-
-
+	$scope.InputValid = {};
 
 	$('.responsive-calendar').responsiveCalendar({
 		onDayClick: function (events) {
+			$scope.timeElement1 = true;
 			$scope.selectedYear = $(this).data('year');
 			$scope.selectedMonth = $(this).data('month');
 			$scope.selectedDay = $(this).data('day');
 			$scope.$apply();
 
 			if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
+
 				dayInfo($scope.submitData.RoomId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
 			}
 
@@ -46,9 +101,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			var currentDate = new Date();
 			var delay = (selectedDate - currentDate) / 1000 / 60 / 60 / 24;
 
-			$scope.isCorrectDate = false;
+
 			if (delay > 3) {
-				$scope.isCorrectDate = true;
+				$scope.InputValid.dayValid = true;
 			}
 
 			if (month < 9) {
@@ -73,21 +128,58 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		}
 	});
 
-	$scope.applyForm = function () {
+	$scope.applyForm = function (size, inputForm) {
+
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: '/Home/Modal',
+			controller: 'ModalController',
+			size: size,
+			resolve: {
+				submitData: function () {
+					return $scope.submitData;
+				},
+				InputForm: function () {
+					return inputForm;
+				},
+				inputValid: function () {
+					return $scope.InputValid;
+				}
+
+			}
+		});
+
+		//$scope.submitData.RoomInfo = roomInfo($scope.submitData.RoomId);
 		$scope.submitData.Man = $scope.Man;
 		$scope.submitData.Woman = $scope.Woman;
 		var object = $scope.submitData;
-		submit(object);
+		//submit(object);
 	}
 
-	$scope.isSelected = function (time) {
-		return $scope.selected === time;
+	$scope.isSelectedHall = function (hall) {
+		return $scope.selectedHall === hall;
 	}
 
-	$scope.timeClick = function (time,timeObject) {
+	$scope.isSelectedTime = function (time) {
+		return $scope.selectedTime === time;
+	}
 
-		$scope.selected = timeObject;
+	$scope.isSelectedMonth = function (month) {
+		return $scope.selectedMonthUI === month;
+	}
 
+	$scope.isSelectedNav = function (nav) {
+		return $scope.selectedNav === nav;
+	}
+
+	$scope.navClick = function (nav) {
+		$scope.selectedNav = nav;
+	}
+
+	$scope.timeClick = function (time, timeObject) {
+
+		$scope.selectedTime = timeObject;
+		$scope.InputValid.TimeValid = true;
 		var temp = time.split(':');
 		var hour = temp[0];
 		var minutes = temp[1];
@@ -96,6 +188,45 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		var day = $scope.selectedDay;
 		$scope.submitData.RegistrationDate = new Date(Date.UTC(year, month - 1, day, hour, minutes));
 	} //выбор времени
+
+	$scope.monthClick = function (month, monthObject) {
+		$scope.selectedMonthUI = monthObject;
+
+		var dateString = currentYear + "-" + monthsDictionary[month];
+		currentMonth = monthsDictionary[month];
+
+		$('.responsive-calendar').responsiveCalendar(dateString);
+		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+	}
+
+	$scope.moveMonthClick = function (flag) {
+		if (flag == 1) {
+			currentMonth++;
+
+			if (currentMonth > 12) {
+				currentYear++;
+				currentMonth = "01";
+			}
+
+		} else {
+			currentMonth--;
+
+			if (currentMonth < 1) {
+				currentYear--;
+				currentMonth = "12";
+			}
+		}
+		var dateString = currentYear + "-" + currentMonth;
+		$('.responsive-calendar').responsiveCalendar(dateString);
+		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+	}
+
+	function setMonth() {
+		currentMonth++;
+		if (currentMonth < 9) {
+			currentMonth = '0' + currentMonth;
+		}
+	}
 
 	function changeElementStyle(clickedId) {
 		var halls = [];
@@ -108,22 +239,32 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 	}
 
 	$scope.hallClick = function (clickedId) {
-
-		changeElementStyle(clickedId);
-
+		$scope.selectedHall = clickedId;
+		//changeElementStyle(clickedId);
+		$scope.timeElement = true;
 		$scope.submitData.RoomId = clickedId;
-		console.log($scope.submitData.RoomId + ' ' + $scope.selectedYear + ' ' + $scope.selectedMonth + ' ' + $scope.selectedDay + ' ' + 'hall')
-		dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+
+		if ($scope.timeElement1) {
+			dayInfo(clickedId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+		}
+
+		$scope.InputValid.HallValid = true;
 	} //event выбор зала
 
 	$scope.yearChange = function (flag) {
+
 		if (flag == 1) {
 			currentYear++;
 		}
 		else {
 			currentYear--;
 		}
+
+		var dateString = currentYear + "-01";
+		$('.responsive-calendar').responsiveCalendar(dateString);
+
 		completenessOfTheMonths(currentYear);
+		$(".responsive-calendar").responsiveCalendar('setCurrYear', currentYear);
 	} // event смена года
 
 	function completenessOfTheDays(year, month) {
@@ -134,7 +275,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			params: { 'year': year, 'month': month }
 		}).success(function (data) {
 			persents = data;
-			console.log(data)
 		}).error(function (data, status) {
 
 		});
@@ -150,7 +290,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			url: api.calendar.months,
 			params: { 'year': year }
 		}).success(function (data) {
-			console.log(data)
 			getM(data);
 		}).error(function (data, status) {
 
@@ -158,6 +297,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 		function getM(persents) {
 			for (var i = 0; i < 12; i++) {
+				if (persents[i] == -1) {
+					persents[i] = 'Нет данных';
+				}
+				else {
+					persents[i] = persents[i] + '%';
+				}
 				$scope.monthsInfo.push({
 					name: months[i],
 					persent: persents[i]
@@ -168,15 +313,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 
 	function dayInfo(roomId, year, month, day) {
 
+		beginLoadTime();
+
 		$http({
 			async: true,
 			method: 'GET',
 			url: api.room.schedule,
 			params: { 'roomId': roomId, 'time': year + '-' + month + '-' + day }
 		}).success(function (data, status, headers, config) {
+			endLoadTime();
 			$scope.times = splitTime(data);
 		}).error(function (data, status) {
-			alert('err')
+			endLoadTime();
 		});
 
 		function splitTime(data) {
@@ -194,22 +342,23 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 			url: api.calendar.holidays,
 			params: { 'year': year, 'month': month }
 		}).success(function (data, status, headers, config) {
-			console.log(data, status);
 		}).error(function (data, status) {
 
 		});
 	} // праздники(список)
 
 	function roomInfo(id) {
+		var response;
 		$http({
 			method: 'GET',
 			url: api.room.info,
 			params: { 'roomId': id }
 		}).success(function (data, status, headers, config) {
-			console.log(data, status);
+			response = data;
 		}).error(function (data, status) {
 
 		});
+		return response;
 	}//инфо по комнате
 
 	function allRooms() {
@@ -223,18 +372,150 @@ marryApp.controller('appCtrl', function ($scope, $http, api) {
 		});
 	} // все комнаты
 
-	function submit(object) {
-		console.log(object);
-		$http({
-			method: 'POST',
-			url: api.submit,
-			data: JSON.stringify(object),
-			headers: { 'Content-Type': 'application/json' }
-		}).success(function (data, status) {
-			alert('success');
-		}).error(function (data, status, headers, config) {
-			alert('error' + status + ' ' + data);
-		});
+
+
+	function beginLoadTime() {
+		if (window.innerWidth > 1199) {
+			$scope.timeLoader = false;
+			$scope.timeNextButton = true;
+		}
+		else {
+			$scope.timeNextButton = false;
+		}
+		$scope.timeElement = true;
+	}
+
+	function endLoadTime() {
+		if (window.innerWidth > 1199) {
+			$scope.timeLoader = true;
+		}
+		$(window).resize();
+		$scope.timeNextButton = false;
+		$scope.timeElement = true;
+	}
+
+	$(window).load(function () {
+		$scope.hide = false;
+		$scope.$apply();
+		blockSize();
+		setTimeout(function () {
+			$("#load").fadeOut("slow");
+		}, 1000);
+		$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
+		//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
+		$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
+	});
+}).controller('ModalController', function ($scope, $http, api, $modalInstance, submitData, InputForm, inputValid) {
+	$scope.SubmitData = submitData;
+	$scope.InputForm = InputForm;
+	$scope.InputValid = inputValid;
+	$scope.FullValid = false;
+	$scope.reCaptcha = false;
+	$scope.alerts = [];
+	$scope.messages = [];
+
+
+
+	if ($scope.InputForm.$valid == false) {
+		if ($scope.InputForm.manFirstName.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните имя жениха.' });
+		}
+		if ($scope.InputForm.manLastName.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните фамилию жениха.' });
+		}
+		if ($scope.InputForm.manMiddleName.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните отчество жениха.' });
+		}
+		if ($scope.InputForm.manTelephoneNumber.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните номер мобильного телефона жениха.' });
+		}
+		if ($scope.InputForm.manPassportNumber.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните личный номер(паспорт) жениха.' });
+		}
+		if ($scope.InputForm.womanFirstName.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните имя невесты.' });
+		}
+		if ($scope.InputForm.womanLastName.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните фамилию невесты.' });
+		}
+		if ($scope.InputForm.womanMiddleName.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните отчество невесты.' });
+		}
+		if ($scope.InputForm.womanTelephoneNumber.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните номер мобильного телефона невесты.' });
+		}
+		if ($scope.InputForm.womanPassportNumber.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните личный номер(паспорт) невесты.' });
+		}
+		if ($scope.InputForm.manEmail.$error.required == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Заполните е-mail.' });
+		}
+		if ($scope.InputForm.manFirstName.$error.pattern == true ||
+			$scope.InputForm.manMiddleName.$error.pattern == true ||
+			$scope.InputForm.manLastName.$error.pattern == true ||
+			$scope.InputForm.womanFirstName.$error.pattern == true ||
+			$scope.InputForm.womanLastName.$error.pattern == true ||
+			$scope.InputForm.womanMiddleName.$error.pattern == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Используйте кириллицу' });
+		}
+		if ($scope.InputForm.manEmail.$error.email == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Не валидный е-mail.' });
+		}
+		if ($scope.InputForm.manPassportNumber.$error.pattern == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Не верно введен личный номер жениха.' });
+		}
+		if ($scope.InputForm.womanPassportNumber.$error.pattern == true) {
+			$scope.alerts.push({ type: 'danger', msg: 'Не верно введен личный номер невесты.' });
+		}
+
+	}
+
+	if ($scope.InputValid.dayValid == undefined || $scope.InputValid.dayValid == false) {
+		$scope.alerts.push({ type: 'danger', msg: 'Выберите дату. Дата не должна быть раньше чем через 3 дня от текущей' });
+	}
+	if ($scope.InputValid.HallValid == undefined || $scope.InputValid.HallValid == false) {
+		$scope.alerts.push({ type: 'danger', msg: 'Не выбран зал' });
+	}
+	if ($scope.InputValid.TimeValid == undefined || $scope.InputValid.TimeValid == false) {
+		$scope.alerts.push({ type: 'danger', msg: 'Не выбрано время' });
+	}
+	if ($scope.InputValid.dayValid == true && $scope.InputValid.HallValid == true && $scope.InputValid.TimeValid == true && $scope.InputForm.$valid == true) {
+		$scope.FullValid = true;
+	}
+
+
+	if (submitData.RegistrationDate != undefined) {
+		dateObjectParse(submitData.RegistrationDate.toString());
+	}
+
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+
+	function dateObjectParse(date) {
+		var object = new Date(date);
+		$scope.selectedDay = object.getDay();
+		$scope.selectedMonth = object.getMonth() + 1;
+		$scope.selectedYear = object.getFullYear();
+		$scope.selectedTime = object.getUTCHours() + ':' + object.getUTCMinutes();
+	}
+
+	$scope.submit = function () {
+		$http.defaults.useXDomain = true;
+		$scope.messages = [];
+		if (captcha == true) {
+			$http({
+				method: 'POST',
+				url: '/api/submit',
+				data: JSON.stringify($scope.SubmitData),
+				headers: { 'Content-Type': 'application/json' }
+			}).success(function (data, status) {
+				$scope.messages.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
+			}).error(function (data, status, headers, config) {
+				$scope.messages.push({ type: 'danger', msg: data.Message });
+			});
+		}
 	}
 });
 
@@ -253,3 +534,12 @@ marryApp.constant('api', {
 	},
 	submit: '/api/submit'
 });
+var onloadCallback = function () {
+	grecaptcha.render('html_element', {
+		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
+		'callback': function (response) {
+			captcha = true;
+		}
+	});
+};
+var captcha = false;

@@ -19,22 +19,21 @@
 <section class="section" id="mission">
 	<div class="container-fluid">
 		<div class="responsive-calendar">
-			<div class="col-lg-6 half">
+			<div class="col-lg-6 half grass1">
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2">
 
 						<div class="section-header" style="margin-bottom:10px">
 							<div class="controls" style="margin-bottom:20px">
-								<a class="pull-left" data-go="prev12"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="yearChange(0)"></div></a>
+								<a class="pull-left"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="yearChange(0)"></div></a>
 								<h4 class="calendar-title" style="color:black">Год: <span data-head-year></span></h4>
-								<a class="pull-right" data-go="next12"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="yearChange(1)"></div></a>
+								<a class="pull-right"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="yearChange(1)"></div></a>
 							</div>
-
 
 							<div class="row">
 								<div ng-repeat="month in monthsInfo">
-									<div class="col-md-4 col-sm-4 col-xs-6" style="padding-right:0px">
-										<div class="block text-color form-control resize month-background-color" style="margin-bottom:0px">
+									<div class="col-md-4 col-sm-4 col-xs-6" style="padding-right:0px" ng-click="monthClick(month.name,month)">
+										<div class="block text-color form-control resize month-background-color" ng-class="{'month-background-color-click' : isSelectedMonth(month)}" style="margin-bottom:0px">
 											<div class="month-text-color">
 												<h3 style="margin-top:5px; margin-bottom:5px">{{month.name}}</h3>
 												<h3 style="margin-top:0px; margin-bottom:5px">{{month.persent}}%</h3>
@@ -51,21 +50,21 @@
 
 						</div>  <!-- Header -->
 
-						<p class="text-lg text-italic text-muted col-lg-12">*в процентах показана занятость месяца.</p>
+						<p class="text-lg text-italic text-muted col-lg-12" style="color:black">*в процентах показана занятость месяца.</p>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-lg-6 half">
+			<div class="col-lg-6 half grass2">
 
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2">
 
 						<div class="section-header">
 							<div class="controls">
-								<a class="pull-left" data-go="prev"><div class="calendar-btn left glyphicon glyphicon-arrow-left"></div></a>
+								<a class="pull-left"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="moveMonthClick(0)"></div></a>
 								<h4 class="calendar-title" style="color:black">Месяц: <span data-head-month></span></h4>
-								<a class="pull-right" data-go="next"><div class="calendar-btn right glyphicon glyphicon-arrow-right"></div></a>
+								<a class="pull-right"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="moveMonthClick(1)"></div></a>
 							</div>
 							<hr />
 							<div class="day-headers">
@@ -81,8 +80,10 @@
 
 							</div>
 						</div>
-						<a id="nextButton" class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" href="#services">Далее</a>
-						<p class="text-lg text-italic text-muted col-lg-8 pull-right">Выбранная вами дата: {{selectedDay}} {{selectedMonth}} {{selectedYear}}</p>
+						<div class="col-lg-2">
+							<a id="nextButton" class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" href="#services">Далее</a>
+						</div>
+						<p class="text-lg text-italic text-muted col-lg-8 pull-right" style="color:black">Выбранная вами дата: {{selectedDay}} {{selectedMonth}} {{selectedYear}}</p>
 					</div>
 				</div>
 			</div>
@@ -99,12 +100,12 @@
 
 					<div class="section-header" style="margin-bottom:10px">
 						<h1 class="title field" style="margin-bottom:0px">Выбор времени</h1>
-						@*<h2 class="title field">Для начала выберите зал.</h2>*@	
+						<h2 class="title field">Для начала выберите зал.</h2>
 					</div>
 
 					<div ng-show="times.length != 0" ng-repeat="time in times | filter:{IsUsing:false}">
 						<div class="col-md-3 col-sm-3 col-xs-3" style="padding-left:0px" ng-click="timeClick(time.Time,time)">
-							<div class="block text-color form-control time-background-color" ng-class="{'time-background-color-click' : isSelected(time)}" style="margin-bottom:0px; margin-top:3px">
+							<div class="block text-color form-control time-background-color" ng-class="{'time-background-color-click' : isSelectedTime(time)}" style="margin-bottom:0px; margin-top:3px">
 								<div class="time-text-color">
 									<h3 style="margin:0px">{{time.Time}}</h3>
 								</div>
@@ -124,6 +125,7 @@
 
 					<div class="section-header" style="margin-bottom:10px">
 						<h1 class="title field" style="margin-bottom:0px">Выбор зала</h1>
+						<h2 class="title field">Для начала выберите дату.</h2>
 					</div>
 
 					<div class="row">
@@ -166,7 +168,7 @@
 									<input type="text" class="form-control tile-blue" placeholder="Отчество" name="manMiddleName" ng-model="Man.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="{{CONST.PatternTelNum}}" />
+									<input type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" ng-pattern="CONST.PatternTelNum" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
 									<input type="email" class="form-control tile-blue" placeholder="E-mail" name="manEmail" ng-model="Man.Email" />
@@ -200,7 +202,7 @@
 									<input type="text" class="form-control tile-pink" placeholder="Отчество" name="womanMiddleName" ng-model="Woman.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
-									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="{{CONST.PatternTelNum}}" />
+									<input type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" ng-pattern="CONST.PatternTelNum" />
 								</div>
 								<div class="col-md-6 col-sm-12 block-lg-label">
 									<input type="email" class="form-control tile-pink" placeholder="E-mail" name="womanEmail" ng-model="Woman.Email" />
@@ -210,36 +212,12 @@
 								</div>
 							</div>
 						</div>
-						<a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" ng-click="applyForm()">Подтвердить</a>
+						<a class="btn btn-main smooth-scroll btn-pink" style="color:white; margin-bottom:10px" ng-click="applyForm('lg')">Подтвердить</a>
 					</div>
-					<ul>
-						<li style="color:red"
-							ng-show="
-            inputForm.manFirstName.$dirty && inputForm.manFirstName.$error.required  ||
-            inputForm.manLastName.$dirty && inputForm.manLastName.$error.required ||
-            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.required ||
-            inputForm.womanFirstName.$dirty && inputForm.womanFirstName.$error.required ||
-            inputForm.womanLastName.$dirty && inputForm.womanLastName.$error.required ||
-            inputForm.womanMiddleName.$dirty && inputForm.womanMiddleName.$error.required
-            ">Заполните обязательные поля</li>
-						<li style="color:red"
-							ng-show="inputForm.manEmail.$dirty && inputForm.manEmail.$error.email ||
-            inputForm.womanEmail.$dirty && inputForm.womanEmail.$error.email
-            ">Не верный e-mail</li>
-						<li style="color:red"
-							ng-show="
-            inputForm.manFirstName.$dirty && inputForm.manFirstName.$error.pattern  ||
-            inputForm.manLastName.$dirty && inputForm.manLastName.$error.pattern ||
-            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.pattern ||
-            inputForm.womanFirstName.$dirty && inputForm.womanFirstName.$error.pattern ||
-            inputForm.womanLastName.$dirty && inputForm.womanLastName.$error.pattern ||
-            inputForm.manMiddleName.$dirty && inputForm.manMiddleName.$error.pattern
-            ">Используйте русские буквы</li>
-						<li style="color:red"
-							ng-show="inputForm.manTelephoneNumber.$error.pattern && inputForm.womanTelephoneNumber.$error.pattern">Заполните хотябы одно поле с номером телефона</li>
-					</ul>
+					
 				</div>
 			</div>
+
 		</form>
 	</div>
 
@@ -276,3 +254,4 @@
 
 	</div>
 </section>
+

@@ -59,6 +59,10 @@
 			{
 				return Ok(_controller.SubmitData(marige));
 			}
+			catch (ArgumentException ex)
+			{
+				return BadRequest(ex.Message);
+			}
 			catch (Exception ex)
 			{
 				return BadRequest(ex.Message);
