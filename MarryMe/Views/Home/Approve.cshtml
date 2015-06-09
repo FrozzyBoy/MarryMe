@@ -1,36 +1,53 @@
 ﻿@model MarryMe.Model.ApproveModel
-
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/approve.css" rel="stylesheet" />
 @{
-	ViewBag.Title = "";
+	ViewBag.Title = "Подтверждение регистрации";
 	Layout = null;
 }
 
-<h2>Подтверждение</h2>
+<div class="text-center container">
+	<h1>Подтверждение</h1>
 
-<div>
-	<hr />
-	<dl class="dl-horizontal">
-		@if (Model.IsApproved)
-		{
-			<dt>
-				Поздравляю, вы успешно зарегистрированы.<br />
-				Не забудьте подать документы в ЗАГС не позднее чем за 3 дня до церемонии.<br />
-				За подробностями можете обратиться в ЗАГС.
-			</dt>
-		}
-		else
-		{
-			<dt>
-				Произошла оишбка регистрации.<br />
-				@if (!string.IsNullOrWhiteSpace(Model.Message))
-				{
-					<p>
-						@Model.Message
-					</p>
-				}
-				За дополнительной информацией обращайтесь в ЗАГС.
-			</dt>
-		}
+	<div>
+		<hr />
+		<div class="row">
+			@if (Model.IsApproved)
+			{
+				<div class="alert alert-success" role="alert" type="success">
+					<h1>Поздравляю, вы успешно зарегистрированы.</h1><br />
+				</div>
+				<h3>
+					Не забудьте подать документы в ЗАГС не позднее чем за 3 дня до церемонии.<br />
+				</h3>
+				<h3>
+					За подробностями можете обратиться в ЗАГС.
+				</h3>
 
-	</dl>
+			}
+			else
+			{
+				<div class="alert alert-danger" role="alert" type="danger">
+					<div class="approve-text">
+						<h1>Произошла ошибка регистрации.</h1><br />
+					</div>
+
+					<div class="approve-text">
+						@if (!string.IsNullOrWhiteSpace(Model.Message))
+						{
+							<p>
+								@Model.Message
+							</p>
+						}
+					</div>
+				</div>
+				<div class="approve-text">
+					<h3>За дополнительной информацией обращайтесь в ЗАГС.</h3>
+				</div>
+
+			}
+
+		</div>
+	</div>
 </div>
