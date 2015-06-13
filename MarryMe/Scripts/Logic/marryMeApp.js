@@ -7,6 +7,14 @@ marryApp.controller('mapCtrl', function ($scope) {
 });
 
 marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
+
+	String.prototype.insert = function (index, string) {
+		if (index > 0)
+			return this.substring(0, index) + string + this.substring(index, this.length);
+		else
+			return string + this;
+	};
+
 	window.location.href = '/#intro'; //relative to domain
 
 	$scope.hide = true;
@@ -81,6 +89,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.InputValid = {};
 
 	$('.responsive-calendar').responsiveCalendar({
+		onInit: function () {
+			var data = getDayStatistic();
+			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+		},
 		onDayClick: function (events) {
 			$scope.timeElement1 = true;
 			$scope.selectedYear = $(this).data('year');
@@ -217,9 +229,26 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			}
 		}
 		var dateString = currentYear + "-" + currentMonth;
+		var data = getDayStatistic();
+		$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+
 	}
+
+	function getDayStatistic() {
+		//var childs = $('.days').children();
+		//console.log(childs);
+
+		//for (var i = 0; i < childs.length; i++) {
+		//	var htmlString = childs[i].innerHTML;
+		//	var index = htmlString.indexOf("<", 2);
+		//	htmlString = htmlString.insert(index, pasteString);
+		//	console.log(index);
+		//}
+		var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+		return data;
+	} //получение статистики на день
 
 	function setMonth() {
 		currentMonth++;
@@ -300,9 +329,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				if (persents[i] == -1) {
 					persents[i] = 'Нет данных';
 				}
-				else {
-					persents[i] = persents[i] + '%';
-				}
+
 				$scope.monthsInfo.push({
 					name: months[i],
 					persent: persents[i]

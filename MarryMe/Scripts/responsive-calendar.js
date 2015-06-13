@@ -12,6 +12,7 @@
 
 (function () {
 	var currMonth;
+	var monthData = [];
 	(function ($) {
 		"use strict";
 		var Calendar, opts, spy;
@@ -168,6 +169,9 @@
 				value--;
 				this.currentMonth = value;
 			},
+			setMonthData: function (value) {
+				monthData = value;
+			},
 			addOthers: function (day, dayEvents) {
 				var badge;
 				if (typeof dayEvents === "object") {
@@ -203,7 +207,7 @@
 			getDaysInMonth: function (year, month) {
 				return new Date(year, month + 1, 0).getDate();
 			},
-			drawDay: function (lastDayOfMonth, yearNum, monthNum, dayNum, i) {
+			drawDay: function (lastDayOfMonth, yearNum, monthNum, dayNum, i, value) {
 				var calcDate, dateNow, dateString, day, dayDate, pastFutureClass;
 				day = $("<div></div>").addClass("day");
 				dateNow = new Date();
@@ -228,8 +232,13 @@
 					if (this.options.activateNonCurrentMonths) {
 						dateString = yearNum + "-" + this.addLeadingZero(monthNum) + "-" + this.addLeadingZero(dayNum);
 					}
+					var pasteString = "";
 				}
-				day.append($("<a>" + dayNum + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum));
+				else {
+					var pasteString = " <div style='position:absolute; padding-left:70%'><h5 style='margin:-3px'>" + value + "</h5></div>";
+				}
+
+				day.append($("<a>" + dayNum + pasteString + "</a>").attr("data-day", dayNum).attr("data-month", monthNum).attr("data-year", yearNum));
 				if (this.options.monthChangeAnimation) {
 					this.applyTransform(day, 'rotateY(180deg)');
 					this.applyBackfaceVisibility(day);
@@ -273,10 +282,18 @@
 					thisRef.$element.find('[data-group="days"]').empty();
 					dayNum = dayBase - firstDayOfMonth;
 					i = thisRef.options.startFromSunday ? 0 : 1;
+					var count = -1;
 					while (dayNum < loopBase - firstDayOfMonth + dayBase) {
-						thisRef.drawDay(lastDayOfMonth, yearNum, monthNum, dayNum, i);
+						if (dayNum <= 0 || dayNum > lastDayOfMonth) {
+
+						}
+						else {
+							count++;
+						}
+						thisRef.drawDay(lastDayOfMonth, yearNum, monthNum, dayNum, i, monthData[count]);
 						dayNum = dayNum + 1;
 						i = i + 1;
+
 					}
 					setEvents = function () {
 						var _j, _len1;
@@ -327,7 +344,8 @@
 				curr: 'curr',
 				getCurrMonth: 'getCurrMonth',
 				setCurrYear: 'setCurrYear',
-				setCurrMonth: 'setCurrMonth'
+				setCurrMonth: 'setCurrMonth',
+				setMonthData: 'setMonthData'
 			};
 			init = function ($this) {
 				var data;
