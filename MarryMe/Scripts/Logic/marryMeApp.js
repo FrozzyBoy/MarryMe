@@ -75,58 +75,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.submitData = {};
 	$scope.InputValid = {};
 
-	$('.responsive-calendar').responsiveCalendar({
-		onInit: function () {
-			completenessOfTheDays(currentYear, currentMonth);
-			console.log('init')
-			//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
-		},
-		onDayClick: function (events) {
-			$scope.timeElement1 = true;
-			$scope.selectedYear = $(this).data('year');
-			$scope.selectedMonth = $(this).data('month');
-			$scope.selectedDay = $(this).data('day');
-			$scope.$apply();
-
-			if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
-
-				dayInfo($scope.submitData.RoomId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
-			}
-
-			var year = $scope.selectedYear;
-			var month = $scope.selectedMonth;
-			var day = $scope.selectedDay;
-
-			var selectedDate = new Date(year, month - 1, day);
-			var currentDate = new Date();
-			var delay = (selectedDate - currentDate) / 1000 / 60 / 60 / 24;
-
-
-			if (delay > 3) {
-				$scope.InputValid.dayValid = true;
-			}
-
-			if (month < 9) {
-				month = '0' + month;
-			}
-			if (day < 9) {
-				day = '0' + day;
-			}
-			var key = $(this).data('year') + '-' + month + '-' + day
-			var qwe = {};
-			qwe[key] = {};
-			$(".responsive-calendar").responsiveCalendar('clearAll');
-			$(".responsive-calendar").responsiveCalendar('getCurrMonth');
-			$(".responsive-calendar").responsiveCalendar('edit', qwe);
-			var currMonth = $(".responsive-calendar").responsiveCalendar.qwerty();
-			if (month - currMonth == 0 || month - currMonth == 12) {
-				$(".responsive-calendar").responsiveCalendar('prev');
-			}
-			if (month - currMonth == 2 || month - currMonth == -10) {
-				$(".responsive-calendar").responsiveCalendar('next');
-			}
-		}
-	});
+	completenessOfTheDays(currentYear, currentMonth);
 
 	$scope.applyForm = function (size, inputForm) {
 
@@ -190,11 +139,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	} //выбор времени
 
 	$scope.monthClick = function (month, monthObject) {
+
 		$scope.selectedMonthUI = monthObject;
 
 		var dateString = currentYear + "-" + monthsDictionary[month];
 		currentMonth = monthsDictionary[month];
-				
+
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 
@@ -205,7 +155,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.moveMonthClick = function (flag) {
 		if (flag == 1) {
 			currentMonth++;
-			
+
 			if (currentMonth > 12) {
 				currentYear++;
 				currentMonth = "01";
@@ -213,7 +163,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			console.log(currentMonth);
 		} else {
 			currentMonth--;
-			
+
 			if (currentMonth < 1) {
 				currentYear--;
 				currentMonth = "12";
@@ -221,7 +171,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			console.log(currentMonth);
 		}
 		var dateString = currentYear + "-" + currentMonth;
-		
+
 		//var data = $scope.daysInfo;
 		//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
@@ -296,7 +246,56 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			url: api.calendar.days,
 			params: { 'year': year, 'month': month }
 		}).success(function (data) {
-			console.log(data);
+			$('.responsive-calendar').responsiveCalendar({
+				onInit: function () {
+					$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+				},
+				onDayClick: function (events) {
+					$scope.timeElement1 = true;
+					$scope.selectedYear = $(this).data('year');
+					$scope.selectedMonth = $(this).data('month');
+					$scope.selectedDay = $(this).data('day');
+					$scope.$apply();
+
+					if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
+
+						dayInfo($scope.submitData.RoomId, $scope.selectedYear, $scope.selectedMonth, $scope.selectedDay);
+					}
+
+					var year = $scope.selectedYear;
+					var month = $scope.selectedMonth;
+					var day = $scope.selectedDay;
+
+					var selectedDate = new Date(year, month - 1, day);
+					var currentDate = new Date();
+					var delay = (selectedDate - currentDate) / 1000 / 60 / 60 / 24;
+
+
+					if (delay > 3) {
+						$scope.InputValid.dayValid = true;
+					}
+
+					if (month < 9) {
+						month = '0' + month;
+					}
+					if (day < 9) {
+						day = '0' + day;
+					}
+					var key = $(this).data('year') + '-' + month + '-' + day
+					var qwe = {};
+					qwe[key] = {};
+					$(".responsive-calendar").responsiveCalendar('clearAll');
+					$(".responsive-calendar").responsiveCalendar('getCurrMonth');
+					$(".responsive-calendar").responsiveCalendar('edit', qwe);
+					var currMonth = $(".responsive-calendar").responsiveCalendar.qwerty();
+					if (month - currMonth == 0 || month - currMonth == 12) {
+						$(".responsive-calendar").responsiveCalendar('prev');
+					}
+					if (month - currMonth == 2 || month - currMonth == -10) {
+						$(".responsive-calendar").responsiveCalendar('next');
+					}
+				}
+			});
 			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		});// заполнение дней месяца(%)
 	}
