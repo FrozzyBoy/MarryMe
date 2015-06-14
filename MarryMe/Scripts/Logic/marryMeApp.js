@@ -98,11 +98,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			}
 		});
 
-		//$scope.submitData.RoomInfo = roomInfo($scope.submitData.RoomId);
 		$scope.submitData.Man = $scope.Man;
 		$scope.submitData.Woman = $scope.Woman;
 		var object = $scope.submitData;
-		//submit(object);
 	}
 
 	$scope.isSelectedHall = function (hall) {
@@ -172,26 +170,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		}
 		var dateString = currentYear + "-" + currentMonth;
 
-		//var data = $scope.daysInfo;
-		//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 		completenessOfTheDays(currentYear, currentMonth);
 	}
-
-	function getDayStatistic() {
-		//var childs = $('.days').children();
-		//console.log(childs);
-
-		//for (var i = 0; i < childs.length; i++) {
-		//	var htmlString = childs[i].innerHTML;
-		//	var index = htmlString.indexOf("<", 2);
-		//	htmlString = htmlString.insert(index, pasteString);
-		//	console.log(index);
-		//}
-		var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-		return data;
-	} //получение статистики на день
 
 	function setMonth() {
 		currentMonth++;
@@ -212,7 +194,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	$scope.hallClick = function (clickedId) {
 		$scope.selectedHall = clickedId;
-		//changeElementStyle(clickedId);
 		$scope.timeElement = true;
 		$scope.submitData.RoomId = clickedId;
 
@@ -415,7 +396,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			$("#load").fadeOut("slow");
 		}, 1000);
 		$scope.map = { center: { latitude: 53.894672, longitude: 30.331377 }, zoom: 16 };
-		//$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 }, options: { labelContent: 'Мы находимся здесь!' } }
 		$scope.marker = { idKey: 2, coords: { latitude: 53.894672, longitude: 30.331377 } }
 	});
 }).controller('ModalController', function ($scope, $http, api, $modalInstance, submitData, InputForm, inputValid) {
