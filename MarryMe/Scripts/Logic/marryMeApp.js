@@ -8,12 +8,6 @@ marryApp.controller('mapCtrl', function ($scope) {
 
 marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
-	String.prototype.insert = function (index, string) {
-		if (index > 0)
-			return this.substring(0, index) + string + this.substring(index, this.length);
-		else
-			return string + this;
-	};
 
 	window.location.href = '/#intro'; //relative to domain
 
@@ -49,13 +43,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		};
 	}
 
-	function isMobile() {
-		if (window.innerWidth < 1199) {
-			//$scope.timeNextButton = false;
-		}
-	}
-
-	isMobile();
 
 	$http.defaults.useXDomain = true;
 
@@ -90,7 +77,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	$('.responsive-calendar').responsiveCalendar({
 		onInit: function () {
-			var data = getDayStatistic();
+			completenessOfTheDays(currentYear, currentMonth);
+			var data = $scope.daysInfo;
 			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		},
 		onDayClick: function (events) {
@@ -229,7 +217,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			}
 		}
 		var dateString = currentYear + "-" + currentMonth;
-		var data = getDayStatistic();
+		var data = $scope.daysInfo;
 		$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
@@ -297,18 +285,13 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	} // event смена года
 
 	function completenessOfTheDays(year, month) {
-		var persents;
 		$http({
 			method: 'GET',
 			url: api.calendar.days,
 			params: { 'year': year, 'month': month }
 		}).success(function (data) {
-			persents = data;
-		}).error(function (data, status) {
-
+			$scope.daysInfo = data;
 		});
-
-
 	};// заполнение дней месяца(%)
 
 	function completenessOfTheMonths(year) {
