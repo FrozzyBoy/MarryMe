@@ -46,11 +46,6 @@
 														<div class="month-text-color">
 															<h3 style="margin-top:5px; margin-bottom:5px">{{month.name}}</h3>
 															<h4 style="margin-top:0px; margin-bottom:5px">Свободных мест: {{month.persent}}</h4>
-															@*<div class="progress">
-																	<div class="progress-bar progress-background" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{month.persent}}%;">
-																		<span class="sr-only">60% Complete</span>
-																	</div>
-																</div>*@
 														</div>
 													</div>
 												</div>
@@ -71,9 +66,7 @@
 
 									<div class="section-header" style="margin-bottom:10px">
 										<div class="controls">
-											<a class="pull-left"><div class="calendar-btn left glyphicon glyphicon-arrow-left" ng-click="moveMonthClick(0)"></div></a>
 											<h4 class="calendar-title" style="color:black">Месяц: <span data-head-month></span></h4>
-											<a class="pull-right"><div class="calendar-btn right glyphicon glyphicon-arrow-right" ng-click="moveMonthClick(1)"></div></a>
 										</div>
 										<hr />
 										<div class="day-headers">
@@ -372,5 +365,6 @@
 				</ui-gmap-marker>
 			</ui-gmap-google-map>
 		</div>
+
 	</div>
 </section>

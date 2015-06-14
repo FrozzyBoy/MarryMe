@@ -194,10 +194,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		var dateString = currentYear + "-" + monthsDictionary[month];
 		currentMonth = monthsDictionary[month];
-		completenessOfTheDays(currentYear, currentMonth);
-		
+				
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+
+		completenessOfTheDays(currentYear, currentMonth);
+
 	}
 
 	$scope.moveMonthClick = function (flag) {
@@ -219,12 +221,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			console.log(currentMonth);
 		}
 		var dateString = currentYear + "-" + currentMonth;
-		completenessOfTheDays(currentYear, currentMonth);
+		
 		//var data = $scope.daysInfo;
 		//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
-
+		completenessOfTheDays(currentYear, currentMonth);
 	}
 
 	function getDayStatistic() {
