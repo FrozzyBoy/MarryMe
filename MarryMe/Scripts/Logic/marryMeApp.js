@@ -49,7 +49,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	var currentMonth = new Date().getMonth();
 
 	setMonth();
-	console.log(currentMonth);
 
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
@@ -160,7 +159,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				currentYear++;
 				currentMonth = "01";
 			}
-			console.log(currentMonth);
 		} else {
 			currentMonth--;
 
@@ -168,7 +166,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				currentYear--;
 				currentMonth = "12";
 			}
-			console.log(currentMonth);
 		}
 		var dateString = currentYear + "-" + currentMonth;
 
@@ -178,20 +175,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 		completenessOfTheDays(currentYear, currentMonth);
 	}
-
-	function getDayStatistic() {
-		//var childs = $('.days').children();
-		//console.log(childs);
-
-		//for (var i = 0; i < childs.length; i++) {
-		//	var htmlString = childs[i].innerHTML;
-		//	var index = htmlString.indexOf("<", 2);
-		//	htmlString = htmlString.insert(index, pasteString);
-		//	console.log(index);
-		//}
-		var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-		return data;
-	} //получение статистики на день
 
 	function setMonth() {
 		currentMonth++;

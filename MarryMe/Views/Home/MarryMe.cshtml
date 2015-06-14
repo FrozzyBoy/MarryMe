@@ -54,7 +54,6 @@
 
 									</div>  <!-- Header -->
 
-									<h4 class="text-lg text-italic text-muted col-lg-12" style="color:black;margin-top:15px; margin-bottom:40px">*в процентах показана занятость месяца.</h4>
 								</div>
 							</div>
 						</div>
@@ -169,178 +168,11 @@
 								</div>
 							</div>
 
-							<a ng-hide="timeNextButton" class="btn btn-main smooth-scroll btn-black col-xs-12" style="color: black; margin-bottom: 10px; margin-top:5px; float: left; clear: left; display: inline" href="#portfolio">Далее</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section><!-- /#services -->
-	</div>
-	<div id="portfolioImage" class="overlay-dark bg-img full-screen-intro" data-parallax="scroll" data-image-src="/img/date3.jpg">
-		<section class="section" style="width: 100%;  height: 100%;  overflow: hidden;  position: relative;margin-bottom:30px" id="portfolio">
-			<div class="container-fluid">
-				<h1 class="center-element site-section" style="margin-top:55px; margin-bottom:10px">Личная информация</h1>
-				<div class="separator"></div>
-				<form name="inputForm">
-					<div id="portfolioPlaceholder" class="col-lg-6 half bg1">
-						<div class="row">
-							<div class="col-lg-10 col-lg-offset-1">
-								<div class="block block-lg form-control form-block tile-blue" style="color:white; padding:10px; padding-top:0px">
-									<h2>Жених</h2>
-									<p>Данные жениха</p>
-									<div class="row">
-										<div class="col-lg-12 col-md-12">
-											<div class="form-horizontal">
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Имя</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-blue" placeholder="Имя" name="manFirstName" ng-model="Man.FirstName" required ng-pattern="/^[а-яА-Я]+$/" />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Фамилия</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-blue" placeholder="Фамилия" name="manLastName" ng-model="Man.LastName" required ng-pattern="/^[а-яА-Я]+$/" />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Отчество</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-blue" placeholder="Отчество" name="manMiddleName" ng-model="Man.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Телефон</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input id="manTel" type="text" class="form-control tile-blue" placeholder="Телефон" name="manTelephoneNumber" ng-model="Man.TelephoneNumber" required />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Идентификационный номер</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-blue" placeholder="см. паспорт (последняя страница)" name="manPassportNumber" ng-model="Man.PassportNumber" required pattern="([0-9]{7}[A-Z][0-9]{3})((PB)|(GB)|(ВА)|(BI))[0-9]" />
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-6 half bg2">
-
-						<div class="row">
-							<div class="col-lg-10 col-lg-offset-1">
-								<div class="block block-lg form-control form-block tile-pink" style="color:white;padding:10px; padding-top:0px">
-									<h2>Невеста</h2>
-									<p>Данные невесты</p>
-									<div class="row">
-
-										<div class="col-lg-12 col-md-12">
-											<div class="form-horizontal">
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Имя</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-pink" placeholder="Имя" name="womanFirstName" ng-model="Woman.FirstName" required ng-pattern="/^[а-яА-Я]+$/" />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Фамилия</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-pink" placeholder="Фамилия" name="womanLastName" ng-model="Woman.LastName" required ng-pattern="/^[а-яА-Я]+$/" />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Отчество</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-pink" placeholder="Отчество" name="womanMiddleName" ng-model="Woman.MiddleName" required ng-pattern="/^[а-яА-Я]+$/" />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Телефон</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input id="womanTel" type="text" class="form-control tile-pink" placeholder="Телефон" name="womanTelephoneNumber" ng-model="Woman.TelephoneNumber" required />
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12 info-text">Идентификационный номер</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="text" class="form-control tile-pink" placeholder="см. паспорт (последняя страница)" name="womanPassportNumber" ng-model="Woman.PassportNumber" required pattern="([0-9]{7}[A-Z][0-9]{3})((PB)|(GB)|(ВА)|(BI))[0-9]" />
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-lg-offset-3 half bg2">
-
-						<div class="row">
-							<div class="col-lg-10 col-lg-offset-1">
-								<div class="block block-lg form-control tile-red" style="color:white; height:200px">
-									<div class="row">
-										<div class="col-lg-12 col-md-12">
-											<div class="form-horizontal">
-
-												<div class="form-group">
-													<h4 class="col-md-12 col-sm-12">Укажите e-mail для подтверждения регитрации</h4>
-													<div class="col-md-12 col-sm-12">
-														<div class="block-lg-label">
-															<input type="email" class="form-control tile-red" placeholder="Контактный e-mail" name="manEmail" ng-model="Man.Email" required />
-
-															<a class="btn btn-main smooth-scroll tile-red tile-red-button pls-me" style="color:white; margin-bottom:10px; margin-top:10px; text-align:center;width: 100%; padding-left:30px;padding-right:30px" ng-click="applyForm('lg',inputForm)">Подтвердить</a>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
-		</section><!-- /#portfolio -->
 	</div>
 </div>
 <section id="contact">
@@ -352,9 +184,8 @@
 			<div class="row">
 
 				<div class="form-horizontal" style="text-align:center; margin-bottom:50px">
-					<h3>Наш телефон: 34-34-34</h3>
-					<h3>Наш e-mail: zags@gmail.com</h3>
-					<h3>&copy; @DateTime.Now.Year – Могилевский ЗАГС</h3>
+					<h3>Наш телефон:  22-55-34, 22-42-33</h3>
+					<h3>@DateTime.Now.Year – Могилевский ЗАГС</h3>
 				</div>
 			</div>
 		</div>

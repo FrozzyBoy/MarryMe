@@ -319,6 +319,7 @@
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Scripts\Logic\app.js" />
     <Content Include="Scripts\Logic\controllers.js" />
+    <Content Include="Scripts\Logic\CopyRights.js" />
     <Content Include="Scripts\Logic\derictives.js" />
     <Content Include="Scripts\Logic\marryMeApp.js" />
     <Content Include="Scripts\Logic\services.js" />
