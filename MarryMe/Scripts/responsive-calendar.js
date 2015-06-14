@@ -166,11 +166,13 @@
 				this.currentYear = value;
 			},
 			setCurrMonth: function (value) {
-				value--;
+				//value--;
 				this.currentMonth = value;
+				console.log(value, 'valueMonthCurrent')
 			},
 			setMonthData: function (value) {
 				monthData = value;
+				console.log(value,'value')
 			},
 			addOthers: function (day, dayEvents) {
 				var badge;
@@ -251,7 +253,7 @@
 				thisRef = this;
 				time = new Date(year, month);
 				currentMonth = time.getMonth();
-				monthNum = time.getMonth() + 1;
+				monthNum = time.getMonth()+1;
 				yearNum = time.getFullYear();
 				time.setDate(1);
 				firstDayOfMonth = this.options.startFromSunday ? time.getDay() + 1 : time.getDay() || 7;
@@ -290,11 +292,14 @@
 						else {
 							count++;
 						}
-						thisRef.drawDay(lastDayOfMonth, yearNum, monthNum, dayNum, i, monthData[count]);
+						console.log(count, 'count');
+						var monthInfo = (monthData === undefined || monthData[count] === undefined || monthData[count] == -1) ? '0' : monthData[count];
+						thisRef.drawDay(lastDayOfMonth, yearNum, monthNum, dayNum, i, monthInfo);
 						dayNum = dayNum + 1;
 						i = i + 1;
 
 					}
+					monthData = null;
 					setEvents = function () {
 						var _j, _len1;
 						days = thisRef.$element.find('[data-group="days"] .day');

@@ -21,7 +21,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
 
 	$scope.myStyleFunction = function (hall) {
-		console.log("hall");
 		switch (hall.Id) {
 			case 1:
 				return {
@@ -50,6 +49,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	var currentMonth = new Date().getMonth();
 
 	setMonth();
+	console.log(currentMonth);
 
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
@@ -78,8 +78,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$('.responsive-calendar').responsiveCalendar({
 		onInit: function () {
 			completenessOfTheDays(currentYear, currentMonth);
-			var data = $scope.daysInfo;
-			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+			console.log('init')
+			//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		},
 		onDayClick: function (events) {
 			$scope.timeElement1 = true;
@@ -194,7 +194,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		var dateString = currentYear + "-" + monthsDictionary[month];
 		currentMonth = monthsDictionary[month];
-
+		completenessOfTheDays(currentYear, currentMonth);
+		
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 	}
@@ -202,23 +203,25 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.moveMonthClick = function (flag) {
 		if (flag == 1) {
 			currentMonth++;
-
+			
 			if (currentMonth > 12) {
 				currentYear++;
 				currentMonth = "01";
 			}
-
+			console.log(currentMonth);
 		} else {
 			currentMonth--;
-
+			
 			if (currentMonth < 1) {
 				currentYear--;
 				currentMonth = "12";
 			}
+			console.log(currentMonth);
 		}
 		var dateString = currentYear + "-" + currentMonth;
-		var data = $scope.daysInfo;
-		$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+		completenessOfTheDays(currentYear, currentMonth);
+		//var data = $scope.daysInfo;
+		//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
 
@@ -287,13 +290,14 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	function completenessOfTheDays(year, month) {
 		$http({
 			method: 'GET',
+			async: false,
 			url: api.calendar.days,
 			params: { 'year': year, 'month': month }
 		}).success(function (data) {
-			$scope.daysInfo = data;
-		});
-	};// заполнение дней месяца(%)
-
+			console.log(data);
+			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+		});// заполнение дней месяца(%)
+	}
 	function completenessOfTheMonths(year) {
 		var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 		$scope.monthsInfo = [];
@@ -381,8 +385,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		});
 	} // все комнаты
-
-
 
 	function beginLoadTime() {
 		if (window.innerWidth > 1199) {
