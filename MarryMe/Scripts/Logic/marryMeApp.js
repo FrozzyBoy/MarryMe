@@ -8,12 +8,6 @@ marryApp.controller('mapCtrl', function ($scope) {
 
 marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
-	String.prototype.insert = function (index, string) {
-		if (index > 0)
-			return this.substring(0, index) + string + this.substring(index, this.length);
-		else
-			return string + this;
-	};
 
 	window.location.href = '/#intro'; //relative to domain
 
@@ -27,7 +21,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.hallsImages = ["url(\"../../img/Halls/mog_gold.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_diam.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ice.jpg\") 50% 50% no-repeat", "url(\"../../img/Halls/mog_ping.jpg\") 50% 50% no-repeat"];
 
 	$scope.myStyleFunction = function (hall) {
-		console.log("hall");
 		switch (hall.Id) {
 			case 1:
 				return {
@@ -49,13 +42,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		};
 	}
 
-	function isMobile() {
-		if (window.innerWidth < 1199) {
-			//$scope.timeNextButton = false;
-		}
-	}
-
-	isMobile();
 
 	$http.defaults.useXDomain = true;
 
@@ -63,6 +49,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	var currentMonth = new Date().getMonth();
 
 	setMonth();
+	console.log(currentMonth);
 
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
@@ -90,8 +77,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	$('.responsive-calendar').responsiveCalendar({
 		onInit: function () {
-			var data = getDayStatistic();
-			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+			completenessOfTheDays(currentYear, currentMonth);
+			console.log('init')
+			//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		},
 		onDayClick: function (events) {
 			$scope.timeElement1 = true;
@@ -206,34 +194,39 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		var dateString = currentYear + "-" + monthsDictionary[month];
 		currentMonth = monthsDictionary[month];
-
+				
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
+
+		completenessOfTheDays(currentYear, currentMonth);
+
 	}
 
 	$scope.moveMonthClick = function (flag) {
 		if (flag == 1) {
 			currentMonth++;
-
+			
 			if (currentMonth > 12) {
 				currentYear++;
 				currentMonth = "01";
 			}
-
+			console.log(currentMonth);
 		} else {
 			currentMonth--;
-
+			
 			if (currentMonth < 1) {
 				currentYear--;
 				currentMonth = "12";
 			}
+			console.log(currentMonth);
 		}
 		var dateString = currentYear + "-" + currentMonth;
-		var data = getDayStatistic();
-		$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+		
+		//var data = $scope.daysInfo;
+		//$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		$('.responsive-calendar').responsiveCalendar(dateString);
 		$(".responsive-calendar").responsiveCalendar('setCurrMonth', currentMonth);
-
+		completenessOfTheDays(currentYear, currentMonth);
 	}
 
 	function getDayStatistic() {
@@ -297,20 +290,16 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	} // event смена года
 
 	function completenessOfTheDays(year, month) {
-		var persents;
 		$http({
 			method: 'GET',
+			async: false,
 			url: api.calendar.days,
 			params: { 'year': year, 'month': month }
 		}).success(function (data) {
-			persents = data;
-		}).error(function (data, status) {
-
-		});
-
-
-	};// заполнение дней месяца(%)
-
+			console.log(data);
+			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
+		});// заполнение дней месяца(%)
+	}
 	function completenessOfTheMonths(year) {
 		var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 		$scope.monthsInfo = [];
@@ -398,8 +387,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		});
 	} // все комнаты
-
-
 
 	function beginLoadTime() {
 		if (window.innerWidth > 1199) {

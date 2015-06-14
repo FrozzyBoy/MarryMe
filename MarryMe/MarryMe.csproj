@@ -317,9 +317,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
-    <Content Include="Scripts\Logic\Calendar.js" />
-    <Content Include="Scripts\Logic\marryMe.js" />
+    <Content Include="Scripts\Logic\app.js" />
+    <Content Include="Scripts\Logic\controllers.js" />
+    <Content Include="Scripts\Logic\derictives.js" />
     <Content Include="Scripts\Logic\marryMeApp.js" />
+    <Content Include="Scripts\Logic\services.js" />
     <Content Include="Scripts\Logic\SmoothScroll.js" />
     <Content Include="Scripts\Logic\telephoneMask.js" />
     <Content Include="Scripts\Logic\Tile.js" />
@@ -351,8 +353,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\IndexTwo.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\MarryMe.cshtml" />
     <Content Include="Views\Home\Modal.cshtml" />
     <Content Include="Views\Home\Approve.cshtml" />
