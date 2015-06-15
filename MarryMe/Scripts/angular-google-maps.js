@@ -11622,48 +11622,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
-
-	/*
-	Graph implemented as a modified incidence list. O(1) for every typical
-	operation except `removeNode()` at O(E) where E is the number of edges.
-
-	## Overview example:
-
-	```js
-	var graph = new Graph;
-	graph.addNode('A'); // => a node object. For more info, log the output or check
-	                    // the documentation for addNode
-	graph.addNode('B');
-	graph.addNode('C');
-	graph.addEdge('A', 'C'); // => an edge object
-	graph.addEdge('A', 'B');
-	graph.getEdge('B', 'A'); // => undefined. Directed edge!
-	graph.getEdge('A', 'B'); // => the edge object previously added
-	graph.getEdge('A', 'B').weight = 2 // weight is the only built-in handy property
-	                                   // of an edge object. Feel free to attach
-	                                   // other properties
-	graph.getInEdgesOf('B'); // => array of edge objects, in this case only one;
-	                         // connecting A to B
-	graph.getOutEdgesOf('A'); // => array of edge objects, one to B and one to C
-	graph.getAllEdgesOf('A'); // => all the in and out edges. Edge directed toward
-	                          // the node itself are only counted once
-	forEachNode(function(nodeObject) {
-	  console.log(node);
-	});
-	forEachEdge(function(edgeObject) {
-	  console.log(edgeObject);
-	});
-	graph.removeNode('C'); // => 'C'. The edge between A and C also removed
-	graph.removeEdge('A', 'B'); // => the edge object removed
-	```
-
-	## Properties:
-
-	- nodeSize: total number of nodes.
-	- edgeSize: total number of edges.
-	*/
-
-
+	
 	(function() {
 	  var Graph,
 	    __hasProp = {}.hasOwnProperty;
@@ -11676,20 +11635,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    }
 
 	    Graph.prototype.addNode = function(id) {
-	      /*
-	      The `id` is a unique identifier for the node, and should **not** change
-	      after it's added. It will be used for adding, retrieving and deleting
-	      related edges too.
-	      
-	      **Note** that, internally, the ids are kept in an object. JavaScript's
-	      object hashes the id `'2'` and `2` to the same key, so please stick to a
-	      simple id data type such as number or string.
-	      
-	      _Returns:_ the node object. Feel free to attach additional custom properties
-	      on it for graph algorithms' needs. **Undefined if node id already exists**,
-	      as to avoid accidental overrides.
-	      */
-
+	
 	      if (!this._nodes[id]) {
 	        this.nodeSize++;
 	        return this._nodes[id] = {
@@ -11700,20 +11646,12 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.getNode = function(id) {
-	      /*
-	      _Returns:_ the node object. Feel free to attach additional custom properties
-	      on it for graph algorithms' needs.
-	      */
-
+	
 	      return this._nodes[id];
 	    };
 
 	    Graph.prototype.removeNode = function(id) {
-	      /*
-	      _Returns:_ the node object removed, or undefined if it didn't exist in the
-	      first place.
-	      */
-
+	
 	      var inEdgeId, nodeToRemove, outEdgeId, _ref, _ref1;
 	      nodeToRemove = this._nodes[id];
 	      if (!nodeToRemove) {
@@ -11740,17 +11678,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (weight == null) {
 	        weight = 1;
 	      }
-	      /*
-	      `fromId` and `toId` are the node id specified when it was created using
-	      `addNode()`. `weight` is optional and defaults to 1. Ignoring it effectively
-	      makes this an unweighted graph. Under the hood, `weight` is just a normal
-	      property of the edge object.
-	      
-	      _Returns:_ the edge object created. Feel free to attach additional custom
-	      properties on it for graph algorithms' needs. **Or undefined** if the nodes
-	      of id `fromId` or `toId` aren't found, or if an edge already exists between
-	      the two nodes.
-	      */
 
 	      if (this.getEdge(fromId, toId)) {
 	        return;
@@ -11770,10 +11697,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.getEdge = function(fromId, toId) {
-	      /*
-	      _Returns:_ the edge object, or undefined if the nodes of id `fromId` or
-	      `toId` aren't found.
-	      */
+
 
 	      var fromNode, toNode;
 	      fromNode = this._nodes[fromId];
@@ -11786,9 +11710,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.removeEdge = function(fromId, toId) {
-	      /*
-	      _Returns:_ the edge object removed, or undefined of edge wasn't found.
-	      */
+
 
 	      var edgeToDelete, fromNode, toNode;
 	      fromNode = this._nodes[fromId];
@@ -11804,10 +11726,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.getInEdgesOf = function(nodeId) {
-	      /*
-	      _Returns:_ an array of edge objects that are directed toward the node, or
-	      empty array if no such edge or node exists.
-	      */
+
 
 	      var fromId, inEdges, toNode, _ref;
 	      toNode = this._nodes[nodeId];
@@ -11821,10 +11740,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.getOutEdgesOf = function(nodeId) {
-	      /*
-	      _Returns:_ an array of edge objects that go out of the node, or empty array
-	      if no such edge or node exists.
-	      */
+
 
 	      var fromNode, outEdges, toId, _ref;
 	      fromNode = this._nodes[nodeId];
@@ -11838,15 +11754,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.getAllEdgesOf = function(nodeId) {
-	      /*
-	      **Note:** not the same as concatenating `getInEdgesOf()` and
-	      `getOutEdgesOf()`. Some nodes might have an edge pointing toward itself.
-	      This method solves that duplication.
-	      
-	      _Returns:_ an array of edge objects linked to the node, no matter if they're
-	      outgoing or coming. Duplicate edge created by self-pointing nodes are
-	      removed. Only one copy stays. Empty array if node has no edge.
-	      */
 
 	      var i, inEdges, outEdges, selfEdge, _i, _ref, _ref1;
 	      inEdges = this.getInEdgesOf(nodeId);
@@ -11866,12 +11773,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.forEachNode = function(operation) {
-	      /*
-	      Traverse through the graph in an arbitrary manner, visiting each node once.
-	      Pass a function of the form `fn(nodeObject, nodeId)`.
-	      
-	      _Returns:_ undefined.
-	      */
+
 
 	      var nodeId, nodeObject, _ref;
 	      _ref = this._nodes;
@@ -11883,12 +11785,7 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Graph.prototype.forEachEdge = function(operation) {
-	      /*
-	      Traverse through the graph in an arbitrary manner, visiting each edge once.
-	      Pass a function of the form `fn(edgeObject)`.
-	      
-	      _Returns:_ undefined.
-	      */
+
 
 	      var edgeObject, nodeId, nodeObject, toId, _ref, _ref1;
 	      _ref = this._nodes;
@@ -11916,26 +11813,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
-
-	/*
-	Minimum heap, i.e. smallest node at root.
-
-	**Note:** does not accept null or undefined. This is by design. Those values
-	cause comparison problems and might report false negative during extraction.
-
-	## Overview example:
-
-	```js
-	var heap = new Heap([5, 6, 3, 4]);
-	heap.add(10); // => 10
-	heap.removeMin(); // => 3
-	heap.peekMin(); // => 4
-	```
-
-	## Properties:
-
-	- size: total number of items.
-	*/
 
 
 	(function() {
@@ -12064,35 +11941,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	Doubly Linked.
-
-	## Overview example:
-
-	```js
-	var list = new LinkedList([5, 4, 9]);
-	list.add(12); // => 12
-	list.head.next.value; // => 4
-	list.tail.value; // => 12
-	list.at(-1); // => 12
-	list.removeAt(2); // => 9
-	list.remove(4); // => 4
-	list.indexOf(5); // => 0
-	list.add(5, 1); // => 5. Second 5 at position 1.
-	list.indexOf(5, 1); // => 1
-	```
-
-	## Properties:
-
-	- head: first item.
-	- tail: last item.
-	- size: total number of items.
-	- item.value: value passed to the item when calling `add()`.
-	- item.prev: previous item.
-	- item.next: next item.
-	*/
-
-
 	(function() {
 	  var LinkedList;
 
@@ -12102,10 +11950,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (valuesToAdd == null) {
 	        valuesToAdd = [];
 	      }
-	      /*
-	      Can pass an array of elements to link together during `new LinkedList()`
-	      initiation.
-	      */
 
 	      this.head = {
 	        prev: void 0,
@@ -12125,22 +11969,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    }
 
 	    LinkedList.prototype.at = function(position) {
-	      /*
-	      Get the item at `position` (optional). Accepts negative index:
-	      
-	      ```js
-	      myList.at(-1); // Returns the last element.
-	      ```
-	      However, passing a negative index that surpasses the boundary will return
-	      undefined:
-	      
-	      ```js
-	      myList = new LinkedList([2, 6, 8, 3])
-	      myList.at(-5); // Undefined.
-	      myList.at(-4); // 2.
-	      ```
-	      _Returns:_ item gotten, or undefined if not found.
-	      */
 
 	      var currentNode, i, _i, _j, _ref;
 	      if (!((-this.size <= position && position < this.size))) {
@@ -12166,15 +11994,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (position == null) {
 	        position = this.size;
 	      }
-	      /*
-	      Add a new item at `position` (optional). Defaults to adding at the end.
-	      `position`, just like in `at()`, can be negative (within the negative
-	      boundary). Position specifies the place the value's going to be, and the old
-	      node will be pushed higher. `add(-2)` on list of size 7 is the same as
-	      `add(5)`.
-	      
-	      _Returns:_ item added.
-	      */
 
 	      if (!((-this.size <= position && position <= this.size))) {
 	        return;
@@ -12205,12 +12024,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (position == null) {
 	        position = this.size - 1;
 	      }
-	      /*
-	      Remove an item at index `position` (optional). Defaults to the last item.
-	      Index can be negative (within the boundary).
-	      
-	      _Returns:_ item removed.
-	      */
 
 	      if (!((-this.size <= position && position < this.size))) {
 	        return;
@@ -12244,12 +12057,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    LinkedList.prototype.remove = function(value) {
-	      /*
-	      Remove the item using its value instead of position. **Will remove the fist
-	      occurrence of `value`.**
-	      
-	      _Returns:_ the value, or undefined if value's not found.
-	      */
 
 	      var currentNode;
 	      if (value == null) {
@@ -12283,22 +12090,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (startingPosition == null) {
 	        startingPosition = 0;
 	      }
-	      /*
-	      Find the index of an item, similarly to `array.indexOf()`. Defaults to start
-	      searching from the beginning, by can start at another position by passing
-	      `startingPosition`. This parameter can also be negative; but unlike the
-	      other methods of this class, `startingPosition` (optional) can be as small
-	      as desired; a value of -999 for a list of size 5 will start searching
-	      normally, at the beginning.
-	      
-	      **Note:** searches forwardly, **not** backwardly, i.e:
-	      
-	      ```js
-	      var myList = new LinkedList([2, 3, 1, 4, 3, 5])
-	      myList.indexOf(3, -3); // Returns 4, not 1
-	      ```
-	      _Returns:_ index of item found, or -1 if not found.
-	      */
 
 	      if (((this.head.value == null) && !this.head.next) || startingPosition >= this.size) {
 	        return -1;
@@ -12341,39 +12132,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	Kind of a stopgap measure for the upcoming [JavaScript
-	Map](http://wiki.ecmascript.org/doku.php?id=harmony:simple_maps_and_sets)
-
-	**Note:** due to JavaScript's limitations, hashing something other than Boolean,
-	Number, String, Undefined, Null, RegExp, Function requires a hack that inserts a
-	hidden unique property into the object. This means `set`, `get`, `has` and
-	`delete` must employ the same object, and not a mere identical copy as in the
-	case of, say, a string.
-
-	## Overview example:
-
-	```js
-	var map = new Map({'alice': 'wonderland', 20: 'ok'});
-	map.set('20', 5); // => 5
-	map.get('20'); // => 5
-	map.has('alice'); // => true
-	map.delete(20) // => true
-	var arr = [1, 2];
-	map.add(arr, 'goody'); // => 'goody'
-	map.has(arr); // => true
-	map.has([1, 2]); // => false. Needs to compare by reference
-	map.forEach(function(key, value) {
-	  console.log(key, value);
-	});
-	```
-
-	## Properties:
-
-	- size: The total number of `(key, value)` pairs.
-	*/
-
-
 	(function() {
 	  var Map, SPECIAL_TYPE_KEY_PREFIX, _extractDataType, _isSpecialType,
 	    __hasProp = {}.hasOwnProperty;
@@ -12388,12 +12146,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    function Map(objectToMap) {
-	      /*
-	      Pass an optional object whose (key, value) pair will be hashed. **Careful**
-	      not to pass something like {5: 'hi', '5': 'hello'}, since JavaScript's
-	      native object behavior will crush the first 5 property before it gets to
-	      constructor.
-	      */
 
 	      var key, value;
 	      this._content = {};
@@ -12412,14 +12164,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (makeHash == null) {
 	        makeHash = false;
 	      }
-	      /*
-	      The hash function for hashing keys is public. Feel free to replace it with
-	      your own. The `makeHash` parameter is optional and accepts a boolean
-	      (defaults to `false`) indicating whether or not to produce a new hash (for
-	      the first use, naturally).
-	      
-	      _Returns:_ the hash.
-	      */
 
 	      type = _extractDataType(key);
 	      if (_isSpecialType(key)) {
@@ -12465,13 +12209,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Map.prototype["delete"] = function(key) {
-	      /*
-	      Remove the (key, value) pair.
-	      
-	      _Returns:_ **true or false**. Unlike most of this library, this method
-	      doesn't return the deleted value. This is so that it conforms to the future
-	      JavaScript `map.delete()`'s behavior.
-	      */
 
 	      var hashedKey;
 	      hashedKey = this.hash(key);
@@ -12487,11 +12224,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	    };
 
 	    Map.prototype.forEach = function(operation) {
-	      /*
-	      Traverse through the map. Pass a function of the form `fn(key, value)`.
-	      
-	      _Returns:_ undefined.
-	      */
 
 	      var key, value, _ref;
 	      _ref = this._content;
@@ -12532,28 +12264,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	Amortized O(1) dequeue!
-
-	## Overview example:
-
-	```js
-	var queue = new Queue([1, 6, 4]);
-	queue.enqueue(10); // => 10
-	queue.dequeue(); // => 1
-	queue.dequeue(); // => 6
-	queue.dequeue(); // => 4
-	queue.peek(); // => 10
-	queue.dequeue(); // => 10
-	queue.peek(); // => undefined
-	```
-
-	## Properties:
-
-	- size: The total number of items.
-	*/
-
-
 	(function() {
 	  var Queue;
 
@@ -12562,10 +12272,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 	      if (initialArray == null) {
 	        initialArray = [];
 	      }
-	      /*
-	      Pass an optional array to be transformed into a queue. The item at index 0
-	      is the first to be dequeued.
-	      */
 
 	      this._content = initialArray;
 	      this._dequeueIndex = 0;
@@ -12624,31 +12330,6 @@ MarkerWithLabel.prototype.setMap = function (theMap) {
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	Credit to Wikipedia's article on [Red-black
-	tree](http://en.wikipedia.org/wiki/Red–black_tree)
-
-	**Note:** doesn't handle duplicate entries, undefined and null. This is by
-	design.
-
-	## Overview example:
-
-	```js
-	var rbt = new RedBlackTree([7, 5, 1, 8]);
-	rbt.add(2); // => 2
-	rbt.add(10); // => 10
-	rbt.has(5); // => true
-	rbt.peekMin(); // => 1
-	rbt.peekMax(); // => 10
-	rbt.removeMin(); // => 1
-	rbt.removeMax(); // => 10
-	rbt.remove(8); // => 8
-	```
-
-	## Properties:
-
-	- size: The total number of items.
-	*/
 
 
 	(function() {

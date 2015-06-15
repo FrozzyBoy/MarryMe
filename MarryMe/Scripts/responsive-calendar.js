@@ -168,11 +168,9 @@
 			setCurrMonth: function (value) {
 				//value--;
 				this.currentMonth = value;
-				console.log(value, 'valueMonthCurrent')
 			},
 			setMonthData: function (value) {
 				monthData = value;
-				console.log(value, 'value')
 			},
 			addOthers: function (day, dayEvents) {
 				var badge;
@@ -292,8 +290,6 @@
 						else {
 							count++;
 						}
-						console.log(count, 'count');
-
 						var monthInfo = (monthData === undefined || count === -1 || monthData[count] === undefined || monthData[count] == -1) ? '0' : monthData[count];
 						thisRef.drawDay(lastDayOfMonth, yearNum, monthNum, dayNum, i, monthInfo);
 

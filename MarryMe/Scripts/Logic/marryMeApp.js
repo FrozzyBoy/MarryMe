@@ -49,8 +49,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	var currentMonth = new Date().getMonth();
 
 	setMonth();
-	console.log(currentMonth);
-
+	
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
 	monthsDictionary["Февраль"] = "02";
@@ -157,8 +156,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			if (currentMonth > 12) {
 				currentYear++;
 				currentMonth = "01";
-			}
-			console.log(currentMonth);
+			}			
 		} else {
 			currentMonth--;
 
@@ -166,7 +164,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				currentYear--;
 				currentMonth = "12";
 			}
-			console.log(currentMonth);
 		}
 		var dateString = currentYear + "-" + currentMonth;
 
