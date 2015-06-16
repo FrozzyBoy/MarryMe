@@ -7,7 +7,7 @@
 			Проверьте введенную информацию
 		</h3>
 	</div>
-	<div class="modal-body" ng-show="{{FullValid}}">
+	<div class="modal-body" ng-show="FullValid">
 		Дата:
 		<ul>
 			<li>День: {{selectedDay}}</li>
@@ -39,22 +39,24 @@
 		<ul>
 			<li>{{SubmitData.Man.Email}}</li>
 		</ul>
-		<div id="html_element"></div>
-	</div><div class="g-recaptcha" data-sitekey="6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo"></div>
+		<!--<div id="html_element"></div>
+	</div><div class="g-recaptcha" data-sitekey="6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo"></div>-->
 	<alert ng-repeat="message in messages" type="{{message.type}}">{{message.msg}}</alert>
 </div>
-<div class="modal-body" ng-show="!{{FullValid}}">
+<div class="modal-body" ng-show="!FullValid">
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
 </div>
-<div class="modal-footer">
-	<button type="submit" class="btn btn-primary" ng-model="btnSend" ng-disabled="" ng-click="submit()">
+<div class="modal-footer" ng-show="!isSending">
+	<button type="submit" class="btn btn-primary" ng-model="btnSend"  ng-click="submit()">
 		Отправить
 	</button>
 	<button type="button" class="btn btn-primary" ng-model="btnCancel" ng-click="cancel()">
 		Отмена
 	</button>
 </div>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-
-
+<div class="modal-footer" ng-show="isSending">
+	Отправка...
+</div>
+<!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>-->
+</div>
 

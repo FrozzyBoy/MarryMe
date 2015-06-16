@@ -277,6 +277,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
 		});// заполнение дней месяца(%)
 	}
+
 	function completenessOfTheMonths(year) {
 		var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 		$scope.monthsInfo = [];
@@ -400,7 +401,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.InputForm = InputForm;
 	$scope.InputValid = inputValid;
 	$scope.FullValid = false;
-	$scope.reCaptcha = false;
+	$scope.isSending = false;
+	//$scope.reCaptcha = false;
 	$scope.alerts = [];
 	$scope.messages = [];
 
@@ -493,8 +495,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	$scope.submit = function () {
 		$http.defaults.useXDomain = true;
+		$scope.isSending = true;
+		$scope.$apply();
 		$scope.messages = [];
-		if (captcha == true) {
 			$http({
 				method: 'POST',
 				url: '/api/submit',
@@ -502,11 +505,12 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				headers: { 'Content-Type': 'application/json' }
 			}).success(function (data, status) {
 				$scope.messages.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
+				$scope.isSending = false;
 			}).error(function (data, status, headers, config) {
 				$scope.messages.push({ type: 'danger', msg: data.Message });
+				$scope.isSending = false;
 			});
 		}
-	}
 });
 
 
@@ -524,12 +528,12 @@ marryApp.constant('api', {
 	},
 	submit: '/api/submit'
 });
-var onloadCallback = function () {
-	grecaptcha.render('html_element', {
-		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
-		'callback': function (response) {
-			captcha = true;
-		}
-	});
-};
-var captcha = false;
+//var onloadCallback = function () {
+//	grecaptcha.render('html_element', {
+//		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
+//		'callback': function (response) {
+//			captcha = true;
+//		}
+//	});
+//};
+//var captcha = false;
