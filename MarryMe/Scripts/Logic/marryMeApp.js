@@ -233,6 +233,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					$scope.selectedYear = $(this).data('year');
 					$scope.selectedMonth = $(this).data('month');
 					$scope.selectedDay = $(this).data('day');
+					$scope.InputValid.HallValid = false;
+					$scope.InputValid.TimeValid = false;
 					$scope.$apply();
 
 					if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
