@@ -236,7 +236,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					$scope.selectedMonth = $(this).data('month');
 					$scope.selectedDay = $(this).data('day');
 					$scope.InputValid.TimeValid = false;
-					$scope.$apply();
 
 					if ($scope.submitData.RoomId != null || $scope.submitData.RoomId != undefined) {
 
@@ -413,7 +412,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.reCaptcha = false;
 	$scope.alerts = [];
 	$scope.messages = [];
-	
+	captcha = false;
 
 	if ($scope.InputForm.$valid == false) {
 		if ($scope.InputForm.manFirstName.$error.required == true) {
