@@ -9,7 +9,7 @@ marryApp.controller('mapCtrl', function ($scope) {
 marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 
-	window.location.href = '/#intro'; //relative to domain
+	window.location.href = '/#intro'; 
 
 	$scope.hide = true;
 
@@ -132,8 +132,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		var year = $scope.selectedYear;
 		var month = $scope.selectedMonth;
 		var day = $scope.selectedDay;
+		
 		$scope.submitData.RegistrationDate = new Date(Date.UTC(year, month - 1, day, hour, minutes));
-	} //выбор времени
+	}
 
 	$scope.monthClick = function (month, monthObject) {
 
@@ -199,7 +200,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		}
 
 		$scope.InputValid.HallValid = true;
-	} //event выбор зала
+		$scope.InputValid.TimeValid = false;
+	} 
 
 	$scope.yearChange = function (flag) {
 
@@ -215,7 +217,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		completenessOfTheMonths(currentYear);
 		$(".responsive-calendar").responsiveCalendar('setCurrYear', currentYear);
-	} // event смена года
+	} 
 
 	function completenessOfTheDays(year, month) {
 		$http({
@@ -233,7 +235,6 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					$scope.selectedYear = $(this).data('year');
 					$scope.selectedMonth = $(this).data('month');
 					$scope.selectedDay = $(this).data('day');
-					$scope.InputValid.HallValid = false;
 					$scope.InputValid.TimeValid = false;
 					$scope.$apply();
 
@@ -247,7 +248,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					var day = $scope.selectedDay;
 
 					var monthsList = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноябрь", "Декабрь"];
-					$scope.selectedMonth = monthsList[month-1];
+					$scope.selectedMonthToUi = monthsList[month-1];
 
 					var selectedDate = new Date(year, month - 1, day);
 					var currentDate = new Date();
@@ -282,7 +283,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				}
 			});
 			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
-		});// заполнение дней месяца(%)
+		});
 	}
 
 	function completenessOfTheMonths(year) {
@@ -309,8 +310,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					persent: persents[i]
 				})
 			}
-		} //добавление объектов в массив
-	} //заполнение месяцов(%)
+		} 
+	} 
 
 	function dayInfo(roomId, year, month, day) {
 
@@ -335,7 +336,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			});
 			return data;
 		}
-	}// заполнение дня(время)
+	}
 
 	function getHolidays(year, month) {
 		$http({
@@ -346,7 +347,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		}).error(function (data, status) {
 
 		});
-	} // праздники(список)
+	} 
 
 	function roomInfo(id) {
 		var response;
@@ -360,7 +361,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		});
 		return response;
-	}//инфо по комнате
+	}
 
 	function allRooms() {
 		$http({
@@ -371,7 +372,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		}).error(function (data, status) {
 
 		});
-	} // все комнаты
+	} 
 
 	function beginLoadTime() {
 		if (window.innerWidth > 1199) {
@@ -409,11 +410,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.InputValid = inputValid;
 	$scope.FullValid = false;
 	$scope.isSending = false;
-	//$scope.reCaptcha = false;
+	$scope.reCaptcha = false;
 	$scope.alerts = [];
 	$scope.messages = [];
-
-
+	
 
 	if ($scope.InputForm.$valid == false) {
 		if ($scope.InputForm.manFirstName.$error.required == true) {
@@ -494,7 +494,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	function dateObjectParse(date) {
 		var object = new Date(date);
-		$scope.selectedDay = object.getDay();
+		$scope.selectedDay = object.getDate();
 		$scope.selectedMonth = object.getMonth() + 1;
 		$scope.selectedYear = object.getFullYear();
 		$scope.selectedTime = object.getUTCHours() + ':' + object.getUTCMinutes();
@@ -502,9 +502,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	$scope.submit = function () {
 		$http.defaults.useXDomain = true;
-		$scope.isSending = true;
-		$scope.$apply();
-		$scope.messages = [];
+		if (captcha) {
+			$scope.isSending = true;
+			$scope.$apply();
+			$scope.messages = [];
 			$http({
 				method: 'POST',
 				url: '/api/submit',
@@ -518,6 +519,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 				$scope.isSending = false;
 			});
 		}
+		else {
+			$scope.messages.push({ type: 'danger', msg: 'Пройдите капчу'});
+		}
+	}
 });
 
 
@@ -535,12 +540,12 @@ marryApp.constant('api', {
 	},
 	submit: '/api/submit'
 });
-//var onloadCallback = function () {
-//	grecaptcha.render('html_element', {
-//		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
-//		'callback': function (response) {
-//			captcha = true;
-//		}
-//	});
-//};
-//var captcha = false;
+var onloadCallback = function () {
+	grecaptcha.render('html_element', {
+		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
+		'callback': function (response) {
+			captcha = true;
+		}
+	});
+};
+var captcha = false;
