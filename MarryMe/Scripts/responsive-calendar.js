@@ -166,7 +166,7 @@
 				this.currentYear = value;
 			},
 			setCurrMonth: function (value) {
-				//value--;
+				value--;
 				this.currentMonth = value;
 			},
 			setMonthData: function (value) {
