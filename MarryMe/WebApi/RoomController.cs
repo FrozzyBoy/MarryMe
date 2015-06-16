@@ -56,8 +56,15 @@
 		[Route("info")]
 		public IHttpActionResult GetRoomInformation(int roomId)
 		{
-			IHttpActionResult result = Ok(_room.GetInformation(roomId));
-			return result;
+			try
+			{
+				IHttpActionResult result = Ok(_room.GetInformation(roomId));
+				return result;
+			}
+			catch
+			{
+				return BadRequest("");
+			}
 		}
 
 		[HttpGet]

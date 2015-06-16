@@ -61,11 +61,11 @@
 			}
 			catch (ArgumentException ex)
 			{
-				return BadRequest(ex.Message);
+				return BadRequest(Helper.Validation.ValidateException(ex.Message));
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(ex.Message);
+				return BadRequest(Helper.Validation.ValidateException(ex.Message));
 			}
 		}
 

@@ -35,7 +35,6 @@ namespace MarryMe.Controllers
 				Path = Url.Action("Approve", "Home")
 			};
 
-			var contactUsUri = contactUsUrlBuilder.Uri;
 			var contactUsUriString = contactUsUrlBuilder.ToString();
 
 			_common.Url = contactUsUriString + "/";
@@ -55,10 +54,10 @@ namespace MarryMe.Controllers
 			{
 				_common.ApproveData(id);
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				model.IsApproved = false;
-				model.Message = ex.Message;
+				model.Message = Helper.Validation.ValidateException(ex.Message);
 			}
 			return View(model);
 		}
