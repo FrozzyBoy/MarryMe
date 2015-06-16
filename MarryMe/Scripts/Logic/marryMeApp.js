@@ -348,19 +348,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		});
 	} 
 
-	function roomInfo(id) {
-		var response;
-		$http({
-			method: 'GET',
-			url: api.room.info,
-			params: { 'roomId': id }
-		}).success(function (data, status, headers, config) {
-			response = data;
-		}).error(function (data, status) {
-
-		});
-		return response;
-	}
+	
 
 	function allRooms() {
 		$http({
@@ -413,6 +401,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	$scope.alerts = [];
 	$scope.messages = [];
 	captcha = false;
+
+
+	roomInfo($scope.SubmitData.RoomId);
 
 	if ($scope.InputForm.$valid == false) {
 		if ($scope.InputForm.manFirstName.$error.required == true) {
@@ -521,6 +512,18 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		else {
 			$scope.messages.push({ type: 'danger', msg: 'Пройдите капчу'});
 		}
+	}
+
+	function roomInfo(id) {
+		$http({
+			method: 'GET',
+			url: api.room.info,
+			params: { 'roomId': id }
+		}).success(function (data, status, headers, config) {
+			$scope.hallName = data.Name;
+		}).error(function (data, status) {
+
+		});
 	}
 });
 
