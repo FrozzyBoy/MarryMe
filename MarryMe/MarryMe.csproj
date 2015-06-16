@@ -318,10 +318,11 @@
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Scripts\Logic\app.js" />
-    <Content Include="Scripts\Logic\controllers.js" />
-    <Content Include="Scripts\Logic\derictives.js" />
+    <Content Include="Scripts\Logic\Constants\constant.js" />
+    <Content Include="Scripts\Logic\Controllers\controllers.js" />
+    <Content Include="Scripts\Logic\Directives\derictives.js" />
     <Content Include="Scripts\Logic\marryMeApp.js" />
-    <Content Include="Scripts\Logic\services.js" />
+    <Content Include="Scripts\Logic\Services\services.js" />
     <Content Include="Scripts\Logic\SmoothScroll.js" />
     <Content Include="Scripts\Logic\telephoneMask.js" />
     <Content Include="Scripts\Logic\Tile.js" />

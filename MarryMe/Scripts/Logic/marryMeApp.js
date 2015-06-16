@@ -244,6 +244,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					var month = $scope.selectedMonth;
 					var day = $scope.selectedDay;
 
+					var monthsList = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноябрь", "Декабрь"];
+					$scope.selectedMonth = monthsList[month-1];
+
 					var selectedDate = new Date(year, month - 1, day);
 					var currentDate = new Date();
 					var delay = (selectedDate - currentDate) / 1000 / 60 / 60 / 24;
@@ -272,6 +275,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					if (month - currMonth == 2 || month - currMonth == -10) {
 						$(".responsive-calendar").responsiveCalendar('next');
 					}
+					
+					$scope.$apply();
 				}
 			});
 			$(".responsive-calendar").responsiveCalendar('setMonthData', data);
