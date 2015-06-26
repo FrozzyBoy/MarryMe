@@ -7,6 +7,9 @@
 	using MarryMe.Model.Entity;
 	using MarryMe.Model.Interfaces;
 	using MarryMe.Model.Resources;
+	using System.Net;
+	using Newtonsoft.Json;
+	using MarryMe.Model;
 	#endregion
 
 	/// <summary>
@@ -55,9 +58,26 @@
 		[Route("submit")]
 		public IHttpActionResult PostData([FromBody] MarriageFullInfo marige)
 		{
+			const string secret = "6LdNoAcTAAAAAA967BP-nJHUKJI-uySm4Gffw6ck";
+			var client = new WebClient();
+			var reply =
+				client.DownloadString(
+					string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, marige.CaptchaResponse));
+
+			var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
+			
+			
 			try
 			{
-				return Ok(_controller.SubmitData(marige));
+				if (captchaResponse.Success)
+				{
+					return Ok(_controller.SubmitData(marige));
+				}
+				else
+				{
+					return BadRequest("Ошибка при проверке капчи");
+				}
+				
 			}
 			catch (ArgumentException ex)
 			{

@@ -190,6 +190,7 @@
     <Compile Include="Infrastructure\UnityControllerActivator.cs" />
     <Compile Include="Infrastructure\UnityHttpControllerActivator.cs" />
     <Compile Include="Model\ApproveModel.cs" />
+    <Compile Include="Model\CaptchaResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WebApi\CalendarController.cs" />

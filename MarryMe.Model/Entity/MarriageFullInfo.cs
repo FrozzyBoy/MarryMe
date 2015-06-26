@@ -18,5 +18,7 @@
 
 		public Spouse Man { get; set; }
 		public Spouse Woman { get; set; }
+
+		public string CaptchaResponse { get; set; }
 	}
 }

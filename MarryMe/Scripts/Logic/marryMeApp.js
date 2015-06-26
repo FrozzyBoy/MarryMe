@@ -496,12 +496,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			$scope.isSending = true;
 			$scope.$apply();
 			$scope.messages = [];
-			$http({
-				method: 'POST',
-				url: '/api/submit',
-				data: JSON.stringify($scope.SubmitData),
-				headers: { 'Content-Type': 'application/json' }
-			}).success(function (data, status) {
+			$scope.SubmitData.CaptchaResponse = captchaResult;
+			$http.post(api.submit,$scope.SubmitData)
+			.success(function (data, status) {
 				$scope.messages.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
 				$scope.isSending = false;
 			}).error(function (data, status, headers, config) {
@@ -546,8 +543,10 @@ var onloadCallback = function () {
 	grecaptcha.render('html_element', {
 		'sitekey': '6LdNoAcTAAAAALiDNn06dsqGiTiEThjpRDoT6iDo',
 		'callback': function (response) {
+			captchaResult = response;
 			captcha = true;
 		}
 	});
 };
+var captchaResult;
 var captcha = false;
