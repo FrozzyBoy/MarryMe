@@ -2,12 +2,9 @@
 {
 	#region Using
 
+	using MarryMe.Model.Interfaces;
 	using System;
 	using System.Web.Http;
-	using System.Web.Http.Cors;
-	using MarryMe.Model.Entity;
-	using MarryMe.Model.Interfaces;
-	using MarryMe.Model.Resources;
 
 	#endregion
 
@@ -16,7 +13,6 @@
 	/// </summary>
 	//[ValidateHttpAntiForgeryToken]
 	[RoutePrefix("api/calendar")]
-	[EnableCors(origins: "*", headers: "*", methods: "*")]
 	[AllowAnonymous]
 	public class CalendarController : ApiController
 	{

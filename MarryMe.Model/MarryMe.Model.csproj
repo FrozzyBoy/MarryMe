@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -40,8 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="%28Spritely.Recipes%29\Functional.cs" />
+    <Compile Include="%28Spritely.Recipes%29\SecureString.cs" />
+    <Compile Include="%28Spritely.Recipes%29\SecureStringJsonConverter.cs" />
+    <Compile Include="CommonCheckCaptchaController.cs" />
     <Compile Include="CommonController.cs" />
     <Compile Include="CommonEmailSenderController.cs" />
+    <Compile Include="Entity\CaptchaResponse.cs" />
     <Compile Include="Entity\DateSchedule.cs" />
     <Compile Include="Entity\DayStatistic.cs" />
     <Compile Include="Entity\Holiday.cs" />
@@ -78,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ApproveEmail.HTML" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

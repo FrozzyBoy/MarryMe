@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MarryMe.Model
+﻿namespace MarryMe.Model.Entity
 {
+
+	#region Using
+
+	using Newtonsoft.Json;
+	using System.Collections.Generic;
+
+	#endregion
+
 	public class CaptchaResponse
 	{
 		[JsonProperty("success")]
