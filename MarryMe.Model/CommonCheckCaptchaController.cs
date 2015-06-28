@@ -6,15 +6,15 @@
 	using MarryMe.Model.Interfaces;
 	using Newtonsoft.Json;
 	using System;
+	using System.Configuration;
 	using System.Net;
 
 	#endregion
 
 	public class CommonCheckCaptchaController : CommonEmailSenderController, ICommonController
 	{
-		private static readonly string secret = "6LdNoAcTAAAAAA967BP-nJHUKJI-uySm4Gffw6ck";
-		private static readonly string googleApi = "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}";
-
+		private static readonly string secret = ConfigurationManager.AppSettings["secret"];
+		private static readonly string googleApi = ConfigurationManager.AppSettings["googleApi"];
 
 		#region constructor
 		public CommonCheckCaptchaController(IRoomData room) : base(room) { }
