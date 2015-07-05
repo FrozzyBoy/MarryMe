@@ -271,7 +271,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
-    <Content Include="Scripts\Logic\app.js" />
     <Content Include="Scripts\Logic\Constants\constant.js" />
     <Content Include="Scripts\Logic\Controllers\controllers.js" />
     <Content Include="Scripts\Logic\Directives\derictives.js" />

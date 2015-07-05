@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MarryMe.Model;
-using MarryMe.Model.Interfaces;
-
-namespace MarryMe.Controllers
+﻿namespace MarryMe.Controllers
 {
+	#region Using
+	using System;
+	using System.Web.Mvc;
+	using MarryMe.Model;
+	using MarryMe.Model.Interfaces;
+	
+	#endregion
 	public class HomeController : Controller
 	{
 		private readonly ICommonController _common;

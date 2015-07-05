@@ -16,6 +16,7 @@
 	[AllowAnonymous]
 	public class CalendarController : ApiController
 	{
+		private const string MessageIncorrectData = "Не корректная дата.";
 		/// <summary>
 		/// Calendar statistic.
 		/// </summary>
@@ -67,7 +68,7 @@
 				int[] result = _calendar.GetMonthStatistic(year);
 				return Ok(result);
 			}
-			return BadRequest("Не корректная дата.");
+			return BadRequest(MessageIncorrectData);
 		}
 
 		/// <summary>
@@ -88,7 +89,7 @@
 
 				return result;
 			}
-			return BadRequest("Не корректная дата.");
+			return BadRequest(MessageIncorrectData);
 
 		}
 
@@ -108,7 +109,7 @@
 
 				return Ok(result);
 			}
-			return BadRequest("Не корректная дата.");
+			return BadRequest(MessageIncorrectData);
 		}
 
 		#endregion

@@ -32,7 +32,7 @@
 
 				if (!captchaResponse.Success)
 				{
-					throw new ArgumentException("Пройдите капчу.");
+					throw new ArgumentException(MarryMe.Model.Resources.Validation.GetCaptcha);
 				}
 
 				return base.SubmitData(fullInfo);

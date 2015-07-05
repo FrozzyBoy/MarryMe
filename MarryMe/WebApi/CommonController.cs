@@ -5,6 +5,7 @@
 	using MarryMe.Model.Interfaces;
 	using System;
 	using System.Web.Http;
+	using System.Data.Common;
 	#endregion
 
 	/// <summary>
@@ -57,6 +58,10 @@
 				return Ok(_controller.SubmitData(marige));
 			}
 			catch (ArgumentException ex)
+			{
+				return BadRequest(Helper.Validation.ValidateException(ex.Message));
+			}
+			catch (DbException ex)
 			{
 				return BadRequest(Helper.Validation.ValidateException(ex.Message));
 			}
