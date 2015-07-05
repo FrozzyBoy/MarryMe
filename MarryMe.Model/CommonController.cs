@@ -17,9 +17,9 @@
 		#region Constants
 
 		private const string StoredAddRegistration = "[dbo].[RegisterMarriage]";
-		private const string RegexEmail = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+		private static readonly string RegexEmail = MarryMe.Model.Resources.Validation.RegexEmail;
 		private const string StoredApprove = "[dbo].[ApproveRegistration]";
-		private const string RegexPassId = @"([0-9]{7}[A-Z][0-9]{3})((PB)|(GB)|(ВА)|(BI))[0-9]";
+		private static readonly string RegexPassId = MarryMe.Model.Resources.Validation.RegexPassId;
 		#endregion
 
 		#region Static
@@ -134,13 +134,23 @@
 		#region Validation
 		private static void Validation(MarriageFullInfo fullInfo)
 		{
-			string manValidation = ValidateSpouse(fullInfo.Man, "жениха");
+			if (!string.IsNullOrWhiteSpace(fullInfo.Man.Email))
+			{
+				fullInfo.Man.Email = fullInfo.Man.Email.ToLower();
+			}
+
+			if (!string.IsNullOrWhiteSpace(fullInfo.Woman.Email))
+			{
+				fullInfo.Man.Email = fullInfo.Woman.Email.ToLower();
+			}
+
+			string manValidation = ValidateSpouse(fullInfo.Man, MarryMe.Model.Resources.Validation.Man);
 			if (!string.IsNullOrWhiteSpace(manValidation))
 			{
 				throw new ArgumentNullException(manValidation);
 			}
 
-			string womanValidation = ValidateSpouse(fullInfo.Woman, "невесты");
+			string womanValidation = ValidateSpouse(fullInfo.Woman, MarryMe.Model.Resources.Validation.WoMan);
 			if (!string.IsNullOrWhiteSpace(womanValidation))
 			{
 				throw new ArgumentNullException(womanValidation);
@@ -150,26 +160,26 @@
 
 			if (!mEmailFilled)
 			{
-				throw new ArgumentException("Нужно указать электронную почту для подтверждения регистрации.");
+				throw new ArgumentException(MarryMe.Model.Resources.Validation.NoEmailMessage);
 			}
 
 			if (mEmailFilled)
 			{
 				if (!RegexCheck(fullInfo.Man.Email, RegexEmail))
 				{
-					throw new ArgumentException("Электронный адрес заполнен не правильно.");
+					throw new ArgumentException(MarryMe.Model.Resources.Validation.EmailNotValid);
 				}
 			}
 
 			if (fullInfo.RegistrationDate < DateTime.Now)
 			{
-				throw new ArgumentNullException("Нужно выбрать время в будущем.");
+				throw new ArgumentNullException(MarryMe.Model.Resources.Validation.DateBelowNow);
 			}
 
 			if (!RegexCheck(fullInfo.Man.PassportNumber, RegexPassId)
 				&& !RegexCheck(fullInfo.Woman.PassportNumber, RegexPassId))
 			{
-				throw new ArgumentException("Паспортные данные не прошли проверку.");
+				throw new ArgumentException(MarryMe.Model.Resources.Validation.CheckPassportNum);
 			}
 
 		}
@@ -186,17 +196,17 @@
 			
 			if (string.IsNullOrWhiteSpace(sp.FirstName))
 			{
-				result = "Имя {0} нужно обязательно заполнить.";
+				result = MarryMe.Model.Resources.Validation.NoName;
 			}
 
 			if (string.IsNullOrWhiteSpace(sp.MiddleName))
 			{
-				result = "Отчество {0} нужно обязательно заполнить.";
+				result = MarryMe.Model.Resources.Validation.NoSecondName;
 			}
 
 			if (string.IsNullOrWhiteSpace(sp.LastName))
 			{
-				result = "Фамилию {0} нужно обязательно заполнить.";
+				result = MarryMe.Model.Resources.Validation.NoLastName;
 			}
 
 			result = string.Format(result, spName);

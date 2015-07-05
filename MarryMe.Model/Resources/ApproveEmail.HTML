@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width;initial-scale=1.0; user-scalable=1;" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Progressive Disclosure sample template</title>	
+	<title>Email template</title>
 </head>
 <body bgcolor="#e4e4e4" style="margin: 0; padding: 0;">
 	<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#e4e4e4">
@@ -24,7 +24,7 @@
 													<h2 align="center">Регистрация брака.</h2>
 													<div class="article">
 														<h5 align="center" class="bodytext">
-															Вам нужно подтвердить регистрацию. Еще раз проверьте введенные данные и подтвердите регистрацию. В противном случае обратитесь в загс.
+															Вам нужно подтвердить регистрацию. Еще раз проверьте введенные данные и подтвердите регистрацию. В противном случае обратитесь в ЗАГС.
 														</h5>
 														Время проведения: {0} <br />
 														{1} зал
@@ -44,9 +44,16 @@
 														Номер телефона: {9} <br />
 													</div>
 													<br />
-													<form action="{10}">
-														<input type="submit" value="Подтвердить">
-													</form>
+													<div>
+														Подтвердите регистрацию: <a href="{10}">Подтвердить</a>
+														<br />
+														Или перейдите по ссылке: {10}
+													</div>
+													<br />
+													<h2>
+														Пожалуйста, следите за своей почтой.
+														Вам могут придти дополнительные сведения.
+													</h2>
 												</td>
 											</tr>
 										</table>

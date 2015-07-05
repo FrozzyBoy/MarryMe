@@ -1,19 +1,16 @@
 ﻿namespace MarryMe.WebApi
 {
 	#region using
-	using System;
-	using System.Web.Http;
-	using System.Web.Http.Cors;
 	using MarryMe.Model.Entity;
 	using MarryMe.Model.Interfaces;
-	using MarryMe.Model.Resources;
+	using System;
+	using System.Web.Http;
 	#endregion
 
 	/// <summary>
 	/// API to get room info.
 	/// </summary>
 	[RoutePrefix("api/room")]
-	[EnableCors(origins: "*", headers: "*", methods: "*")]
 	[AllowAnonymous]
 	public class RoomController : ApiController
 	{

@@ -9,7 +9,7 @@ marryApp.controller('mapCtrl', function ($scope) {
 marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 
-	window.location.href = '/#intro'; 
+	window.location.href = '/#intro';
 
 	$scope.hide = true;
 
@@ -49,7 +49,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 	var currentMonth = new Date().getMonth();
 
 	setMonth();
-	
+
 	var monthsDictionary = {};
 	monthsDictionary["Январь"] = "01";
 	monthsDictionary["Февраль"] = "02";
@@ -132,7 +132,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		var year = $scope.selectedYear;
 		var month = $scope.selectedMonth;
 		var day = $scope.selectedDay;
-		
+
 		$scope.submitData.RegistrationDate = new Date(Date.UTC(year, month - 1, day, hour, minutes));
 	}
 
@@ -157,7 +157,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			if (currentMonth > 12) {
 				currentYear++;
 				currentMonth = "01";
-			}			
+			}
 		} else {
 			currentMonth--;
 
@@ -201,7 +201,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		$scope.InputValid.HallValid = true;
 		$scope.InputValid.TimeValid = false;
-	} 
+	}
 
 	$scope.yearChange = function (flag) {
 
@@ -217,7 +217,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 		completenessOfTheMonths(currentYear);
 		$(".responsive-calendar").responsiveCalendar('setCurrYear', currentYear);
-	} 
+	}
 
 	function completenessOfTheDays(year, month) {
 		$http({
@@ -247,7 +247,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					var day = $scope.selectedDay;
 
 					var monthsList = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноябрь", "Декабрь"];
-					$scope.selectedMonthToUi = monthsList[month-1];
+					$scope.selectedMonthToUi = monthsList[month - 1];
 
 					var selectedDate = new Date(year, month - 1, day);
 					var currentDate = new Date();
@@ -277,7 +277,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					if (month - currMonth == 2 || month - currMonth == -10) {
 						$(".responsive-calendar").responsiveCalendar('next');
 					}
-					
+
 					$scope.$apply();
 				}
 			});
@@ -309,8 +309,8 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 					persent: persents[i]
 				})
 			}
-		} 
-	} 
+		}
+	}
 
 	function dayInfo(roomId, year, month, day) {
 
@@ -346,9 +346,9 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		}).error(function (data, status) {
 
 		});
-	} 
+	}
 
-	
+
 
 	function allRooms() {
 		$http({
@@ -359,7 +359,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 		}).error(function (data, status) {
 
 		});
-	} 
+	}
 
 	function beginLoadTime() {
 		if (window.innerWidth > 1199) {
@@ -459,6 +459,10 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 
 	}
 
+	if ($scope.InputForm.womanPassportNumber.$modelValue.trim().length + $scope.InputForm.womanPassportNumber.$modelValue.trim().length == 0) {
+		$scope.alerts.push({ type: 'danger', msg: 'Нужно ввести паспортные данные хотя бы для одного брачующегося.' });
+	}
+
 	if ($scope.InputValid.dayValid == undefined || $scope.InputValid.dayValid == false) {
 		$scope.alerts.push({ type: 'danger', msg: 'Выберите дату. Дата не должна быть раньше чем через 3 дня от текущей' });
 	}
@@ -497,7 +501,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			$scope.$apply();
 			$scope.messages = [];
 			$scope.SubmitData.CaptchaResponse = captchaResult;
-			$http.post(api.submit,$scope.SubmitData)
+			$http.post(api.submit, $scope.SubmitData)
 			.success(function (data, status) {
 				$scope.messages.push({ type: 'success', msg: 'На ваш e-mail отправлено письмо, пройдите по ссылке в письме для окончания регистрации' });
 				$scope.isSending = false;
@@ -507,7 +511,7 @@ marryApp.controller('appCtrl', function ($scope, $http, api, $modal, $log) {
 			});
 		}
 		else {
-			$scope.messages.push({ type: 'danger', msg: 'Пройдите капчу'});
+			$scope.messages.push({ type: 'danger', msg: 'Пройдите капчу' });
 		}
 	}
 
